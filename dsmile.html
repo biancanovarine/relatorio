@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsmile Dashboard - Mídias 360</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    boxShadow: {
+                        'premium': '0 10px 30px -10px rgba(13, 148, 136, 0.08)',
+                        'premium-lg': '0 20px 40px -15px rgba(15, 23, 42, 0.05)',
+                        'glow': '0 0 20px rgba(13, 148, 136, 0.15)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc; /* slate-50 */
+        }
+        /* Estilização fina para barras de rolagem */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0d9488;
+        }
+        /* Estilos de Impressão */
+        @media print {
+            body {
+                background-color: #ffffff;
+                color: #000000;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .print-card {
+                box-shadow: none !important;
+                border: 1px solid #e2e8f0 !important;
+                page-break-inside: avoid;
+            }
+            .grid {
+                display: grid !important;
+            }
+        }
+    </style>
+</head>
+<body class="text-slate-800 selection:bg-teal-100 selection:text-teal-950">
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 text-white px-6 py-4 rounded-2xl shadow-xl flex items-center space-x-3 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <svg class="w-6 h-6 text-teal-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span class="text-sm font-medium" id="toast-message">Relatório preparado para impressão!</span>
+    </div>
+
+    <!-- CABEÇALHO PRINCIPAL (Premium Glassmorphic Navbar) -->
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-100 px-6 lg:px-12 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Lado Esquerdo: Identificação do Profissional -->
+        <div class="flex items-center space-x-4">
+            <div class="h-12 w-12 rounded-2xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center shadow-lg shadow-teal-500/20 text-white font-bold text-xl tracking-wider">
+                D
+            </div>
+            <div>
+                <h1 class="text-xl font-extrabold text-slate-900 tracking-tight flex items-center gap-2">
+                    Dsmile Clínica Odontológica
+                    <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-50 text-teal-700 font-semibold border border-teal-100">Odontologia</span>
+                </h1>
+                <p class="text-xs text-slate-500 font-medium tracking-wide uppercase">Parceiro Executivo • Mídias 360</p>
+            </div>
+        </div>
+
+        <!-- Lado Direito: Chancelas em SVG Inline -->
+        <div class="flex items-center space-x-6">
+            <!-- Google Partner Badge -->
+            <div class="flex items-center space-x-2 bg-slate-50 px-4 py-2 rounded-xl border border-slate-100">
+                <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" fill="#0D9488"/>
+                </svg>
+                <div class="text-left">
+                    <p class="text-[9px] text-slate-400 font-bold uppercase tracking-wider leading-none">Certificado</p>
+                    <p class="text-[11px] text-slate-800 font-black tracking-wide leading-tight">Google Partner</p>
+                </div>
+            </div>
+
+            <!-- Doctoralia Badge com Estrelas -->
+            <div class="flex items-center space-x-2 bg-teal-50/50 px-4 py-2 rounded-xl border border-teal-100/50">
+                <div class="flex flex-col text-right">
+                    <span class="text-[10px] text-teal-800 font-bold tracking-wider uppercase leading-none">Membro Premium</span>
+                    <div class="flex items-center space-x-0.5 mt-0.5">
+                        <!-- Estrelas Doctoralia -->
+                        <svg class="w-3 h-3 text-amber-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-3 h-3 text-amber-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-3 h-3 text-amber-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-3 h-3 text-amber-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                        <svg class="w-3 h-3 text-amber-500 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    </div>
+                </div>
+                <div class="h-8 w-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-teal-600/10">
+                    d
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTAINER CENTRAL -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+        
+        <!-- SUB-HEADER DE METADADOS -->
+        <div class="bg-white rounded-[1.5rem] p-6 shadow-premium border border-slate-100/80 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+            <div class="flex flex-wrap items-center gap-3">
+                <span class="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-100">
+                    <span class="w-2 h-2 rounded-full bg-emerald-500 mr-2 animate-pulse"></span>
+                    Campanha Ativa
+                </span>
+                <div class="text-slate-500 text-sm">
+                    Período Analisado: <strong class="text-slate-800 font-semibold">01/06/2026 - 30/06/2026</strong>
+                </div>
+                <div class="h-4 w-px bg-slate-200 hidden md:block"></div>
+                <div class="text-slate-500 text-sm">
+                    CPC Médio Geral: <strong class="text-teal-600 font-bold">R$ 2,30</strong>
+                </div>
+            </div>
+            
+            <div class="flex items-center space-x-3 w-full md:w-auto no-print">
+                <button onclick="triggerPrint()" class="w-full md:w-auto px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm transition-all duration-200 flex items-center justify-center space-x-2 hover:shadow-lg hover:shadow-slate-900/10 active:scale-[0.98]">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                    <span>Exportar Relatório</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 1: ALCANCE DO ANÚNCIO (GOOGLE ADS) -->
+        <section class="space-y-4">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-2">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 tracking-tight">Atração & Alcance Digital</h2>
+                    <p class="text-slate-500 text-sm">Mapeamento detalhado das interações e cliques gerados pelos anúncios de pesquisa do Google Ads.</p>
+                </div>
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-widest no-print">Google Ads</div>
+            </div>
+
+            <!-- Grid de 5 Colunas de Destaque -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+                
+                <!-- CARD 1: IMPRESSÕES -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 hover:border-teal-500/20 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-2xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">Exibições</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-slate-900 tracking-tight">35.501</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2">Impressões Totais</p>
+                </div>
+
+                <!-- CARD 2: CLIQUES DIRETOS -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 hover:border-teal-500/20 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-2xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">Conversão</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-slate-900 tracking-tight">1.140</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2">Cliques Diretos</p>
+                </div>
+
+                <!-- CARD 3: CTR DE PERFORMANCE -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 hover:border-amber-500/20 transition-all duration-300 group hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 h-1.5 w-full bg-amber-500"></div>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-2xl bg-amber-50 text-amber-600 group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold text-amber-600">Alta Eficiência</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-amber-600 tracking-tight">3,21%</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2">CTR da Campanha</p>
+                </div>
+
+                <!-- CARD 4: ACESSOS TOTAIS AO PERFIL -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 hover:border-teal-500/20 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-2xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">Total Perfil</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-slate-900 tracking-tight">1.184</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2">
+                        Acessos Totais <span class="text-teal-600 font-bold block sm:inline">(96,28% Ads)</span>
+                    </p>
+                </div>
+
+                <!-- CARD 5: CLIQUES NO TELEFONE -->
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 hover:border-teal-500/20 transition-all duration-300 group hover:-translate-y-1">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="p-3 rounded-2xl bg-teal-50 text-teal-600 group-hover:bg-teal-600 group-hover:text-white transition-colors duration-300">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.725l.548 2.2a1.3 1.3 0 01-.321.988l-1.305 1.305a13.483 13.483 0 005.618 5.618l1.305-1.305a1.3 1.3 0 01.988-.321l2.2.548a1.1 1.1 0 01.725.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                        </div>
+                        <span class="text-xs font-bold text-slate-400">Intenção Direta</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-slate-900 tracking-tight">104</p>
+                    <p class="text-xs font-semibold text-slate-500 mt-2">Cliques no Telefone</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: BENCHMARK DE EFICIÊNCIA E DOMÍNIO DE BUSCA -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- COLUNA ESQUERDA (1/3): benchmark chart -->
+            <div class="bg-white rounded-[2.5rem] p-8 shadow-premium border border-slate-100 flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-extrabold text-slate-950 tracking-tight">Benchmark de CTR</h3>
+                    <p class="text-slate-500 text-xs mb-6">Comparativo da taxa de cliques (CTR) contra a média consolidada do mercado de saúde.</p>
+                </div>
+                
+                <!-- Gráfico de Canvas -->
+                <div class="relative w-full h-52 flex items-center justify-center">
+                    <canvas id="benchmarkChart"></canvas>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-medium text-slate-500">
+                    <span>Performance vs Setor:</span>
+                    <span class="text-emerald-600 font-bold flex items-center">
+                        <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path></svg>
+                        +1,26% acima da média
+                    </span>
+                </div>
+            </div>
+
+            <!-- COLUNA DIREITA (2/3): Domínio de Busca (Share of Voice) -->
+            <div class="lg:col-span-2 bg-slate-900 text-white rounded-[2.5rem] p-8 shadow-premium-lg flex flex-col justify-between relative overflow-hidden">
+                <!-- Efeito sutil de brilho de fundo -->
+                <div class="absolute -right-16 -top-16 w-64 h-64 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h3 class="text-lg font-extrabold tracking-tight">Domínio de Busca (Share of Voice)</h3>
+                        <span class="px-2.5 py-1 rounded-full bg-slate-800 text-teal-400 text-[10px] font-bold tracking-widest uppercase">Posições Google</span>
+                    </div>
+                    <p class="text-slate-400 text-xs mb-8">Nível de protagonismo dos anúncios nos resultados mais nobres das buscas de pacientes na sua região geográfica.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Progress Bar 1: Top 3 (Parte Superior) -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <span class="text-sm font-bold text-slate-100 block">Exibição Premium (Top 3)</span>
+                                <span class="text-[11px] text-slate-400">Anúncio exibido na seção superior de maior clique</span>
+                            </div>
+                            <span class="text-2xl font-extrabold text-teal-400">61,58%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-teal-500 to-teal-300 h-full rounded-full transition-all duration-1000" style="width: 61.58%"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar 2: Top 1 (Primeira Posição Absoluta) -->
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <div>
+                                <span class="text-sm font-bold text-slate-100 block">Liderança Absoluta (Top 1)</span>
+                                <span class="text-[11px] text-slate-400">Primeiro resultado de busca absoluto da página</span>
+                            </div>
+                            <span class="text-2xl font-extrabold text-amber-500">17,54%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3.5 rounded-full overflow-hidden">
+                            <div class="bg-gradient-to-r from-amber-500 to-amber-300 h-full rounded-full transition-all duration-1000" style="width: 17.54%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-slate-800 flex items-center justify-between text-xs text-slate-400">
+                    <p>Fórmula de dominância calculada por peso consolidado de impressões.</p>
+                    <span class="text-teal-400 font-semibold">Consolidado Junho 2026</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO 3: % GANHO EM LEILÕES (SHARE OF VOICE) -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Performance e Ganho em Leilões por Campanha</h2>
+                    <p class="text-slate-500 text-sm">Visualização executiva da alocação orçamentária e da relevância do anúncio por segmentação de campanha.</p>
+                </div>
+            </div>
+
+            <!-- Tabela Executiva Claro-Premium -->
+            <div class="bg-white rounded-[2rem] shadow-premium border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-100/60 text-slate-600 text-xs font-bold tracking-wider uppercase">
+                                <th class="py-4.5 px-6 font-semibold">Identificação da Campanha</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">Impressões</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">Cliques</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">CTR</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">CPC Médio</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">Top 3 (Parte Sup.)</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">Top 1 (Absoluto)</th>
+                                <th class="py-4.5 px-6 text-right font-semibold">Parcela de Impressão (Ganho)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100/80 text-sm">
+                            <!-- Campanha 1 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-900">Especialidade</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">35.471</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">1.135</td>
+                                <td class="py-4 px-6 text-right font-semibold text-teal-600">3,20%</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">R$ 2,30</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">61,57%</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">17,50%</td>
+                                <td class="py-4 px-6 text-right font-bold text-amber-600">&lt; 10%</td>
+                            </tr>
+                            <!-- Campanha 2 -->
+                            <tr class="hover:bg-slate-50/50 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-900">Serviços</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">30</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">5</td>
+                                <td class="py-4 px-6 text-right font-semibold text-teal-600">16,67%</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">R$ 2,60</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">75,00%</td>
+                                <td class="py-4 px-6 text-right font-medium text-slate-600">60,00%</td>
+                                <td class="py-4 px-6 text-right font-bold text-teal-600">37,74%</td>
+                            </tr>
+                            <!-- Total Consolidado -->
+                            <tr class="bg-slate-50/70 font-bold border-t-2 border-slate-200">
+                                <td class="py-5 px-6 text-slate-950 font-extrabold uppercase tracking-wide">Total Consolidado</td>
+                                <td class="py-5 px-6 text-right text-slate-950">35.501</td>
+                                <td class="py-5 px-6 text-right text-slate-950">1.140</td>
+                                <td class="py-5 px-6 text-right text-teal-700">3,21%</td>
+                                <td class="py-5 px-6 text-right text-slate-950">R$ 2,30</td>
+                                <td class="py-5 px-6 text-right text-slate-700">61,58%</td>
+                                <td class="py-5 px-6 text-right text-slate-700">17,54%</td>
+                                <td class="py-5 px-6 text-right text-amber-600">&lt; 10%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Nota técnica elegante -->
+                <div class="bg-teal-50/30 p-5 border-t border-slate-100 flex items-start space-x-3">
+                    <svg class="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <div class="text-xs text-slate-500 leading-relaxed">
+                        <strong class="text-slate-800 block mb-1">Análise de Leilão & Performance:</strong>
+                        A campanha principal (<em class="font-semibold text-slate-700">Especialidade</em>) concentra a maior parte do investimento, convertendo um CTR sólido de <span class="font-bold text-teal-700">3,20%</span>. A campanha secundária (<em class="font-semibold text-slate-700">Serviços</em>), apesar do menor tráfego de nicho, demonstrou excelente sinergia criativa com um CTR astronômico de <span class="font-bold text-teal-700">16,67%</span> e parcela de impressão altamente competitiva de <span class="font-bold text-teal-700">37,74%</span>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: PALAVRAS-CHAVE PRINCIPAIS -->
+        <section class="space-y-4">
+            <div>
+                <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Performance Detalhada de Palavras-Chave</h2>
+                <p class="text-slate-500 text-sm">Monitoramento dos termos de busca mais eficazes que engajaram pacientes de alta qualificação no Google Ads.</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] shadow-premium border border-slate-100 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider">
+                                <th class="py-4 px-6">Palavra-Chave de Busca</th>
+                                <th class="py-4 px-6 text-right">Impressões</th>
+                                <th class="py-4 px-6 text-right">Cliques</th>
+                                <th class="py-4 px-6 text-right">CTR</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 text-sm">
+                            <!-- Termo 1 (Destaque Turquesa Translúcido) -->
+                            <tr class="bg-teal-50/40 hover:bg-teal-50/60 transition-colors duration-150">
+                                <td class="py-4 px-6 font-bold text-teal-900 flex items-center space-x-2">
+                                    <span>odontologico sp</span>
+                                    <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-bold bg-teal-100 text-teal-800 uppercase tracking-widest">Líder de Cliques</span>
+                                </td>
+                                <td class="py-4 px-6 text-right font-semibold text-teal-900">8.573</td>
+                                <td class="py-4 px-6 text-right font-semibold text-teal-900">274</td>
+                                <td class="py-4 px-6 text-right font-extrabold text-teal-700">3,20%</td>
+                            </tr>
+                            <!-- Termo 2 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">dentista</td>
+                                <td class="py-4 px-6 text-right text-slate-600">7.665</td>
+                                <td class="py-4 px-6 text-right text-slate-600">227</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">2,96%</td>
+                            </tr>
+                            <!-- Termo 3 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">dentistas sp</td>
+                                <td class="py-4 px-6 text-right text-slate-600">6.055</td>
+                                <td class="py-4 px-6 text-right text-slate-600">184</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">3,04%</td>
+                            </tr>
+                            <!-- Termo 4 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">dentistas são paulo</td>
+                                <td class="py-4 px-6 text-right text-slate-600">2.451</td>
+                                <td class="py-4 px-6 text-right text-slate-600">77</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">3,14%</td>
+                            </tr>
+                            <!-- Termo 5 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">odontologica são paulo</td>
+                                <td class="py-4 px-6 text-right text-slate-600">2.137</td>
+                                <td class="py-4 px-6 text-right text-slate-600">69</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">3,23%</td>
+                            </tr>
+                            <!-- Termo 6 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">odontologico</td>
+                                <td class="py-4 px-6 text-right text-slate-600">1.348</td>
+                                <td class="py-4 px-6 text-right text-slate-600">41</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">3,04%</td>
+                            </tr>
+                            <!-- Termo 7 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">dentista sp</td>
+                                <td class="py-4 px-6 text-right text-slate-600">1.097</td>
+                                <td class="py-4 px-6 text-right text-slate-600">39</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">3,56%</td>
+                            </tr>
+                            <!-- Termo 8 -->
+                            <tr class="hover:bg-slate-50/40 transition-colors duration-150">
+                                <td class="py-4 px-6 font-semibold text-slate-800">clinica de odontologia</td>
+                                <td class="py-4 px-6 text-right text-slate-600">998</td>
+                                <td class="py-4 px-6 text-right text-slate-600">24</td>
+                                <td class="py-4 px-6 text-right font-bold text-slate-800">2,40%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÕES INFERIORES: AGENDAMENTOS DOCTORALIA & REPUTAÇÃO -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- SEÇÃO 5: AGENDAMENTOS NA DOCTORALIA -->
+            <section class="space-y-4">
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Conversão de Agendamentos (Doctoralia)</h2>
+                    <p class="text-slate-500 text-sm">Comparação de consultas e captação de novos pacientes entre os dois últimos períodos.</p>
+                </div>
+
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 flex flex-col justify-between h-[360px]">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-50 border-b border-slate-100 text-slate-600 text-xs font-bold uppercase tracking-wider">
+                                    <th class="py-3.5 px-4 rounded-l-2xl">Mês Analisado</th>
+                                    <th class="py-3.5 px-4 text-center">Agendamentos Totais</th>
+                                    <th class="py-3.5 px-4 text-right rounded-r-2xl">Pacientes Novos</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-100 text-sm">
+                                <!-- Período 1 -->
+                                <tr class="hover:bg-slate-50/50">
+                                    <td class="py-4 px-4 font-semibold text-slate-700">Maio (Período Anterior)</td>
+                                    <td class="py-4 px-4 text-center text-slate-900 font-extrabold">93</td>
+                                    <td class="py-4 px-4 text-right font-semibold text-teal-600">
+                                        12 <span class="text-xs font-normal text-slate-400 block italic">Primeira Consulta</span>
+                                    </td>
+                                </tr>
+                                <!-- Período 2 -->
+                                <tr class="bg-teal-50/20 hover:bg-teal-50/40">
+                                    <td class="py-4 px-4 font-bold text-teal-950">Junho (Período Atual)</td>
+                                    <td class="py-4 px-4 text-center text-teal-950 font-extrabold text-base">98</td>
+                                    <td class="py-4 px-4 text-right font-bold text-teal-700">
+                                        9 <span class="text-xs font-normal text-slate-400 block italic">Primeira Consulta</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Rodapé de Metadados Doctoralia -->
+                    <div class="p-4 bg-slate-50 rounded-2xl flex items-center justify-between text-xs text-slate-500">
+                        <span>Crescimento de Volume:</span>
+                        <span class="text-emerald-600 font-bold flex items-center">
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg>
+                            +5,37% de aumento
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SEÇÃO 6: REPUTAÇÃO E PROVA SOCIAL -->
+            <section class="space-y-4">
+                <div>
+                    <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Reputação Digital & Prova Social</h2>
+                    <p class="text-slate-500 text-sm">Análise do impacto da reputação e autoridade digital na jornada final do paciente.</p>
+                </div>
+
+                <div class="bg-white rounded-[2rem] p-6 shadow-premium border border-slate-100 flex flex-col justify-between h-[360px]">
+                    <!-- Bloco de Destaque -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-teal-50/50 p-4 rounded-2xl border border-teal-100/50">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[10px] font-bold text-teal-800 uppercase tracking-wider">Período Recente</span>
+                                <span class="h-2 w-2 rounded-full bg-teal-500"></span>
+                            </div>
+                            <p class="text-3xl font-extrabold text-teal-950">+5</p>
+                            <p class="text-[11px] text-slate-500 font-medium">Novas Opiniões (Junho)</p>
+                        </div>
+
+                        <div class="bg-amber-50/50 p-4 rounded-2xl border border-amber-100/50">
+                            <div class="flex items-center justify-between mb-1">
+                                <span class="text-[10px] font-bold text-amber-800 uppercase tracking-wider">Autoridade</span>
+                                <span class="h-2 w-2 rounded-full bg-amber-500"></span>
+                            </div>
+                            <p class="text-3xl font-extrabold text-amber-950">340</p>
+                            <p class="text-[11px] text-slate-500 font-medium">Opiniões Consolidadas</p>
+                        </div>
+                    </div>
+
+                    <!-- Parágrafo de Análise Comercial -->
+                    <div class="text-xs text-slate-600 leading-relaxed bg-slate-50/50 p-4 rounded-2xl border border-slate-100">
+                        <strong class="text-slate-900 block mb-1">Círculo Virtuoso da Reputação:</strong>
+                        A reputação consolidada com <em class="font-bold text-slate-800">340 opiniões com pontuação máxima (5 estrelas)</em> é o principal catalisador para converter acessos em agendamentos ativos. Pesquisas internas demonstram que cerca de <strong class="text-teal-700">70% de quem acessa o perfil do especialista</strong> lê as opiniões antes de realizar o agendamento final. O reforço recorrente de depoimentos cria autoridade orgânica e reduz o custo de aquisição final do paciente.
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER MÍDIAS 360 -->
+    <footer class="bg-white border-t border-slate-100 mt-20 py-8 text-center text-xs text-slate-400 font-medium no-print">
+        <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p>© 2026 Mídias 360 - Doctoralia. Todos os direitos reservados.</p>
+            <p class="flex items-center space-x-1.5 text-slate-500">
+                <span>Relatório Gerencial de Performance de Saúde</span>
+                <span class="h-1.5 w-1.5 rounded-full bg-teal-500"></span>
+                <span>Clínica Dsmile</span>
+            </p>
+        </div>
+    </footer>
+
+    <!-- LOGICA DO CHART E COMPORTAMENTOS INTERATIVOS -->
+    <script>
+        // Iniciar gráfico de benchmark no carregamento da página
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('benchmarkChart').getContext('2d');
+            
+            // Criando gradients de preenchimento premium
+            const gradientClient = ctx.createLinearGradient(0, 0, 0, 200);
+            gradientClient.addColorStop(0, '#0d9488'); // teal-600
+            gradientClient.addColorStop(1, '#5eead4'); // teal-300
+
+            const gradientMarket = ctx.createLinearGradient(0, 0, 0, 200);
+            gradientMarket.addColorStop(0, '#94a3b8'); // slate-400
+            gradientMarket.addColorStop(1, '#cbd5e1'); // slate-300
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Sua Clínica (CTR)', 'Mercado de Saúde (Média)'],
+                    datasets: [{
+                        data: [3.21, 3.17],
+                        backgroundColor: [gradientClient, gradientMarket],
+                        borderRadius: 16,
+                        borderSkipped: false,
+                        barThickness: 45
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true,
+                            backgroundColor: '#0f172a',
+                            titleFont: {
+                                size: 13,
+                                family: 'Plus Jakarta Sans',
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 12,
+                                family: 'Plus Jakarta Sans'
+                            },
+                            callbacks: {
+                                label: function(context) {
+                                    return `Taxa: ${context.parsed.y.toFixed(2)}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: '#f1f5f9'
+                            },
+                            ticks: {
+                                font: {
+                                    family: 'Plus Jakarta Sans',
+                                    size: 11
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    family: 'Plus Jakarta Sans',
+                                    size: 11,
+                                    weight: 'bold'
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+        // Trigger elegante para impressão de PDF do Dashboard
+        function triggerPrint() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                window.print();
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 1000);
+        }
+    </script>
+</body>
+</html>
