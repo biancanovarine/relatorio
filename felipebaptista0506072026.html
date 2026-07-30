@@ -14,12 +14,11 @@
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-        .tab-active { border-bottom: 2px solid #0d9488; color: #0d9488; }
     </style>
 </head>
 <!-- Chosen Palette: Teal & Amber Executive -->
-<!-- Application Structure Plan: Dashboard de performance médica focado em ROI e agendamentos. A estrutura prioriza KPIs de impacto imediato (top), seguidos por análises técnicas de leilão e finalizando com a conversão final na agenda Doctoralia. Escolhido para dar clareza do funil: Atração -> Visibilidade -> Agendamento. -->
-<!-- Visualization & Content Choices: Report Google Ads -> Goal: Mostrar Eficiência -> Bar Chart/Line Chart -> Interatividade via abas para não sobrecarregar o usuário -> JS nativo para troca de tabelas. -->
+<!-- Application Structure Plan: Dashboard reestruturado para exibição sequencial de dados técnicos. A análise de grupos de anúncios e palavras-chave agora aparecem em sequência para facilitar a leitura contínua do funil técnico de tráfego, eliminando a fricção de cliques em abas. -->
+<!-- Visualization & Content Choices: Tabelas executivas separadas por contexto. Destaque visual para o termo principal de busca para reforçar a autoridade do branding. -->
 <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 <body class="text-slate-800 scroll-smooth">
 
@@ -33,7 +32,8 @@
                 </div>
                 <div class="flex space-x-4">
                     <a href="#performance" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Performance</a>
-                    <a href="#detalhes" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Grupos</a>
+                    <a href="#campanhas" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Grupos</a>
+                    <a href="#keywords" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Palavras</a>
                     <a href="#agendamentos" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Doctoralia</a>
                 </div>
                 <div class="hidden md:flex items-center gap-4">
@@ -142,21 +142,14 @@
             </div>
         </section>
 
-        <!-- SEÇÃO 2: TABELAS DETALHADAS -->
-        <section id="detalhes" class="space-y-6">
-            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
-                <div>
-                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Análise detalhada por grupo de anúncio</h2>
-                    <p class="text-sm text-slate-500">Performance técnica das campanhas e palavras-chave.</p>
-                </div>
-                <div class="flex bg-white p-1 rounded-xl border border-slate-200">
-                    <button onclick="toggleTable('campanhas')" id="btn-campanhas" class="px-4 py-2 text-xs font-bold rounded-lg tab-active transition-all">Grupos de Campanha</button>
-                    <button onclick="toggleTable('palavras')" id="btn-palavras" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-600 transition-all">Palavras-Chave</button>
-                </div>
+        <!-- SEÇÃO 2: ANALISE POR GRUPO -->
+        <section id="campanhas" class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Análise Detalhada por Grupo</h2>
+                <p class="text-sm text-slate-500">Distribuição de verba e taxa de conversão técnica.</p>
             </div>
 
-            <!-- Tabela Grupos de Anúncio Atualizada -->
-            <div id="table-campanhas" class="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
+            <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
                 <table class="w-full text-left text-xs">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-widest">
@@ -191,9 +184,16 @@
                     </tbody>
                 </table>
             </div>
+        </section>
 
-            <!-- Tabela Palavras-Chave -->
-            <div id="table-palavras" class="hidden bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
+        <!-- SEÇÃO 3: PALAVRAS-CHAVE (AGORA ABAIXO DA ANÁLISE DE CAMPANHA) -->
+        <section id="keywords" class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Principais Palavras-Chave</h2>
+                <p class="text-sm text-slate-500">Termos de busca que geraram maior engajamento qualificado.</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
                 <table class="w-full text-left text-xs">
                     <thead>
                         <tr class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-widest">
@@ -231,9 +231,14 @@
                     </tbody>
                 </table>
             </div>
+            <div class="p-4 bg-teal-50 rounded-2xl border border-teal-100">
+                <p class="text-[11px] text-teal-800 font-medium leading-relaxed">
+                    <span class="font-bold">Análise Técnica:</span> A palavra-chave principal "cardiologista" mantém um CTR excepcional de 6,41%, o que reduz o custo por clique e garante que o anúncio seja exibido para buscas de alta intenção de agendamento.
+                </p>
+            </div>
         </section>
 
-        <!-- SEÇÃO 3: AGENDAMENTOS NA DOCTORALIA -->
+        <!-- SEÇÃO 4: AGENDAMENTOS NA DOCTORALIA -->
         <section id="agendamentos" class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
@@ -342,29 +347,7 @@
     </footer>
 
     <script>
-        function toggleTable(target) {
-            const btnCamp = document.getElementById('btn-campanhas');
-            const btnPal = document.getElementById('btn-palavras');
-            const tableCamp = document.getElementById('table-campanhas');
-            const tablePal = document.getElementById('table-palavras');
-
-            if (target === 'campanhas') {
-                btnCamp.classList.add('tab-active');
-                btnCamp.classList.remove('text-slate-400');
-                btnPal.classList.remove('tab-active');
-                btnPal.classList.add('text-slate-400');
-                tableCamp.classList.remove('hidden');
-                tablePal.classList.add('hidden');
-            } else {
-                btnPal.classList.add('tab-active');
-                btnPal.classList.remove('text-slate-400');
-                btnCamp.classList.remove('tab-active');
-                btnCamp.classList.add('text-slate-400');
-                tablePal.classList.remove('hidden');
-                tableCamp.classList.add('hidden');
-            }
-        }
-
+        // Gráfico de Benchmark CTR
         const ctxCtr = document.getElementById('ctrChart').getContext('2d');
         new Chart(ctxCtr, {
             type: 'bar',
@@ -388,6 +371,7 @@
             }
         });
 
+        // Gráfico de Crescimento Doctoralia
         const ctxGrowth = document.getElementById('growthChart').getContext('2d');
         new Chart(ctxGrowth, {
             type: 'line',
