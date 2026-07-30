@@ -1,523 +1,429 @@
-<!-- HEADER PRINCIPAL -->
-<header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 mb-6 shadow-sm">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <div class="flex items-center space-x-3">
-            <div class="w-10 h-10 rounded-xl bg-teal-600 flex items-center justify-center text-white font-bold text-xl shadow-md shadow-teal-600/20">
-                FB
-            </div>
-            <div>
-                <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">Dr. Felipe Rodrigues Baptista</h1>
-                <p class="text-xs font-semibold text-slate-500">Cardiologia & Saúde Cardiovascular • Mídias 360</p>
-            </div>
-        </div>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Performance - Dr. Felipe Rodrigues Baptista</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 700px; margin-left: auto; margin-right: auto; height: 320px; }
+        .glass-card { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .scroll-smooth { scroll-behavior: smooth; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        .tab-active { border-bottom: 2px solid #0d9488; color: #0d9488; }
+    </style>
+</head>
+<body class="text-slate-800 scroll-smooth">
 
-        <!-- Logos e Chancelas -->
-        <div class="flex items-center space-x-4 sm:space-x-6">
-            <!-- Google Partner Badge -->
-            <div class="hidden sm:flex items-center space-x-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
-                <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
-                    <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                    <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                    <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
-                    <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
-                </svg>
-                <span class="text-xs font-semibold text-slate-700">Google Partner</span>
-            </div>
-
-            <!-- Doctoralia Badge -->
-            <div class="flex items-center space-x-2 bg-teal-50/90 px-3 py-1.5 rounded-xl border border-teal-200">
-                <div class="flex text-amber-500">
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-                </div>
-                <span class="text-xs font-bold text-teal-900">Doctoralia Partner</span>
-            </div>
-        </div>
-    </div>
-</header>
-
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-
-    <!-- SUB-HEADER DE METADADOS -->
-    <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200/60 space-y-4">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div class="space-y-1">
+    <!-- NAVEGAÇÃO SUPERIOR -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
                 <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-teal-500 animate-pulse"></span>
-                    <span class="text-xs font-bold text-teal-800 uppercase tracking-wider">Relatório Executivo de Mídia & Inteligência de Busca</span>
+                    <div class="w-8 h-8 bg-teal-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">FB</div>
+                    <span class="font-bold text-slate-900 hidden sm:block">Dr. Felipe Rodrigues Baptista</span>
                 </div>
-                <h2 class="text-lg font-extrabold text-slate-900">Período de Análise: 01/05/2026 a 30/07/2026</h2>
-                <p class="text-xs text-slate-500">Campanha Ativa de Alta Intenção • CPC Médio Consolidado: <strong class="text-slate-900 font-bold">R$ 1,50</strong></p>
+                <div class="flex space-x-4">
+                    <a href="#performance" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Performance</a>
+                    <a href="#detalhes" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Grupos</a>
+                    <a href="#agendamentos" class="text-xs font-bold px-3 py-2 rounded-lg hover:bg-slate-100 transition-colors">Doctoralia</a>
+                </div>
+                <div class="hidden md:flex items-center gap-4">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Mídias 360</span>
+                </div>
             </div>
+        </div>
+    </nav>
 
-            <div class="flex items-center space-x-3">
-                <button onclick="window.print()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-5 py-3 rounded-2xl transition-all shadow-md shadow-slate-900/10 flex items-center gap-2">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
-                    Exportar Relatório PDF
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+        <!-- HEADER DE IDENTIFICAÇÃO -->
+        <section class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm relative overflow-hidden">
+            <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="bg-teal-100 text-teal-800 text-[10px] font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">Dashboard Estratégico</span>
+                        <span class="text-slate-400 text-xs font-medium">Maio - Julho 2026</span>
+                    </div>
+                    <h1 class="text-3xl font-black text-slate-900 tracking-tight">Performance de Campanha</h1>
+                    <p class="text-slate-500 text-sm mt-1 max-w-xl leading-relaxed">
+                        Análise de cardiologia: Atração via Google Ads e impacto na agenda da Doctoralia.
+                    </p>
+                </div>
+                <button onclick="window.print()" class="bg-slate-900 text-white px-5 py-3 rounded-2xl text-xs font-bold shadow-lg shadow-slate-200 hover:scale-105 transition-transform">
+                    💾 Exportar Dados
                 </button>
             </div>
-        </div>
-    </div>
+        </section>
 
-    <!-- SEÇÃO 1: ALCANCE DO ANÚNCIO NO GOOGLE ADS -->
-    <section class="space-y-4">
-        <div>
-            <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">1. Alcance & Performance de Mídia (Google Ads)</h2>
-            <p class="text-xs text-slate-500 mt-1">Atração ativa de pacientes que buscam ativamente por consultas e exames em cardiologia no Rio de Janeiro.</p>
-        </div>
-
-        <!-- Grid de 5 Cartões Destaque -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-            <!-- Card 1: Impressões -->
-            <div class="bg-white p-5 rounded-[2rem] border border-slate-200/60 shadow-sm space-y-2">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Impressões Totais</p>
-                <p class="text-2xl font-black text-slate-900">31.497</p>
-                <p class="text-[11px] text-slate-500 leading-snug">Exibições para buscas por cardiologista no Google.</p>
+        <!-- KPI GRID: IMPACTO NO PERFIL -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Impressões Totais</p>
+                <h3 class="text-3xl font-black text-slate-900">31.497</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-600">Pacientes Visualizaram</div>
             </div>
-
-            <!-- Card 2: Cliques Diretos -->
-            <div class="bg-white p-5 rounded-[2rem] border border-slate-200/60 shadow-sm space-y-2">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cliques Diretos</p>
-                <p class="text-2xl font-black text-slate-900">1.962</p>
-                <p class="text-[11px] text-teal-700 font-semibold">Pacientes qualificados direcionados ao perfil.</p>
-            </div>
-
-            <!-- Card 3: CTR -->
-            <div class="bg-white p-5 rounded-[2rem] border border-amber-200 shadow-sm bg-amber-50/20 space-y-2">
-                <p class="text-xs font-bold text-amber-800 uppercase tracking-wider">CTR de Performance</p>
-                <p class="text-2xl font-black text-amber-600">6,23%</p>
-                <p class="text-[11px] text-amber-700 font-semibold">★ 1,96x Maior que o Mercado (3,17%)</p>
-            </div>
-
-            <!-- Card 4: Acessos Totais -->
-            <div class="bg-white p-5 rounded-[2rem] border border-slate-200/60 shadow-sm space-y-2">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Acessos Totais ao Perfil</p>
-                <p class="text-2xl font-black text-slate-900">2.188</p>
-                <p class="text-[11px] text-teal-700 font-bold">89,7% do Tráfego Gerado via Google Ads</p>
-            </div>
-
-            <!-- Card 5: Cliques no Telefone -->
-            <div class="bg-white p-5 rounded-[2rem] border border-slate-200/60 shadow-sm space-y-2 border-l-4 border-l-teal-600">
-                <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Cliques no Telefone</p>
-                <p class="text-2xl font-black text-slate-900">662</p>
-                <p class="text-[11px] text-teal-700 font-bold">Volume expressivo de chamadas imediatas.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO 2: BENCHMARK DE EFICIÊNCIA & DOMÍNIO DE BUSCA -->
-    <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <!-- Coluna Esquerda: Gráfico Benchmark (1/3) -->
-        <div class="bg-white p-6 rounded-[2rem] border border-slate-200/60 shadow-sm flex flex-col justify-between space-y-4">
-            <div>
-                <h3 class="text-sm font-bold text-slate-900 uppercase tracking-wider">Benchmark de Atração (CTR)</h3>
-                <p class="text-xs text-slate-500 mt-1">CTR do Dr. Felipe (6,23%) vs. Média de Mercado Médica (3,17%).</p>
-            </div>
-            <div class="h-44 relative">
-                <canvas id="benchmarkChart"></canvas>
-            </div>
-            <div class="bg-teal-50 p-3 rounded-xl border border-teal-100 text-center text-xs text-teal-800 font-bold">
-                ▲ Quase o dobro da eficiência média de anúncios na saúde
-            </div>
-        </div>
-
-        <!-- Coluna Direita: Share of Voice (2/3) -->
-        <div class="lg:col-span-2 bg-slate-900 text-white p-6 lg:p-8 rounded-[2rem] shadow-lg flex flex-col justify-between space-y-6">
-            <div>
-                <div class="flex items-center justify-between">
-                    <span class="bg-teal-500/20 text-teal-300 text-xs font-bold px-3 py-1 rounded-full border border-teal-500/30">Share of Voice & Leilões</span>
-                    <span class="text-xs text-slate-400">Média de Posicionamento no Google</span>
+            
+            <!-- KPI COM CÁLCULO DE REFLEXO NO PERFIL -->
+            <div class="bg-teal-50 p-6 rounded-[2rem] border border-teal-100 shadow-sm relative overflow-hidden">
+                <p class="text-[10px] font-black text-teal-800 uppercase tracking-widest mb-2">Cliques Ads</p>
+                <h3 class="text-3xl font-black text-teal-900">1.962</h3>
+                <div class="mt-2 p-2 bg-white rounded-xl border border-teal-100">
+                    <p class="text-[10px] font-bold text-teal-700 leading-tight">
+                        Este volume reflete <span class="text-teal-900 font-black">89,7%</span> de todos os acessos ao perfil na Doctoralia.
+                    </p>
                 </div>
-                <h3 class="text-xl font-bold mt-3">Domínio do Anúncio em Topo de Página</h3>
-                <p class="text-xs text-slate-300 mt-1 leading-relaxed">
-                    Nas buscas ativas por cardiologia, o Dr. Felipe Baptista mantém forte liderança nos leilões do Google, garantindo altíssima visibilidade nas posições nobres de pesquisa.
+            </div>
+
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">CTR de Campanha</p>
+                <h3 class="text-3xl font-black text-amber-600">6,23%</h3>
+                <div class="mt-2 text-[10px] font-bold text-slate-400">▲ 96% Superior ao Mercado</div>
+            </div>
+
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Cliques Telefone</p>
+                <h3 class="text-3xl font-black text-slate-900">662</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-600">Contatos Diretos</div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 1: BENCHMARK E SHARE OF VOICE -->
+        <section id="performance" class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                <div>
+                    <h2 class="text-xl font-black text-slate-900">Taxa de Atração (CTR)</h2>
+                    <p class="text-xs text-slate-500">Benchmark Dr. Felipe vs Média de Saúde (3,17%).</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="ctrChart"></canvas>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-[2rem] p-8 text-white flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xl font-black">Share of Voice (Domínio de Busca)</h2>
+                    <p class="text-xs text-slate-400 mt-1">Presença nas primeiras posições do Google.</p>
+                </div>
+                
+                <div class="space-y-8 my-8">
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-bold text-slate-300">Top 3 (Parte Superior)</span>
+                            <span class="text-xl font-black text-teal-400">64,03%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-teal-500 h-full rounded-full" style="width: 64%"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-bold text-slate-300">Top 1 (1ª Posição Absoluta)</span>
+                            <span class="text-xl font-black text-amber-500">23,65%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full rounded-full" style="width: 24%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-4 rounded-2xl border border-slate-700">
+                    <p class="text-xs text-slate-300 leading-relaxed italic">
+                        Nota Técnica: O domínio de 64% no topo da página garante que o Dr. Felipe seja uma das primeiras escolhas visualizadas em 2 a cada 3 buscas na região.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: TABELAS DETALHADAS -->
+        <section id="detalhes" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Análise detalhada por grupo de anúncio</h2>
+                    <p class="text-sm text-slate-500">Performance técnica das campanhas e palavras-chave.</p>
+                </div>
+                <div class="flex bg-white p-1 rounded-xl border border-slate-200">
+                    <button onclick="toggleTable('campanhas')" id="btn-campanhas" class="px-4 py-2 text-xs font-bold rounded-lg tab-active transition-all">Grupos de Campanha</button>
+                    <button onclick="toggleTable('palavras')" id="btn-palavras" class="px-4 py-2 text-xs font-bold rounded-lg text-slate-400 hover:text-slate-600 transition-all">Palavras-Chave</button>
+                </div>
+            </div>
+
+            <!-- Tabela Grupos de Anúncio -->
+            <div id="table-campanhas" class="bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-widest">
+                            <th class="px-6 py-4">ID Grupo</th>
+                            <th class="px-6 py-4">Impressões</th>
+                            <th class="px-6 py-4">Cliques</th>
+                            <th class="px-6 py-4">CTR</th>
+                            <th class="px-6 py-4">CPC Médio</th>
+                            <th class="px-6 py-4 text-right">Conversões</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-6 py-5 font-bold text-slate-900">Especialidade (Cardiologia)</td>
+                            <td class="px-6 py-5">31.423</td>
+                            <td class="px-6 py-5 font-semibold text-slate-600">1.939</td>
+                            <td class="px-6 py-5">6,17%</td>
+                            <td class="px-6 py-5">R$ 1,51</td>
+                            <td class="px-6 py-5 text-right font-black text-teal-600">22</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-6 py-5 font-bold text-slate-900">Nome (Branding)</td>
+                            <td class="px-6 py-5">74</td>
+                            <td class="px-6 py-5 font-semibold text-slate-600">23</td>
+                            <td class="px-6 py-5 text-amber-600 font-bold">31,08%</td>
+                            <td class="px-6 py-5">R$ 0,81</td>
+                            <td class="px-6 py-5 text-right font-black text-slate-400">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Tabela Palavras-Chave -->
+            <div id="table-palavras" class="hidden bg-white rounded-[2rem] border border-slate-200 shadow-sm overflow-hidden overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-widest">
+                            <th class="px-6 py-4">Termo de Busca</th>
+                            <th class="px-6 py-4">Impressões</th>
+                            <th class="px-6 py-4">Cliques</th>
+                            <th class="px-6 py-4 text-right">CTR</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-50">
+                        <tr class="bg-teal-50/40">
+                            <td class="px-6 py-5 font-bold text-teal-900">cardiologista</td>
+                            <td class="px-6 py-5">24.582</td>
+                            <td class="px-6 py-5">1.576</td>
+                            <td class="px-6 py-5 text-right font-black text-teal-600">6,41%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">cardiologista particular</td>
+                            <td class="px-6 py-5">4.277</td>
+                            <td class="px-6 py-5">206</td>
+                            <td class="px-6 py-5 text-right font-semibold">4,82%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">rj cardiologista</td>
+                            <td class="px-6 py-5">2.076</td>
+                            <td class="px-6 py-5">139</td>
+                            <td class="px-6 py-5 text-right font-semibold">6,70%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-5 font-bold text-slate-900">felipe rodrigues baptista</td>
+                            <td class="px-6 py-5">67</td>
+                            <td class="px-6 py-5">22</td>
+                            <td class="px-6 py-5 text-right font-semibold">32,84%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: AGENDAMENTOS NA DOCTORALIA -->
+        <section id="agendamentos" class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Agendamentos na Doctoralia</h2>
+                    <p class="text-sm text-slate-500 italic">Evolução do volume de consultas online após início das campanhas.</p>
+                </div>
+            </div>
+
+            <!-- FLOW DE EVOLUÇÃO MÉDIA -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-100 flex flex-col justify-center items-center text-center">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Antes do Mídias 360</p>
+                    <span class="text-4xl font-black text-slate-400">05</span>
+                    <p class="text-[10px] font-bold text-slate-500 mt-2 italic">Média Agendamento Online</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border-2 border-teal-100 flex flex-col justify-center items-center text-center relative">
+                    <div class="absolute -top-3 bg-teal-600 text-white text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-tighter">Início Campanha</div>
+                    <p class="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-2">Primeiros 6 Meses</p>
+                    <span class="text-4xl font-black text-teal-600">07</span>
+                    <p class="text-[10px] font-bold text-teal-700 mt-2 italic">Média Agendamento Online</p>
+                </div>
+                <div class="bg-teal-900 p-6 rounded-3xl text-white shadow-xl shadow-teal-100 flex flex-col justify-center items-center text-center">
+                    <p class="text-[10px] font-black text-teal-300 uppercase tracking-widest mb-2">Últimos 30 Dias (Julho)</p>
+                    <span class="text-4xl font-black text-white">14</span>
+                    <p class="text-[10px] font-bold text-teal-100 mt-2 italic">Novo Recorde de Agendamentos</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center pt-4">
+                <div class="lg:col-span-3">
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="p-5 rounded-2xl bg-white border border-slate-100">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Julho (Parcial até dia 30)</p>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-2xl font-black text-slate-900">101</span>
+                            <span class="text-xs font-bold text-teal-600">20 Novos</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 italic">Total de Agendamentos</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-white border border-slate-100">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Junho</p>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-2xl font-black text-slate-900">96</span>
+                            <span class="text-xs font-bold text-teal-600">16 Novos</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 italic">Total de Agendamentos</p>
+                    </div>
+                    <div class="p-5 rounded-2xl bg-white border border-slate-100">
+                        <p class="text-[10px] font-bold text-slate-400 uppercase mb-2">Maio</p>
+                        <div class="flex justify-between items-baseline">
+                            <span class="text-2xl font-black text-slate-900">75</span>
+                            <span class="text-xs font-bold text-teal-600">22 Novos</span>
+                        </div>
+                        <p class="text-[10px] text-slate-400 italic">Total de Agendamentos</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: REPUTAÇÃO E GEOGRAFIA -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+            <div class="bg-teal-900 text-white rounded-[2rem] p-8 space-y-6">
+                <h2 class="text-xl font-black">Reputação & Prova Social</h2>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-teal-800/50 p-4 rounded-2xl border border-teal-700">
+                        <p class="text-[10px] font-bold text-teal-300 uppercase">Novas Opiniões</p>
+                        <p class="text-2xl font-black">+14 no Período</p>
+                    </div>
+                    <div class="bg-teal-800/50 p-4 rounded-2xl border border-teal-700">
+                        <p class="text-[10px] font-bold text-teal-300 uppercase">Histórico Total</p>
+                        <p class="text-2xl font-black">482 Avaliações</p>
+                    </div>
+                </div>
+                <p class="text-xs text-teal-100 leading-relaxed">
+                    Pesquisas indicam que <span class="font-bold text-white">70% dos pacientes</span> validam sua escolha através das opiniões na Doctoralia antes de confirmar o agendamento. O volume atual posiciona o Dr. Felipe como autoridade máxima no setor cardíaco regional.
                 </p>
             </div>
 
-            <div class="space-y-4">
-                <!-- Progress 1 -->
-                <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1.5">
-                        <span class="text-slate-300">Top 3 (Posições de Destaque no Topo da Página)</span>
-                        <span class="text-teal-400 font-bold">64,03%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
-                        <div class="bg-teal-500 h-3 rounded-full" style="width: 64.03%"></div>
-                    </div>
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-200 shadow-sm space-y-6">
+                <h2 class="text-xl font-black text-slate-900">Bairros de Performance</h2>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Centro</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Barra da Tijuca</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Botafogo</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Santa Teresa</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Vila Isabel</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Realengo</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">São Cristóvão</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Jardim Guanabara</span>
+                    <span class="px-3 py-1.5 bg-slate-100 rounded-lg text-[9px] font-black uppercase text-slate-600 border border-slate-200">Recreio</span>
                 </div>
-
-                <!-- Progress 2 -->
-                <div>
-                    <div class="flex justify-between text-xs font-semibold mb-1.5">
-                        <span class="text-slate-300">Top 1 (1ª Posição Absoluta do Google)</span>
-                        <span class="text-amber-400 font-bold">23,65%</span>
-                    </div>
-                    <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
-                        <div class="bg-amber-500 h-3 rounded-full" style="width: 23.65%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-slate-800/90 p-4 rounded-xl border border-slate-700 text-xs text-slate-300">
-                <span class="font-bold text-teal-400">Consolidação em Busca:</span> Em 64% das vezes que um paciente procurou por cardiologista, o anúncio apareceu entre os primeiros resultados superiores da tela.
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO 3: % GANHO EM LEILÕES (SHARE OF VOICE TABELA) -->
-    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-sm space-y-6">
-        <div>
-            <h2 class="text-xl font-bold text-slate-900">3. Performance por Tipo de Campanha & Leilões</h2>
-            <p class="text-xs text-slate-500 mt-1">Acompanhamento consolidado das campanhas ativas no Google Ads.</p>
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-                <thead>
-                    <tr class="border-b border-slate-200 text-slate-400 font-semibold uppercase tracking-wider">
-                        <th class="pb-3">Campanha</th>
-                        <th class="pb-3 text-right">Impressões</th>
-                        <th class="pb-3 text-right">Cliques</th>
-                        <th class="pb-3 text-right">CTR</th>
-                        <th class="pb-3 text-right">CPC Médio</th>
-                        <th class="pb-3 text-right">Topo Pg. %</th>
-                        <th class="pb-3 text-right">1ª Posição %</th>
-                        <th class="pb-3 text-right">Ganho Leilão %</th>
-                        <th class="pb-3 text-right">Conversões</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                    <tr class="hover:bg-slate-50/80 transition-colors">
-                        <td class="py-4 font-bold text-slate-900 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
-                            Especialidade
-                        </td>
-                        <td class="py-4 text-right">31.423</td>
-                        <td class="py-4 text-right">1.939</td>
-                        <td class="py-4 text-right font-semibold text-slate-900">6,17%</td>
-                        <td class="py-4 text-right">R$ 1,51</td>
-                        <td class="py-4 text-right">63,98%</td>
-                        <td class="py-4 text-right">23,51%</td>
-                        <td class="py-4 text-right">11,01%</td>
-                        <td class="py-4 text-right font-bold text-teal-600">22</td>
-                    </tr>
-                    <tr class="hover:bg-slate-50/80 transition-colors">
-                        <td class="py-4 font-bold text-slate-900 flex items-center gap-2">
-                            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
-                            Nome (Dr. Felipe)
-                        </td>
-                        <td class="py-4 text-right">74</td>
-                        <td class="py-4 text-right">23</td>
-                        <td class="py-4 text-right font-semibold text-amber-600">31,08%</td>
-                        <td class="py-4 text-right">R$ 0,81</td>
-                        <td class="py-4 text-right">87,04%</td>
-                        <td class="py-4 text-right">83,33%</td>
-                        <td class="py-4 text-right">83,08%</td>
-                        <td class="py-4 text-right font-bold text-slate-400">0</td>
-                    </tr>
-                    <tr class="bg-slate-50 font-bold text-slate-900">
-                        <td class="py-4 rounded-l-xl">Consolidado Total</td>
-                        <td class="py-4 text-right">31.497</td>
-                        <td class="py-4 text-right font-bold text-slate-900">1.962</td>
-                        <td class="py-4 text-right text-amber-600">6,23%</td>
-                        <td class="py-4 text-right">R$ 1,50</td>
-                        <td class="py-4 text-right">64,03%</td>
-                        <td class="py-4 text-right">23,65%</td>
-                        <td class="py-4 text-right">-</td>
-                        <td class="py-4 text-right text-teal-700 rounded-r-xl font-extrabold">22</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="bg-teal-50/60 p-4 rounded-2xl border border-teal-200/80 text-xs text-teal-900">
-            <span class="font-bold">Análise Estratégica das Campanhas:</span> A campanha de <strong>Especialidade</strong> domina o volume de topo de funil com 22 conversões diretas rastreadas e CPC extremamente eficiente de R$ 1,51. Já a campanha de <strong>Nome</strong> blinda a marca pessoal do médico com CTR récorde de 31,08%.
-        </div>
-    </section>
-
-    <!-- SEÇÃO 4: PERFORMANCE DE PALAVRAS-CHAVE -->
-    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-sm space-y-6">
-        <div>
-            <h2 class="text-xl font-bold text-slate-900">4. Palavras-Chave de Maior Conversão</h2>
-            <p class="text-xs text-slate-500 mt-1">Termos pesquisados pelos pacientes no momento exato em que precisavam de consulta cardiologia.</p>
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-                <thead>
-                    <tr class="border-b border-slate-200 text-slate-400 font-semibold uppercase tracking-wider">
-                        <th class="pb-3">Palavra-Chave</th>
-                        <th class="pb-3 text-right">Impressões</th>
-                        <th class="pb-3 text-right">Cliques</th>
-                        <th class="pb-3 text-right">CTR</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 font-medium">
-                    <!-- Termo Principal Destaque Turquesa -->
-                    <tr class="bg-teal-50/70 text-slate-900 font-semibold">
-                        <td class="py-3.5 px-3 rounded-l-xl flex items-center gap-2">
-                            <svg class="w-4 h-4 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
-                            cardiologista
-                        </td>
-                        <td class="py-3.5 text-right">24.582</td>
-                        <td class="py-3.5 text-right font-bold text-teal-700">1.576</td>
-                        <td class="py-3.5 text-right px-3 rounded-r-xl font-bold text-teal-700">6,41%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">cardiologista particular</td>
-                        <td class="py-3 text-right text-slate-600">4.277</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">206</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">4,82%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">rj cardiologista</td>
-                        <td class="py-3 text-right text-slate-600">2.076</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">139</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">6,70%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">felipe rodrigues baptista</td>
-                        <td class="py-3 text-right text-slate-600">67</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">22</td>
-                        <td class="py-3 text-right px-3 font-bold text-amber-600">32,84%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">cardiologista perto de mim</td>
-                        <td class="py-3 text-right text-slate-600">32</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">3</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">9,38%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">cardiologista para pressão alta</td>
-                        <td class="py-3 text-right text-slate-600">59</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">2</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">3,39%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">cardiologistas</td>
-                        <td class="py-3 text-right text-slate-600">54</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">1</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">1,85%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">cardiologista rio de janeiro</td>
-                        <td class="py-3 text-right text-slate-600">40</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">1</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">2,50%</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3 px-3 text-slate-800">baptista felipe rodrigues</td>
-                        <td class="py-3 text-right text-slate-600">7</td>
-                        <td class="py-3 text-right text-slate-800 font-semibold">1</td>
-                        <td class="py-3 text-right px-3 text-slate-800 font-semibold">14,29%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- SEÇÃO 5: AGENDAMENTOS NA DOCTORALIA & EVOLUÇÃO -->
-    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-sm space-y-6">
-        <div>
-            <h2 class="text-xl font-bold text-slate-900">5. Agendamentos na Doctoralia & Crescimento Exponencial</h2>
-            <p class="text-xs text-slate-500 mt-1">Acompanhamento do volume de consultas e aceleração de novos agendamentos online.</p>
-        </div>
-
-        <!-- Visualização da Média de Agendamentos Online -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-1">
-                <p class="text-xs font-semibold text-slate-500">Média Online Pré-Mídias 360</p>
-                <p class="text-2xl font-black text-slate-700">5 / mês</p>
-                <p class="text-[11px] text-slate-400">Patamar inicial histórico</p>
-            </div>
-            <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-1">
-                <p class="text-xs font-semibold text-slate-500">Média nos Primeiros 6 Meses</p>
-                <p class="text-2xl font-black text-teal-700">7 / mês</p>
-                <p class="text-[11px] text-teal-600 font-semibold">▲ +40% de Crescimento Inicial</p>
-            </div>
-            <div class="bg-teal-500 text-white p-4 rounded-2xl shadow-md space-y-1">
-                <p class="text-xs font-semibold text-teal-100">Média Recente (Últimos 30 Dias)</p>
-                <p class="text-2xl font-black">14 / mês</p>
-                <p class="text-[11px] text-teal-100 font-bold">▲ +180% em Relação ao Patamar Inicial</p>
-            </div>
-        </div>
-
-        <!-- Gráfico de Evolução de Agendamentos -->
-        <div class="bg-slate-50 p-5 rounded-2xl border border-slate-200/80 space-y-3">
-            <h3 class="text-xs font-bold text-slate-700 uppercase tracking-wider">Evolução Mensal de Agendamentos Recentes (Doctoralia)</h3>
-            <div class="h-56 relative">
-                <canvas id="appointmentsChart"></canvas>
-            </div>
-        </div>
-
-        <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs">
-                <thead>
-                    <tr class="border-b border-slate-200 text-slate-400 font-semibold uppercase tracking-wider">
-                        <th class="pb-3">Período</th>
-                        <th class="pb-3 text-right">Agendamentos Totais</th>
-                        <th class="pb-3 text-right">Pacientes Novos (1ª Consulta)</th>
-                    </tr>
-                </thead>
-                <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
-                    <tr>
-                        <td class="py-3.5 font-bold text-slate-900">Maio 2026</td>
-                        <td class="py-3.5 text-right font-bold text-slate-900">75</td>
-                        <td class="py-3.5 text-right font-semibold text-teal-700">22</td>
-                    </tr>
-                    <tr>
-                        <td class="py-3.5 font-bold text-slate-900">Junho 2026</td>
-                        <td class="py-3.5 text-right font-bold text-slate-900">96</td>
-                        <td class="py-3.5 text-right font-semibold text-teal-700">16</td>
-                    </tr>
-                    <tr class="bg-teal-50/50">
-                        <td class="py-3.5 font-bold text-slate-900">Julho 2026 (Até dia 30)</td>
-                        <td class="py-3.5 text-right font-bold text-slate-900">101</td>
-                        <td class="py-3.5 text-right font-bold text-teal-700">20</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </section>
-
-    <!-- SEÇÃO 6: DISPERSÃO GEOGRÁFICA DE BAIRROS (RIO DE JANEIRO) -->
-    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-sm space-y-4">
-        <div>
-            <h2 class="text-xl font-bold text-slate-900">6. Dispersão Geográfica dos Acessos de Maior Performance</h2>
-            <p class="text-xs text-slate-500 mt-1">Bairros e regiões de onde partiram as principais buscas e conversões no Rio de Janeiro.</p>
-        </div>
-
-        <div class="flex flex-wrap gap-2.5 pt-2">
-            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-teal-200/80 shadow-xs">📍 Centro</span>
-            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-teal-200/80 shadow-xs">📍 Barra da Tijuca</span>
-            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-teal-200/80 shadow-xs">📍 Botafogo</span>
-            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-teal-200/80 shadow-xs">📍 Alto da Boa Vista</span>
-            <span class="bg-teal-50 text-teal-800 text-xs font-bold px-3.5 py-2 rounded-xl border border-teal-200/80 shadow-xs">📍 Santa Teresa</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Vila Isabel</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Realengo</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Galeão</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">São Cristóvão</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Anil</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Jardim Guanabara</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Engenho de Dentro</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Recreio</span>
-            <span class="bg-slate-100 text-slate-700 text-xs font-semibold px-3.5 py-2 rounded-xl border border-slate-200">Guaratiba</span>
-        </div>
-    </section>
-
-    <!-- SEÇÃO 7: REPUTAÇÃO DIGITAL & PROVA SOCIAL -->
-    <section class="bg-slate-900 text-white rounded-[2rem] p-6 lg:p-8 shadow-xl space-y-6">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-6">
-            <div>
-                <span class="bg-teal-500/20 text-teal-300 text-xs font-bold px-3 py-1 rounded-full border border-teal-500/30">Prova Social & Autoridade</span>
-                <h2 class="text-2xl font-extrabold mt-2 tracking-tight">7. Reputação Digital & Prova Social</h2>
-                <p class="text-xs text-slate-400 mt-1">Consolidação do perfil no Doctoralia como fator de decisão de agendamento.</p>
-            </div>
-
-            <div class="flex items-center space-x-4">
-                <div class="bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">Novas Opiniões no Período</p>
-                    <p class="text-2xl font-bold text-teal-300">+14</p>
-                </div>
-                <div class="bg-slate-800 px-5 py-3 rounded-2xl border border-slate-700 text-center">
-                    <p class="text-xs text-slate-400">Histórico Acumulado</p>
-                    <p class="text-2xl font-bold text-amber-300">482</p>
+                <div class="p-4 bg-amber-50 rounded-2xl border border-amber-100">
+                    <p class="text-[11px] text-amber-800 font-bold leading-relaxed">
+                        A ampla dispersão geográfica confirma que a relevância digital do Dr. Felipe atrai pacientes de polos estratégicos em toda a capital fluminense.
+                    </p>
                 </div>
             </div>
         </div>
+    </main>
 
-        <div class="bg-slate-800/80 p-5 rounded-2xl border border-slate-700 text-xs text-slate-300 leading-relaxed">
-            <p>
-                <strong class="text-teal-300">O Círculo Virtuoso da Decisão Cardiovascular:</strong> Cerca de <strong>70% dos pacientes que encontram o perfil do Dr. Felipe no Google Ads</strong> consultam diretamente as opiniões no perfil da Doctoralia antes de efetivar a primeira consulta. O marco de <strong>482 avaliações acumuladas com alto índice de satisfação</strong> consolida autoridade médica e assegura excelente taxa de conversão final.
-            </p>
-        </div>
-    </section>
+    <footer class="bg-white border-t border-slate-200 py-12 text-center space-y-2">
+        <p class="text-xs font-black text-slate-400 uppercase tracking-widest">Mídias 360 &copy; 2026</p>
+        <p class="text-[10px] text-slate-400 italic">Consultoria de Performance Médica & Doctoralia Partner</p>
+    </footer>
 
-</main>
+    <script>
+        // Alternância de tabelas
+        function toggleTable(target) {
+            const btnCamp = document.getElementById('btn-campanhas');
+            const btnPal = document.getElementById('btn-palavras');
+            const tableCamp = document.getElementById('table-campanhas');
+            const tablePal = document.getElementById('table-palavras');
 
-<!-- FOOTER -->
-<footer class="mt-16 border-t border-slate-200/80 pt-8 text-center text-xs text-slate-400">
-    <p class="font-semibold text-slate-600">Mídias 360 &copy; 2026 - Consultoria & Gestão de Performance Médica</p>
-    <p class="text-[11px] mt-1 text-slate-400">Relatório Executivo Preparado para Acompanhamento de Resultados</p>
-</footer>
+            if (target === 'campanhas') {
+                btnCamp.classList.add('tab-active');
+                btnCamp.classList.remove('text-slate-400');
+                btnPal.classList.remove('tab-active');
+                btnPal.classList.add('text-slate-400');
+                tableCamp.classList.remove('hidden');
+                tablePal.classList.add('hidden');
+            } else {
+                btnPal.classList.add('tab-active');
+                btnPal.classList.remove('text-slate-400');
+                btnCamp.classList.remove('tab-active');
+                btnCamp.classList.add('text-slate-400');
+                tablePal.classList.remove('hidden');
+                tableCamp.classList.add('hidden');
+            }
+        }
 
-<!-- CHART RENDERING SCRIPT -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Chart 1: Benchmark Chart
-        var ctxBench = document.getElementById('benchmarkChart').getContext('2d');
-        new Chart(ctxBench, {
+        // Gráfico de CTR
+        const ctxCtr = document.getElementById('ctrChart').getContext('2d');
+        new Chart(ctxCtr, {
             type: 'bar',
             data: {
-                labels: ['Média de Mercado', 'Dr. Felipe Baptista'],
+                labels: ['Média Saúde', 'Dr. Felipe Baptista'],
                 datasets: [{
-                    label: 'CTR (%)',
                     data: [3.17, 6.23],
-                    backgroundColor: ['#94a3b8', '#d97706'],
-                    borderRadius: 8,
-                    barThickness: 28
+                    backgroundColor: ['#e2e8f0', '#d97706'],
+                    borderRadius: 12,
+                    barThickness: 45
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: { beginAtZero: true, ticks: { callback: v => v + '%' } },
+                    x: { grid: { display: false } }
+                }
+            }
+        });
+
+        // Gráfico de Crescimento
+        const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+        new Chart(ctxGrowth, {
+            type: 'line',
+            data: {
+                labels: ['Maio', 'Junho', 'Julho'],
+                datasets: [{
+                    label: 'Agendamentos Totais',
+                    data: [75, 96, 101],
+                    borderColor: '#0d9488',
+                    backgroundColor: 'rgba(13, 148, 136, 0.1)',
+                    fill: true,
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointBackgroundColor: '#0d9488'
+                },
+                {
+                    label: 'Pacientes Novos',
+                    data: [22, 16, 20],
+                    borderColor: '#d97706',
+                    borderDash: [5, 5],
+                    tension: 0.4,
+                    pointRadius: 4
                 }]
             },
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: {
-                    legend: { display: false }
+                    legend: { position: 'bottom', labels: { font: { size: 10, weight: 'bold' } } }
                 },
                 scales: {
-                    x: { grid: { display: false }, ticks: { font: { weight: '600', size: 10 } } },
-                    y: {
-                        ticks: {
-                            callback: function(value) {
-                                return value + '%';
-                            }
-                        }
-                    }
+                    y: { grid: { color: '#f1f5f9' } },
+                    x: { grid: { display: false } }
                 }
             }
         });
-
-        // Chart 2: Doctoralia Appointments Chart
-        var ctxApp = document.getElementById('appointmentsChart').getContext('2d');
-        new Chart(ctxApp, {
-            type: 'bar',
-            data: {
-                labels: ['Maio 2026', 'Junho 2026', 'Julho 2026 (parcial)'],
-                datasets: [
-                    {
-                        label: 'Agendamentos Totais',
-                        data: [75, 96, 101],
-                        backgroundColor: '#0f172a',
-                        borderRadius: 6,
-                        barThickness: 22
-                    },
-                    {
-                        label: 'Pacientes Novos',
-                        data: [22, 16, 20],
-                        backgroundColor: '#0d9488',
-                        borderRadius: 6,
-                        barThickness: 22
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top',
-                        labels: { boxWidth: 12, font: { size: 11, weight: '600' } }
-                    }
-                },
-                scales: {
-                    x: { grid: { display: false }, ticks: { font: { size: 10, weight: '600' } } },
-                    y: { grid: { color: 'rgba(226, 232, 240, 0.8)' }, ticks: { font: { size: 10 } } }
-                }
-            }
-        });
-    });
-</script>
+    </script>
+</body>
+</html>
