@@ -1,0 +1,525 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Performance - Dr. Luis Belini</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+        .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(226, 232, 240, 0.8); }
+        .scroll-smooth { scroll-behavior: smooth; }
+        @media (min-width: 768px) { .chart-container { height: 330px; } }
+    </style>
+</head>
+<!-- Chosen Palette: Premium Teal & Amber (Medical Precision & High Conversion) -->
+<body class="text-slate-800 scroll-smooth antialiased">
+
+    <!-- NAVEGAÇÃO -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/85 backdrop-blur-md border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-teal-600 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-lg shadow-teal-600/20">
+                    LB
+                </div>
+                <div>
+                    <span class="font-black text-slate-900 block leading-none">Dr. Luis Belini</span>
+                    <span class="text-[10px] text-teal-600 font-bold uppercase tracking-widest">Neurologia</span>
+                </div>
+            </div>
+            <div class="hidden md:flex items-center gap-6">
+                <!-- Google Partner Badge -->
+                <div class="flex items-center gap-2 bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-200">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                    <span class="text-[11px] font-bold text-slate-700">Google Partner</span>
+                </div>
+                <!-- Doctoralia Badge -->
+                <div class="flex items-center gap-1.5 bg-teal-50 px-3 py-1.5 rounded-xl border border-teal-100">
+                    <span class="text-amber-500 text-sm font-black">★★★★★</span>
+                    <span class="text-[10px] font-black text-teal-900 uppercase tracking-wider">Doctoralia VIP</span>
+                </div>
+                <div class="h-6 w-[1px] bg-slate-200"></div>
+                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Mídias 360</span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+        <!-- SUB-HEADER DE METADADOS -->
+        <section class="bg-white rounded-[2rem] p-8 border border-slate-200/80 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+            <div>
+                <span class="bg-teal-100 text-teal-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2 inline-block">Relatório Executivo de Performance</span>
+                <h1 class="text-3xl font-black text-slate-900 tracking-tight">Análise Estratégica de Presença Digital</h1>
+                <p class="text-slate-500 text-sm mt-1">Período Analisado: <strong>01 a 30 de Julho de 2026</strong> (Mês Consolidado)</p>
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-4 w-full md:w-auto">
+                <div class="bg-slate-50 border border-slate-200 px-5 py-3 rounded-2xl text-left">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">CPC Médio Consolidado</p>
+                    <p class="text-xl font-black text-teal-700">R$ 1,66</p>
+                </div>
+                <button onclick="window.print()" class="flex-1 md:flex-none bg-slate-900 text-white px-6 py-3.5 rounded-2xl text-xs font-bold shadow-xl shadow-slate-900/10 hover:scale-105 transition-all">
+                    Exportar Relatório PDF
+                </button>
+            </div>
+        </section>
+
+        <!-- KPI GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200/80 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Impressões Totais</p>
+                <h3 class="text-3xl font-black text-slate-900">7.652</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-600">Buscas de Alta Intenção</div>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200/80 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Cliques Ads</p>
+                <h3 class="text-3xl font-black text-slate-900">512</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-600">Acessos Qualificados</div>
+            </div>
+            <div class="bg-amber-50 p-6 rounded-[2rem] border border-amber-200/80 shadow-sm">
+                <p class="text-[10px] font-black text-amber-800 uppercase tracking-widest mb-2">CTR Global</p>
+                <h3 class="text-3xl font-black text-amber-600">6,69%</h3>
+                <div class="mt-2 text-[10px] font-bold text-amber-700">▲ 2x Média do Setor (3,17%)</div>
+            </div>
+            <div class="bg-white p-6 rounded-[2rem] border border-slate-200/80 shadow-sm">
+                <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Acessos Perfil Doctoralia</p>
+                <h3 class="text-3xl font-black text-slate-900">749</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-600">68.4% vindos do Google Ads</div>
+            </div>
+            <div class="bg-teal-600 p-6 rounded-[2rem] shadow-lg shadow-teal-600/20 text-white">
+                <p class="text-[10px] font-black text-teal-200 uppercase tracking-widest mb-2">Cliques Telefone</p>
+                <h3 class="text-3xl font-black">192</h3>
+                <div class="mt-2 text-[10px] font-bold text-teal-100">Contatos Iniciados</div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 1: BENCHMARK DE EFICIÊNCIA E SHARE OF VOICE -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-200/80 shadow-sm space-y-6 flex flex-col justify-between">
+                <div>
+                    <h2 class="text-xl font-black text-slate-900">Eficiência de Atração (CTR)</h2>
+                    <p class="text-xs text-slate-500 mt-1">Comparativo entre a performance do Dr. Luis Belini e a média saudável do setor de saúde.</p>
+                </div>
+                <div class="chart-container">
+                    <canvas id="ctrChart"></canvas>
+                </div>
+                <div class="p-4 bg-teal-50 rounded-2xl border border-teal-100">
+                    <p class="text-[11px] text-teal-800 leading-relaxed italic">
+                        <strong>Análise Técnica:</strong> Com uma taxa de atração de <strong>6,69%</strong>, as campanhas do Dr. Luis Belini superam o benchmark de mercado (3,17%) em mais de 110%, indicando anúncios altamente assertivos e direcionados ao público certo nas regiões de Indaiatuba, Vinhedo e Campinas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-slate-900 rounded-[2rem] p-8 text-white flex flex-col justify-between space-y-6">
+                <div>
+                    <span class="bg-teal-500/20 text-teal-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider border border-teal-500/30">Domínio Regional de Leilão</span>
+                    <h2 class="text-xl font-black tracking-tight mt-3">Share of Voice (Presença em Busca)</h2>
+                    <p class="text-xs text-slate-400 mt-1">Sua visibilidade nas posições de maior destaque no Google.</p>
+                </div>
+                
+                <div class="space-y-6 my-4">
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-widest">Top 3 (Topo da Página)</span>
+                            <span class="text-xl font-black text-teal-400">61,9%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-teal-500 h-full rounded-full transition-all duration-500" style="width: 61.9%"></div>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex justify-between items-end">
+                            <span class="text-xs font-bold text-slate-300 uppercase tracking-widest">Top 1 (1ª Posição Absoluta)</span>
+                            <span class="text-xl font-black text-amber-500">17,9%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 h-3 rounded-full overflow-hidden">
+                            <div class="bg-amber-500 h-full rounded-full transition-all duration-500" style="width: 17.9%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-slate-800 p-5 rounded-2xl border border-slate-700/80">
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Em média, o Dr. Luis Belini é exibido nas <span class="text-white font-bold underline">primeiras posições em 6 a cada 10 buscas</span> relacionadas a Neurologia em sua área geográfica de atuação.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: PERFORMANCE POR GRUPO DE ANÚNCIO -->
+        <section class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Análise detalhada por grupo de anúncio</h2>
+                    <p class="text-sm text-slate-500 italic">Detalhamento técnico por geografia e posicionamento de leilão no Google Ads.</p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm overflow-hidden overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200/80 text-slate-400 font-bold uppercase tracking-widest">
+                            <th class="px-6 py-4">Campanha</th>
+                            <th class="px-6 py-4 text-right">Impr.</th>
+                            <th class="px-6 py-4 text-right">Cliques</th>
+                            <th class="px-6 py-4 text-right">CTR</th>
+                            <th class="px-6 py-4 text-right">CPC Méd.</th>
+                            <th class="px-6 py-4 text-right bg-teal-50/50 text-teal-800">% Impr. Topo</th>
+                            <th class="px-6 py-4 text-right bg-teal-50/50 text-teal-800">% Impr. 1ª Pos</th>
+                            <th class="px-6 py-4 text-right bg-teal-50/50 text-teal-800">Parc. Impr. Pesq.</th>
+                            <th class="px-6 py-4 text-right">Conversões</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium">
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-teal-50/20">
+                            <td class="px-6 py-5 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-teal-500"></span>
+                                Nome (Branding)
+                            </td>
+                            <td class="px-6 py-5 text-right">147</td>
+                            <td class="px-6 py-5 text-right font-bold text-slate-900">32</td>
+                            <td class="px-6 py-5 text-right text-teal-600 font-bold">21,77%</td>
+                            <td class="px-6 py-5 text-right font-semibold">R$ 0,68</td>
+                            <td class="px-6 py-5 text-right font-bold text-teal-800">77,91%</td>
+                            <td class="px-6 py-5 text-right font-bold text-teal-800">37,21%</td>
+                            <td class="px-6 py-5 text-right font-black text-slate-900">73,50%</td>
+                            <td class="px-6 py-5 text-right font-bold text-teal-700">2</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-5 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                Especialidade - Indaiatuba (Principal)
+                            </td>
+                            <td class="px-6 py-5 text-right">7.391</td>
+                            <td class="px-6 py-5 text-right font-bold text-slate-900">473</td>
+                            <td class="px-6 py-5 text-right font-semibold">6,40%</td>
+                            <td class="px-6 py-5 text-right font-semibold">R$ 1,74</td>
+                            <td class="px-6 py-5 text-right font-semibold">61,72%</td>
+                            <td class="px-6 py-5 text-right font-semibold">17,70%</td>
+                            <td class="px-6 py-5 text-right font-bold text-slate-700">10,08%</td>
+                            <td class="px-6 py-5 text-right font-bold text-teal-700">10</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-5 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                Especialidade - Vinhedo
+                            </td>
+                            <td class="px-6 py-5 text-right">81</td>
+                            <td class="px-6 py-5 text-right font-bold text-slate-900">6</td>
+                            <td class="px-6 py-5 text-right font-semibold">7,41%</td>
+                            <td class="px-6 py-5 text-right font-semibold">R$ 0,63</td>
+                            <td class="px-6 py-5 text-right font-semibold">63,51%</td>
+                            <td class="px-6 py-5 text-right font-semibold">8,11%</td>
+                            <td class="px-6 py-5 text-right text-slate-400">&lt; 10%</td>
+                            <td class="px-6 py-5 text-right font-bold text-teal-700">2</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-5 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-purple-500"></span>
+                                Especialidade - Campinas
+                            </td>
+                            <td class="px-6 py-5 text-right">33</td>
+                            <td class="px-6 py-5 text-right font-bold text-slate-900">1</td>
+                            <td class="px-6 py-5 text-right font-semibold">3,03%</td>
+                            <td class="px-6 py-5 text-right font-semibold">R$ 1,54</td>
+                            <td class="px-6 py-5 text-right font-semibold">36,00%</td>
+                            <td class="px-6 py-5 text-right font-semibold">8,00%</td>
+                            <td class="px-6 py-5 text-right text-slate-400">&lt; 10%</td>
+                            <td class="px-6 py-5 text-right text-slate-400">0</td>
+                        </tr>
+                        <!-- Consolidated Row -->
+                        <tr class="bg-slate-900 text-white font-bold">
+                            <td class="px-6 py-4 rounded-l-xl">Consolidado Total</td>
+                            <td class="px-6 py-4 text-right">7.652</td>
+                            <td class="px-6 py-4 text-right text-teal-400">512</td>
+                            <td class="px-6 py-4 text-right text-amber-400">6,69%</td>
+                            <td class="px-6 py-4 text-right text-teal-300">R$ 1,66</td>
+                            <td class="px-6 py-4 text-right">61,94%</td>
+                            <td class="px-6 py-4 text-right">17,93%</td>
+                            <td class="px-6 py-4 text-right">-</td>
+                            <td class="px-6 py-4 text-right text-teal-400 rounded-r-xl">14</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="text-[11px] text-slate-400 italic">
+                * Os dados demonstram alta dominância de leilão na campanha de Branding (73.5% de ganho) e sólida escala na campanha de Indaiatuba com 473 cliques diretos a CPC excelente de R$ 1,74.
+            </p>
+        </section>
+
+        <!-- SEÇÃO 3: PALAVRAS-CHAVE PRINCIPAIS -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 space-y-6">
+                <div>
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Top 10 Palavras-Chave</h2>
+                    <p class="text-sm text-slate-500">Termos de pesquisa com maior volume de cliques qualificados no período.</p>
+                </div>
+                <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm overflow-hidden">
+                    <table class="w-full text-left text-xs">
+                        <thead>
+                            <tr class="bg-slate-50 border-b border-slate-100 text-slate-400 font-bold uppercase tracking-wider">
+                                <th class="px-6 py-4">Termo de Busca</th>
+                                <th class="px-6 py-4 text-right">Impressões</th>
+                                <th class="px-6 py-4 text-right">Cliques</th>
+                                <th class="px-6 py-4 text-right">CTR</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100 font-medium">
+                            <tr class="bg-teal-50/60 font-bold text-teal-900">
+                                <td class="px-6 py-4">neurologistas</td>
+                                <td class="px-6 py-4 text-right">3.540</td>
+                                <td class="px-6 py-4 text-right font-black text-teal-700">214</td>
+                                <td class="px-6 py-4 text-right font-black">6,05%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 font-bold text-slate-900">neurologista</td>
+                                <td class="px-6 py-4 text-right">2.194</td>
+                                <td class="px-6 py-4 text-right font-semibold">141</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800">6,43%</td>
+                            </tr>
+                            <tr class="bg-teal-50/30">
+                                <td class="px-6 py-4 font-bold text-teal-900">neurologista indaiatuba</td>
+                                <td class="px-6 py-4 text-right">544</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-700">66</td>
+                                <td class="px-6 py-4 text-right font-black text-teal-600">12,13%</td>
+                            </tr>
+                            <tr class="bg-amber-50/40">
+                                <td class="px-6 py-4 font-bold text-amber-900">luis belini (Branding)</td>
+                                <td class="px-6 py-4 text-right">143</td>
+                                <td class="px-6 py-4 text-right font-black text-amber-700">31</td>
+                                <td class="px-6 py-4 text-right font-black text-amber-600">21,68%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-slate-800">neurologia</td>
+                                <td class="px-6 py-4 text-right">929</td>
+                                <td class="px-6 py-4 text-right">28</td>
+                                <td class="px-6 py-4 text-right font-semibold">3,01%</td>
+                            </tr>
+                            <tr class="bg-teal-50/30">
+                                <td class="px-6 py-4 font-bold text-teal-900">neurologistas indaiatuba</td>
+                                <td class="px-6 py-4 text-right">148</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-700">23</td>
+                                <td class="px-6 py-4 text-right font-black text-teal-600">15,54%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-slate-800">neurologista perto de mim</td>
+                                <td class="px-6 py-4 text-right">25</td>
+                                <td class="px-6 py-4 text-right font-semibold">3</td>
+                                <td class="px-6 py-4 text-right font-bold text-slate-800">12,00%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-slate-800">campinas neurologista</td>
+                                <td class="px-6 py-4 text-right">29</td>
+                                <td class="px-6 py-4 text-right">1</td>
+                                <td class="px-6 py-4 text-right">3,45%</td>
+                            </tr>
+                            <tr>
+                                <td class="px-6 py-4 text-slate-800">neurologista vinhedo</td>
+                                <td class="px-6 py-4 text-right">4</td>
+                                <td class="px-6 py-4 text-right">1</td>
+                                <td class="px-6 py-4 text-right font-bold text-teal-600">25,00%</td>
+                            </tr>
+                            <tr class="bg-amber-50/30">
+                                <td class="px-6 py-4 font-bold text-amber-900">belini luis</td>
+                                <td class="px-6 py-4 text-right">4</td>
+                                <td class="px-6 py-4 text-right font-bold text-amber-700">1</td>
+                                <td class="px-6 py-4 text-right font-black text-amber-600">25,00%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="bg-teal-900 rounded-[2rem] p-8 text-white space-y-6 self-start">
+                <h3 class="text-lg font-black tracking-tight">O Gatilho da Busca Ativa</h3>
+                <p class="text-xs text-teal-200 leading-relaxed">
+                    A palavra-chave regional <span class="text-amber-300 font-bold">"neurologista indaiatuba"</span> possui um CTR extraordinário de <span class="text-white font-black underline">12,13%</span>, enquanto a busca pelo nome direto (<span class="text-amber-300 font-bold">luis belini</span>) alcança <span class="text-white font-black underline">21,68%</span>.
+                </p>
+                <div class="bg-teal-800/60 p-4 rounded-2xl border border-teal-700 text-xs text-teal-100">
+                    <strong>Como funciona o anúncio:</strong> Quando o paciente digita no Google procurando especialista na sua região, o anúncio oficial aparece de forma imediata no topo, captando a demanda exatamente no momento de decisão.
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: AGENDAMENTOS NA DOCTORALIA -->
+        <section id="agendamentos" class="bg-white rounded-[2rem] p-8 border border-slate-200/80 shadow-sm space-y-8">
+            <div class="text-center max-w-2xl mx-auto space-y-2">
+                <span class="bg-teal-100 text-teal-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Evolução de Agendamentos Online</span>
+                <h2 class="text-3xl font-black text-slate-900 tracking-tight">O Funil de Crescimento na Doctoralia</h2>
+                <p class="text-sm text-slate-500">Comparativo histórico mostrando a curva ascendente de consultas confirmadas.</p>
+            </div>
+
+            <!-- Cards de Evolução Histórica -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/60 flex flex-col items-center text-center">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3">Antes do Mídias 360</p>
+                    <div class="text-4xl font-black text-slate-400">4,7</div>
+                    <p class="text-[10px] font-bold text-slate-400 mt-2 uppercase">Média Mensal de Agendamentos</p>
+                </div>
+                <div class="bg-white p-6 rounded-3xl border-2 border-teal-200 flex flex-col items-center text-center relative shadow-lg shadow-teal-50">
+                    <div class="absolute -top-3 bg-teal-600 text-white text-[9px] font-black px-4 py-1 rounded-full uppercase tracking-wider">Gestão Inicial</div>
+                    <p class="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-3">Primeiros 6 Meses</p>
+                    <div class="text-4xl font-black text-teal-600">7,1</div>
+                    <p class="text-[10px] font-bold text-teal-700 mt-2 uppercase">Média Mensal de Agendamentos</p>
+                    <span class="text-[10px] font-bold text-teal-600 mt-1">+51% de Crescimento</span>
+                </div>
+                <div class="bg-amber-500 p-6 rounded-3xl text-white shadow-xl shadow-amber-500/20 flex flex-col items-center text-center">
+                    <div class="bg-amber-600 text-amber-100 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-wider mb-2">Recorde Histórico</div>
+                    <p class="text-[10px] font-black text-amber-100 uppercase tracking-widest mb-1">Últimos 30 dias (Julho)</p>
+                    <div class="text-5xl font-black">18</div>
+                    <p class="text-[10px] font-bold text-amber-100 mt-2 uppercase">Agendamentos Online Confirmados</p>
+                    <span class="text-[10px] font-bold text-white mt-1">▲ +283% vs Período Inicial</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center pt-4">
+                <div class="lg:col-span-3">
+                    <div class="chart-container">
+                        <canvas id="growthChart"></canvas>
+                    </div>
+                </div>
+                
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: REPUTAÇÃO E LOCALIDADES DE DESTAQUE -->
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 pb-12">
+            <div class="bg-teal-900 text-white rounded-[2rem] p-8 space-y-6 shadow-xl shadow-teal-900/10 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <span class="bg-teal-800 text-teal-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Prova Social</span>
+                            <h2 class="text-2xl font-black tracking-tight mt-2">Reputação Digital Consolidada</h2>
+                        </div>
+                        <span class="text-amber-400 text-2xl font-black">★★★★★</span>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4 my-4">
+                        <div class="bg-teal-800/60 p-5 rounded-2xl border border-teal-700/80">
+                            <p class="text-[10px] font-bold text-teal-300 uppercase tracking-widest mb-1">Novas Opiniões</p>
+                            <p class="text-3xl font-black text-amber-400">+2</p>
+                            <p class="text-[9px] text-teal-300 mt-1">Registradas no mês</p>
+                        </div>
+                        <div class="bg-teal-800/60 p-5 rounded-2xl border border-teal-700/80">
+                            <p class="text-[10px] font-bold text-teal-300 uppercase tracking-widest mb-1">Acumulado Total</p>
+                            <p class="text-3xl font-black">126</p>
+                            <p class="text-[9px] text-teal-300 mt-1">Avaliações Positivas</p>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-teal-100 leading-relaxed">
+                        Estudos de conversão em marketing médico mostram que mais de <span class="text-white font-bold underline">70% dos pacientes leem as avaliações no Doctoralia</span> antes de confirmar a primeira consulta. As 126 opiniões do Dr. Luis Belini são fundamentais para transmitir confiança imediata.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-[2rem] p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-6">
+                <div>
+                    <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Mapeamento Geográfico</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-2">Locais e Bairros de Maior Entrega</h3>
+                    <p class="text-xs text-slate-500 mt-1">Regiões em Indaiatuba, Vinhedo e Campinas com maior volume de buscas convertidas.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <p class="text-[10px] font-black text-teal-700 uppercase tracking-wider mb-2">Indaiatuba & Vinhedo</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-2 bg-teal-50 border border-teal-100 rounded-xl text-[11px] font-bold text-teal-900">Indaiatuba (Centro)</span>
+                            <span class="px-3.5 py-2 bg-teal-50 border border-teal-100 rounded-xl text-[11px] font-bold text-teal-900">Jardim Morada do Sol</span>
+                            <span class="px-3.5 py-2 bg-teal-50 border border-teal-100 rounded-xl text-[11px] font-bold text-teal-900">Vinhedo</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <p class="text-[10px] font-black text-amber-700 uppercase tracking-wider mb-2">Campinas (Bairros Nobres)</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3.5 py-2 bg-amber-50 border border-amber-100 rounded-xl text-[11px] font-bold text-amber-900">Swiss Park</span>
+                            <span class="px-3.5 py-2 bg-amber-50 border border-amber-100 rounded-xl text-[11px] font-bold text-amber-900">Jardim Ipaussurama</span>
+                            <span class="px-3.5 py-2 bg-amber-50 border border-amber-100 rounded-xl text-[11px] font-bold text-amber-900">Techno Park</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100">
+                    <p class="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-1">Dica Estratégica Mídias 360</p>
+                    <p class="text-[11px] text-slate-500">A forte presença em regiões corporativas como Techno Park e condomínios de alto padrão (Swiss Park) indica um público de elevado poder aquisitivo para consultas particulares.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-white border-t border-slate-200/80 py-8 text-center">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Mídias 360 &copy; 2026</p>
+        <p class="text-[10px] text-slate-400 italic">Consultoria & Gestão Estratégica de Performance Médica</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Chart 1: Benchmark CTR
+            const ctxCtr = document.getElementById('ctrChart').getContext('2d');
+            new Chart(ctxCtr, {
+                type: 'bar',
+                data: {
+                    labels: ['Média do Setor (Saúde)', 'Dr. Luis Belini (Atual)'],
+                    datasets: [{
+                        label: 'Taxa de Atração (%)',
+                        data: [3.17, 6.69],
+                        backgroundColor: ['#e2e8f0', '#0d9488'],
+                        borderRadius: 12,
+                        barThickness: 48
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: { beginAtZero: true, ticks: { callback: v => v + '%' }, grid: { color: '#f1f5f9' } },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+
+            // Chart 2: Agendamentos Growth
+            const ctxGrowth = document.getElementById('growthChart').getContext('2d');
+            new Chart(ctxGrowth, {
+                type: 'bar',
+                data: {
+                    labels: ['Antes do Mídias 360', 'Primeiros 6 Meses', 'Julho 2026 (Recorde)'],
+                    datasets: [{
+                        label: 'Média de Agendamentos Online',
+                        data: [4.7, 7.1, 18],
+                        backgroundColor: ['#cbd5e1', '#0d9488', '#d97706'],
+                        borderRadius: 12,
+                        barThickness: 44
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: { grid: { color: '#f1f5f9' }, beginAtZero: true },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
