@@ -1,0 +1,590 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Performance - Dra. Fernanda Caldeira</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind = window.tailwind || {};
+        window.tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                            950: '#042f2e',
+                        },
+                        amber: {
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        };
+    </script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f8fafc; }
+        .chart-container { position: relative; width: 100%; height: 280px; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen">
+
+    <!-- CABEÇALHO PRINCIPAL (NAVIGATION BAR) -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 bg-teal-600 rounded-2xl flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-teal-600/20">
+                    FC
+                </div>
+                <div>
+                    <span class="font-black text-slate-900 text-lg block leading-tight">Dra. Fernanda Caldeira</span>
+                    <span class="text-[11px] text-teal-600 font-bold uppercase tracking-widest">Dermatologia Especializada</span>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-4">
+                <!-- Google Partner Badge -->
+                <div class="hidden sm:flex items-center gap-2 bg-slate-50 px-3.5 py-2 rounded-xl border border-slate-200/80">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none">
+                        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" fill="#FBBC05"/>
+                        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"/>
+                    </svg>
+                    <span class="text-xs font-bold text-slate-700">Google Partner</span>
+                </div>
+                <!-- Doctoralia VIP Badge -->
+                <div class="flex items-center gap-1.5 bg-teal-50 px-3.5 py-2 rounded-xl border border-teal-100">
+                    <span class="text-amber-500 text-sm font-black">★★★★★</span>
+                    <span class="text-[10px] font-black text-teal-900 uppercase tracking-wider">Doctoralia VIP</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-28 pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+
+        <!-- SUB-HEADER DE METADADOS -->
+        <section class="bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-sm flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+                <div class="flex flex-wrap items-center gap-2 mb-1.5">
+                    <span class="bg-teal-100 text-teal-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">
+                        Relatório Executivo Trimestral
+                    </span>
+                    <span class="bg-slate-100 text-slate-700 text-[10px] font-bold px-3 py-1 rounded-full uppercase">
+                        Período: 01/05/2026 - 31/07/2026
+                    </span>
+                </div>
+                <h1 class="text-2xl font-black text-slate-900 tracking-tight">Performance Mídias 360 & Doctoralia</h1>
+                <p class="text-xs text-slate-500 mt-0.5">Análise consolidada de visibilidade, atração e agendamentos para Dra. Fernanda Caldeira</p>
+            </div>
+
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
+                <!-- Highlight CPC Médio -->
+                <div class="bg-gradient-to-br from-teal-900 to-slate-900 text-white px-5 py-3 rounded-2xl text-left border border-teal-800 shadow-md">
+                    <p class="text-[9px] font-bold text-teal-300 uppercase tracking-widest">CPC Médio Consolidado</p>
+                    <p class="text-xl font-black text-amber-400">R$ 3,37</p>
+                </div>
+
+                <button onclick="window.print()" class="bg-slate-900 text-white px-5 py-3.5 rounded-2xl text-xs font-bold shadow-xl shadow-slate-900/10 hover:bg-slate-800 transition-all flex items-center gap-2">
+                    <span>Exportar Relatório</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 1: ALCANCE DO ANÚNCIO NO GOOGLE -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">1. Alcance do Anúncio no Google</h2>
+                <p class="text-xs text-slate-500 mt-1 max-w-3xl">
+                    A estratégia de atração ativa posiciona os anúncios da Dra. Fernanda Caldeira diretamente para pacientes que buscam tratamentos dermatológicos qualificados na região de São José dos Campos e via Telemedicina.
+                </p>
+            </div>
+
+            <!-- Grid de 5 Cartões Destaque -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="bg-white p-5 rounded-[2rem] border border-slate-200/80 shadow-sm space-y-1.5">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Impressões Totais</p>
+                    <h3 class="text-2xl font-black text-slate-900">11.661</h3>
+                    <p class="text-[10px] font-bold text-teal-600">Buscas Relevantes Exibidas</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-[2rem] border border-slate-200/80 shadow-sm space-y-1.5">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Cliques Diretos</p>
+                    <h3 class="text-2xl font-black text-slate-900">931</h3>
+                    <p class="text-[10px] font-bold text-teal-700">Tráfego Qualificado</p>
+                </div>
+
+                <div class="bg-amber-50 p-5 rounded-[2rem] border border-amber-200/80 shadow-sm space-y-1.5">
+                    <p class="text-[10px] font-black text-amber-800 uppercase tracking-widest">CTR de Performance</p>
+                    <h3 class="text-2xl font-black text-amber-600">7,98%</h3>
+                    <p class="text-[10px] font-bold text-amber-700">▲ 2,5x Média de Mercado</p>
+                </div>
+
+                <div class="bg-white p-5 rounded-[2rem] border border-slate-200/80 shadow-sm space-y-1.5">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Acessos Totais Perfil</p>
+                    <h3 class="text-2xl font-black text-slate-900">1.821</h3>
+                    <p class="text-[10px] font-bold text-teal-800">▲ 51,1% vieram do Ads</p>
+                </div>
+
+                <div class="bg-teal-600 p-5 rounded-[2rem] shadow-lg shadow-teal-600/20 text-white space-y-1.5">
+                    <p class="text-[10px] font-black text-teal-200 uppercase tracking-widest">Cliques no Telefone</p>
+                    <h3 class="text-2xl font-black">377</h3>
+                    <p class="text-[10px] font-bold text-teal-100">Contatos Diretos Gerados</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: BENCHMARK DE EFICIÊNCIA E DOMÍNIO DE BUSCA -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">2. Benchmark de Eficiência & Domínio de Busca</h2>
+                <p class="text-xs text-slate-500 mt-1">Comparativo de conversão e posição nos leilões do Google em relação ao mercado dermatológico.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Coluna Esquerda 1/3: Gráfico CTR vs Benchmark -->
+                <div class="bg-white p-6 rounded-[2rem] border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="bg-teal-100 text-teal-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase">Atração Notável</span>
+                        <h3 class="text-lg font-black text-slate-900 mt-2">CTR da Dra. vs Mercado</h3>
+                        <p class="text-xs text-slate-500 mt-0.5">Média saudável do setor de saúde é 3,17%.</p>
+                    </div>
+
+                    <div class="chart-container">
+                        <canvas id="ctrBenchmarkChart"></canvas>
+                    </div>
+
+                    <div class="p-3 bg-teal-50 rounded-xl border border-teal-100 text-[11px] text-teal-900">
+                        <strong>Efetividade:</strong> O anúncio da Dra. Fernanda possui atratividade <strong>151% superior</strong> à média nacional.
+                    </div>
+                </div>
+
+                <!-- Coluna Direita 2/3: Domínio de Busca (Top 3 e Top 1) -->
+                <div class="lg:col-span-2 bg-slate-900 rounded-[2rem] p-8 text-white flex flex-col justify-between space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center">
+                            <span class="bg-teal-500/20 text-teal-300 text-[10px] font-bold px-3 py-1 rounded-full uppercase border border-teal-500/30">Share of Voice</span>
+                            <span class="text-xs font-bold text-slate-400">Dominância em Leilões</span>
+                        </div>
+                        <h3 class="text-xl font-black text-white mt-3">Exibição de Destaque nas Buscas</h3>
+                        <p class="text-xs text-slate-400 mt-1">Porcentagem de vezes em que os anúncios apareceram nas posições nobres do Google.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <!-- Top 3 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-xs font-bold">
+                                <span class="text-slate-300">Top 3 (Exibição em Posições Premium)</span>
+                                <span class="text-teal-400 text-sm font-black">73,80%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3 p-0.5 border border-slate-700">
+                                <div class="bg-gradient-to-r from-teal-500 to-teal-400 h-2 rounded-full" style="width: 73.8%"></div>
+                            </div>
+                            <p class="text-[10px] text-slate-400">Presente entre os 3 primeiros resultados em mais de 7 a cada 10 pesquisas.</p>
+                        </div>
+
+                        <!-- Top 1 -->
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center text-xs font-bold">
+                                <span class="text-slate-300">Top 1 (Primeira Posição Absoluta)</span>
+                                <span class="text-amber-400 text-sm font-black">24,13%</span>
+                            </div>
+                            <div class="w-full bg-slate-800 rounded-full h-3 p-0.5 border border-slate-700">
+                                <div class="bg-gradient-to-r from-amber-500 to-amber-400 h-2 rounded-full" style="width: 24.13%"></div>
+                            </div>
+                            <p class="text-[10px] text-slate-400">Liderança topo da página isolado em quase 1/4 das buscas ativas.</p>
+                        </div>
+                    </div>
+
+                    <div class="p-4 bg-slate-800/80 rounded-2xl border border-slate-700/80 text-xs text-slate-300">
+                        <strong>Parcela Média de Impressão no Leilão:</strong> <span class="text-amber-400 font-bold">24,87%</span> de conquista de mercado sobre todo o volume de pesquisas dermatológicas qualificadas.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: GANHO EM LEILÕES (SHARE OF VOICE POR CAMPANHA) -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">3. Análise Detalhada por Grupo de Campanha</h2>
+                <p class="text-xs text-slate-500 mt-1">Detalhamento dos leilões e investimento por modalidade de atendimento e marca.</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm overflow-hidden overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200/80 text-slate-400 font-bold uppercase tracking-widest">
+                            <th class="px-6 py-4">Campanha</th>
+                            <th class="px-6 py-4 text-right">Impressões</th>
+                            <th class="px-6 py-4 text-right">Cliques</th>
+                            <th class="px-6 py-4 text-right">CTR</th>
+                            <th class="px-6 py-4 text-right font-bold text-slate-700">CPC Médio</th>
+                            <th class="px-6 py-4 text-right bg-teal-50/50 text-teal-800">% Impr. Topo</th>
+                            <th class="px-6 py-4 text-right bg-teal-50/50 text-teal-800">% 1ª Posição</th>
+                            <th class="px-6 py-4 text-right">Ganho Leilões</th>
+                            <th class="px-6 py-4 text-right font-bold text-amber-700">Conversões</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-teal-600"></span>
+                                Especialidade
+                            </td>
+                            <td class="px-6 py-4 text-right">8.823</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-900">582</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-600">6,60%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-800">R$ 2,06</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">70,27%</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">14,95%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-700">14,70%</td>
+                            <td class="px-6 py-4 text-right font-black text-amber-600">29</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-blue-500"></span>
+                                Serviços
+                            </td>
+                            <td class="px-6 py-4 text-right">2.134</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-900">201</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-600">9,42%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-800">R$ 5,18</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">84,49%</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">48,96%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-700">54,64%</td>
+                            <td class="px-6 py-4 text-right font-black text-amber-600">8</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-teal-50/30">
+                            <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span>
+                                Online
+                            </td>
+                            <td class="px-6 py-4 text-right">487</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-900">104</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-700">21,36%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-800">R$ 8,26</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">96,68%</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">71,90%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-700">74,60%</td>
+                            <td class="px-6 py-4 text-right font-black text-amber-600">4</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-amber-50/30">
+                            <td class="px-6 py-4 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+                                Nome (Fernanda)
+                            </td>
+                            <td class="px-6 py-4 text-right">217</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-900">44</td>
+                            <td class="px-6 py-4 text-right font-bold text-amber-600">20,28%</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-700">R$ 0,92</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">63,23%</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800">46,45%</td>
+                            <td class="px-6 py-4 text-right font-bold text-slate-700">30,08%</td>
+                            <td class="px-6 py-4 text-right font-black text-amber-600">2</td>
+                        </tr>
+                        <tr class="bg-slate-900 text-white font-bold">
+                            <td class="px-6 py-4 rounded-l-xl">Total Consolidado</td>
+                            <td class="px-6 py-4 text-right">11.661</td>
+                            <td class="px-6 py-4 text-right text-teal-400">931</td>
+                            <td class="px-6 py-4 text-right text-amber-400">7,98%</td>
+                            <td class="px-6 py-4 text-right text-teal-300">R$ 3,37</td>
+                            <td class="px-6 py-4 text-right">73,80%</td>
+                            <td class="px-6 py-4 text-right">24,13%</td>
+                            <td class="px-6 py-4 text-right text-slate-300">24,87%</td>
+                            <td class="px-6 py-4 text-right text-amber-400 rounded-r-xl">43</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200/80 p-4 rounded-2xl text-xs text-slate-600">
+                <strong>Análise Técnica:</strong> A campanha da modalidade <strong>Online</strong> registra a maior dominância de leilão (74,60%), com incrível CTR de 21,36%. A campanha de <strong>Especialidade</strong> atua como principal motor de volume, gerando 29 conversões diretas a um custo ultraeficiente por clique (R$ 2,06).
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: PERFORMANCE DE PALAVRAS-CHAVE -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">4. Palavras-Chave de Maior Conversão</h2>
+                <p class="text-xs text-slate-500 mt-1">Termos de busca de maior atratividade e intenção de agendamento no Google.</p>
+            </div>
+
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm overflow-hidden">
+                <table class="w-full text-left text-xs">
+                    <thead class="bg-slate-100 border-b border-slate-200 text-slate-500 font-bold uppercase tracking-wider">
+                        <tr>
+                            <th class="px-6 py-3.5">#</th>
+                            <th class="px-6 py-3.5">Palavra-Chave de Pesquisa</th>
+                            <th class="px-6 py-3.5 text-right">Impressões</th>
+                            <th class="px-6 py-3.5 text-right">Cliques</th>
+                            <th class="px-6 py-3.5 text-right">CTR</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium">
+                        <!-- Termo Principal em destaque Turquesa -->
+                        <tr class="bg-teal-50/70 font-bold text-teal-900">
+                            <td class="px-6 py-3.5 text-teal-700">1</td>
+                            <td class="px-6 py-3.5 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                                dermatologista são josé dos campos
+                            </td>
+                            <td class="px-6 py-3.5 text-right">6.040</td>
+                            <td class="px-6 py-3.5 text-right font-black text-teal-800">392</td>
+                            <td class="px-6 py-3.5 text-right font-black">6,49%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">2</td>
+                            <td class="px-6 py-3.5 font-bold text-slate-900">dermatologia são josé dos campos</td>
+                            <td class="px-6 py-3.5 text-right">974</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">92</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-slate-800">9,45%</td>
+                        </tr>
+                        <tr class="bg-amber-50/30">
+                            <td class="px-6 py-3.5 text-amber-700 font-bold">3</td>
+                            <td class="px-6 py-3.5 font-bold text-amber-900">médico especialista em psoríase</td>
+                            <td class="px-6 py-3.5 text-right">425</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-amber-700">85</td>
+                            <td class="px-6 py-3.5 text-right font-black text-amber-600">20,00%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">4</td>
+                            <td class="px-6 py-3.5 text-slate-800">clínica preenchimento facial</td>
+                            <td class="px-6 py-3.5 text-right">911</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">57</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-slate-800">6,26%</td>
+                        </tr>
+                        <tr class="bg-teal-50/40">
+                            <td class="px-6 py-3.5 text-teal-700 font-bold">5</td>
+                            <td class="px-6 py-3.5 font-bold text-teal-900">dermatologista online</td>
+                            <td class="px-6 py-3.5 text-right">179</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-teal-800">53</td>
+                            <td class="px-6 py-3.5 text-right font-black text-teal-800">29,61%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">6</td>
+                            <td class="px-6 py-3.5 text-slate-800">especialista preenchimento facial</td>
+                            <td class="px-6 py-3.5 text-right">547</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">31</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-slate-800">5,67%</td>
+                        </tr>
+                        <tr class="bg-amber-50/20">
+                            <td class="px-6 py-3.5 text-amber-700 font-bold">7</td>
+                            <td class="px-6 py-3.5 font-bold text-amber-900">caldeira fernanda</td>
+                            <td class="px-6 py-3.5 text-right">147</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-amber-700">28</td>
+                            <td class="px-6 py-3.5 text-right font-black text-amber-600">19,05%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">8</td>
+                            <td class="px-6 py-3.5 text-slate-800">clínica ácido hialurônico</td>
+                            <td class="px-6 py-3.5 text-right">251</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">28</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-teal-600">11,16%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">9</td>
+                            <td class="px-6 py-3.5 text-slate-800">dermatologista</td>
+                            <td class="px-6 py-3.5 text-right">510</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">24</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-slate-800">4,71%</td>
+                        </tr>
+                        <tr>
+                            <td class="px-6 py-3.5 text-slate-400">10</td>
+                            <td class="px-6 py-3.5 text-slate-800">são josé dos campos dermatologista</td>
+                            <td class="px-6 py-3.5 text-right">223</td>
+                            <td class="px-6 py-3.5 text-right font-semibold">21</td>
+                            <td class="px-6 py-3.5 text-right font-bold text-slate-800">9,42%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: AGENDAMENTOS NA DOCTORALIA -->
+        <section class="space-y-6">
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">5. Agendamentos na Doctoralia & Funil de Crescimento</h2>
+                <p class="text-xs text-slate-500 mt-1">Evolução expressiva no volume de consultas confirmadas pós-implantação das Mídias 360.</p>
+            </div>
+
+            <!-- Funil Visual de Crescimento Média de Agendamentos -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div class="bg-slate-50 border border-slate-200/80 p-6 rounded-[2rem] space-y-2">
+                    <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Antes do Mídias 360</span>
+                    <h4 class="text-3xl font-black text-slate-400">8 <span class="text-xs font-normal text-slate-500">agendamentos/mês</span></h4>
+                    <p class="text-[11px] text-slate-500">Média histórica inicial de consultas online.</p>
+                </div>
+
+                <div class="bg-teal-50 border border-teal-200 p-6 rounded-[2rem] space-y-2">
+                    <span class="text-[10px] font-bold text-teal-800 uppercase tracking-widest">Primeiros 6 Meses</span>
+                    <h4 class="text-3xl font-black text-teal-700">22 <span class="text-xs font-normal text-teal-900">agendamentos/mês</span></h4>
+                    <p class="text-[11px] text-teal-800">▲ Crescimento de <strong>175%</strong> no volume mensal.</p>
+                </div>
+
+                <div class="bg-gradient-to-br from-teal-900 to-slate-900 text-white p-6 rounded-[2rem] space-y-2 shadow-lg">
+                    <span class="text-[10px] font-bold text-amber-400 uppercase tracking-widest">Média Recente (Últimos 30 Dias)</span>
+                    <h4 class="text-3xl font-black text-amber-400">48 <span class="text-xs font-normal text-teal-200">agendamentos/mês</span></h4>
+                    <p class="text-[11px] text-teal-200">▲ Salto extraordinário de <strong>6x</strong> comparado ao início.</p>
+                </div>
+            </div>
+
+            <!-- Tabela Comparativa dos Últimos 3 Meses -->
+            <div class="bg-white rounded-[2rem] border border-slate-200/80 shadow-sm overflow-hidden">
+                <table class="w-full text-left text-xs">
+                    <thead>
+                        <tr class="bg-slate-50 border-b border-slate-200/80 text-slate-400 font-bold uppercase tracking-widest">
+                            <th class="px-6 py-4">Mês de Análise</th>
+                            <th class="px-6 py-4 text-right">Agendamentos Totais</th>
+                            <th class="px-6 py-4 text-right">Pacientes Novos (1ª Consulta)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-900">Maio / 2026</td>
+                            <td class="px-6 py-4 text-right font-black text-slate-900">171</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-700 italic pl-4">67 novos pacientes</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="px-6 py-4 font-bold text-slate-900">Junho / 2026</td>
+                            <td class="px-6 py-4 text-right font-black text-slate-900">223</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-700 italic pl-4">39 novos pacientes</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-teal-50/40">
+                            <td class="px-6 py-4 font-bold text-teal-900">Julho / 2026</td>
+                            <td class="px-6 py-4 text-right font-black text-teal-900">189</td>
+                            <td class="px-6 py-4 text-right font-bold text-teal-800 italic pl-4">54 novos pacientes</td>
+                        </tr>
+                        <tr class="bg-slate-900 text-white font-bold">
+                            <td class="px-6 py-4 rounded-l-xl">Total do Trimestre</td>
+                            <td class="px-6 py-4 text-right text-amber-400 text-sm">583 Agendamentos</td>
+                            <td class="px-6 py-4 text-right text-teal-300 italic rounded-r-xl">160 Pacientes Novos</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: REPUTAÇÃO DIGITAL & PROVA SOCIAL -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="bg-teal-900 text-white rounded-[2rem] p-8 space-y-6 shadow-xl shadow-teal-900/10 flex flex-col justify-between">
+                <div class="space-y-4">
+                    <span class="bg-teal-800 text-teal-200 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">Autoridade Confirmada</span>
+                    <h2 class="text-2xl font-black tracking-tight">6. Reputação Digital & Prova Social</h2>
+                    
+                    <div class="pt-2">
+                        <p class="text-xs font-bold text-teal-300 uppercase tracking-widest">Avaliações Positivas Acumuladas</p>
+                        <p class="text-4xl font-black text-amber-400 mt-1">228</p>
+                        <p class="text-[11px] text-teal-200 mt-1"><strong class="text-white">+27 novas opiniões</strong> registradas neste trimestre.</p>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-teal-800/50 rounded-2xl border border-teal-700/60 text-xs text-teal-100 leading-relaxed">
+                    <strong>Doctoralia VIP:</strong> Classificação máxima de satisfação sustentando alta conversão de visitantes do perfil em consultas efetuadas.
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-white rounded-[2rem] p-8 border border-slate-200/80 shadow-sm flex flex-col justify-between space-y-6">
+                <div class="space-y-3">
+                    <span class="bg-amber-100 text-amber-900 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">O Círculo Virtuoso da Conversão</span>
+                    <h3 class="text-xl font-black text-slate-900">Como a Prova Social Maximiza os Anúncios no Google</h3>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        Pesquisas de comportamento digital no setor de saúde comprovam que mais de <strong class="text-slate-900">70% dos pacientes que acessam o perfil de um médico na Doctoralia consultam diretamente a área de opiniões</strong> antes de efetuar o agendamento da primeira consulta.
+                    </p>
+                    <p class="text-xs text-slate-600 leading-relaxed">
+                        A combinação entre a <strong class="text-teal-700">presença no topo das pesquisas do Google (931 cliques qualificados)</strong> e o <strong class="text-teal-700">histórico sólido de 228 avaliações recomendadas</strong> garante que a Dra. Fernanda Caldeira converta tráfego de busca em pacientes fiéis continuamente.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-slate-100 flex justify-between items-center flex-wrap gap-2">
+                    <div>
+                        <p class="text-[10px] font-black text-teal-600 uppercase tracking-widest mb-0.5">Mídias 360 &copy; 2026</p>
+                        <p class="text-[11px] text-slate-500">Gestão Estratégica & Performance em Saúde</p>
+                    </div>
+                    <span class="text-[10px] bg-slate-100 text-slate-600 font-bold px-3 py-1 rounded-full">Dermatologia de Alta Performance</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ DE PÁGINA -->
+    <footer class="bg-white border-t border-slate-200/80 py-8 text-center">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] mb-1">Mídias 360 - Doctoralia</p>
+        <p class="text-[10px] text-slate-400 italic">Consultoria & Gestão Estratégica de Performance Médica</p>
+    </footer>
+
+    <!-- SCRIPTS DE RENDERIZAÇÃO DE GRÁFICOS (CHART.JS) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctxCtr = document.getElementById('ctrBenchmarkChart').getContext('2d');
+            new Chart(ctxCtr, {
+                type: 'bar',
+                data: {
+                    labels: ['Dra. Fernanda', 'Benchmark Mercado'],
+                    datasets: [{
+                        label: 'Taxa de Clique (CTR)',
+                        data: [7.98, 3.17],
+                        backgroundColor: [
+                            'rgba(13, 148, 136, 0.9)',
+                            'rgba(217, 119, 6, 0.4)'
+                        ],
+                        borderColor: [
+                            '#0d9488',
+                            '#d97706'
+                        ],
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.raw.toFixed(2) + '% CTR';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { callback: v => v + '%' },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: { grid: { display: false } }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
