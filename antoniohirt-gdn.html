@@ -145,16 +145,16 @@
     <!-- CONTAINER PRINCIPAL -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 py-8 space-y-8">
         
-        <!-- SUBHEADER DE METADADOS (SEM DATA DE PERÍODO / COM REFORÇO DE INÍCIO DE PROJETO) -->
+        <!-- SUBHEADER DE METADADOS (COM DATA DE PERÍODO & REFORÇO DE INÍCIO DE PROJETO) -->
         <section class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 print-card">
             <div class="space-y-1">
-                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Status do Projeto</span>
+                <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Status do Projeto & Período</span>
                 <div class="flex items-center gap-3">
                     <div class="p-2 bg-teal-50 rounded-lg text-teal-600">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                     </div>
                     <div>
-                        <span class="text-lg font-bold text-slate-800">Início de Projeto & Aprendizado de Algoritmo</span>
+                        <span class="text-lg font-bold text-slate-800">Início de Projeto (23/07 a 04/08)</span>
                         <p class="text-xs text-slate-400">Rede de Display (GDN) • Foco em Gastroenterologia e Testes SIBO/IMO</p>
                     </div>
                 </div>
@@ -172,10 +172,6 @@
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-3a2 2 0 00-2-2H9a2 2 0 00-2 2v3a2 2 0 002 2zm0 0v-4h10v4H9z"/></svg>
                     <span>Imprimir Relatório</span>
                 </button>
-                <button onclick="showExportToast()" class="flex-1 md:flex-none border border-slate-200 hover:border-teal-600 text-slate-600 hover:text-teal-600 font-semibold px-6 py-3 rounded-2xl transition duration-200 flex items-center justify-center gap-2 bg-white">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-                    <span>Exportar Dados</span>
-                </button>
             </div>
         </section>
 
@@ -192,7 +188,7 @@
             <!-- CARDS DE MÉTRICAS (REMOVIDOS CPM E INVESTIMENTO TOTAL) -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 
-                <!-- Card 1: Impressões Totais (29.543) -->
+                <!-- Card 1: Impressões Totais (57.506) -->
                 <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 flex flex-col justify-between relative overflow-hidden transition hover:-translate-y-1 duration-300 group print-card">
                     <div>
                         <div class="flex items-center justify-between">
@@ -201,7 +197,7 @@
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
                             </div>
                         </div>
-                        <div class="text-3xl font-black text-slate-950 mt-4">29.543</div>
+                        <div class="text-3xl font-black text-slate-950 mt-4">57.506</div>
                         <div class="text-[11px] text-slate-400 mt-1">Exibições na região de Curitiba</div>
                     </div>
                     <div class="mt-4 flex items-center gap-1.5 text-xs text-teal-600 font-semibold bg-teal-50 w-fit px-2.5 py-1 rounded-full">
@@ -209,7 +205,7 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Cliques Diretos (194) -->
+                <!-- Card 2: Cliques Diretos (377) -->
                 <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-100 flex flex-col justify-between relative overflow-hidden transition hover:-translate-y-1 duration-300 group print-card">
                     <div>
                         <div class="flex items-center justify-between">
@@ -218,7 +214,7 @@
                                 <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122"/></svg>
                             </div>
                         </div>
-                        <div class="text-3xl font-black text-slate-950 mt-4">194</div>
+                        <div class="text-3xl font-black text-slate-950 mt-4">377</div>
                         <div class="text-[11px] text-slate-400 mt-1">Interações diretas com o anúncio</div>
                     </div>
                     <div class="mt-4 flex items-center gap-1.5 text-xs text-teal-600 font-semibold bg-teal-50 w-fit px-2.5 py-1 rounded-full">
@@ -248,59 +244,42 @@
         </section>
 
         <!-- SEÇÃO 2: ABRANGÊNCIA GEOGRÁFICA & RAIO DE ATUAÇÃO -->
-        <section class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            
-            <!-- Coluna Esquerda: Detalhes do Consultório (1/3) -->
-            <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-slate-100 flex flex-col justify-between print-card">
-                <div class="space-y-4">
-                    <div class="flex items-center gap-2">
-                        <span class="p-2 bg-teal-50 rounded-xl text-teal-600">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                        </span>
-                        <h3 class="text-lg font-bold text-slate-900 tracking-tight">Geo-Targeting Estratégico</h3>
-                    </div>
-
-                    <div class="space-y-3 pt-2">
-                        <div>
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Endereço do Consultório</span>
-                            <p class="text-sm font-extrabold text-slate-900 mt-0.5">Rua Amintas de Barros, 519 (Cj. 103)</p>
-                            <p class="text-xs text-slate-500">Curitiba - PR • CEP 80060-200</p>
-                        </div>
-
-                        <div class="border-t border-slate-100 pt-3">
-                            <span class="text-xs font-bold text-slate-400 uppercase tracking-wider">Raio de Cobertura de Anúncios</span>
-                            <div class="text-2xl font-black text-teal-600 mt-0.5">12 km</div>
-                            <p class="text-xs text-slate-400 mt-1">Cobrindo integralmente bairros estratégicos: Batel, Bigorrilho, Juvevê, Cabral, Centro e região metropolitana próxima.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="bg-teal-50/80 rounded-2xl p-4 border border-teal-100/50 mt-6">
-                    <p class="text-xs text-teal-950 leading-relaxed">
-                        <strong class="font-bold">Estratégia de Proximidade:</strong> O raio de 12 km garante que 100% da verba seja investida exclusivamente no público que possui facilidade de deslocamento ao consultório.
-                    </p>
-                </div>
-            </div>
-
-            <!-- Coluna Direita: Mapa Interativo Leaflet.js (2/3) -->
-            <div class="bg-slate-900 rounded-[2rem] p-6 shadow-xl text-white flex flex-col justify-between relative overflow-hidden lg:col-span-2">
-                <div class="flex items-center justify-between mb-4">
+        <section class="space-y-6">
+            <div class="bg-white rounded-[2.5rem] p-6 sm:p-8 shadow-sm border border-slate-100 space-y-6 print-card">
+                <!-- Header do Mapa em estilo referência -->
+                <div class="space-y-3 border-b border-slate-100 pb-5">
                     <div>
-                        <span class="text-xs font-bold text-teal-400 uppercase tracking-widest">Mapa de Exibição Geográfica</span>
-                        <h3 class="text-lg font-bold tracking-tight text-white mt-0.5">Centro de Atuação & Perímetro de 12 km em Curitiba</h3>
+                        <h3 class="text-xl font-extrabold text-slate-900 tracking-tight">Consultório Dr. Antonio Hirt & Raios de Cobertura</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 mt-0.5">Localização na Rua Amintas de Barros, 519 e zonas de abrangência dos anúncios em Curitiba</p>
                     </div>
-                    <span class="text-xs bg-teal-900/80 text-teal-300 border border-teal-700/50 px-3 py-1 rounded-full font-bold">Pin Ativo</span>
+
+                    <!-- Badges de Raios de Cobertura (Igual à referência) -->
+                    <div class="flex flex-wrap items-center gap-4 text-xs font-bold pt-1">
+                        <div class="flex items-center gap-2">
+                            <span class="h-3 w-3 rounded-full bg-teal-500"></span>
+                            <span class="text-slate-700">Raio 3km (Alta Densidade)</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="h-3 w-3 rounded-full bg-amber-500"></span>
+                            <span class="text-slate-700">Raio 6km / Diâmetro 12km (Cobertura Urbana)</span>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Leaflet Canvas Container -->
-                <div id="leafletMap" class="shadow-inner"></div>
+                <div id="leafletMap" class="shadow-inner border border-slate-200/80"></div>
 
-                <div class="flex items-center gap-3 border-t border-slate-800 pt-4 mt-4 text-xs text-slate-400">
-                    <span class="h-3 w-3 rounded-full bg-teal-500/30 border border-teal-400 shrink-0"></span>
-                    <span>A área assinalada em turquesa representa o limite máximo de alcance de impressão da Rede de Display para o Dr. Antonio Hirt.</span>
+                <!-- Card de Endereço da Clínica (Estilo Referência) -->
+                <div class="bg-teal-50/70 border border-teal-100 rounded-2xl p-4 flex items-center gap-3">
+                    <div class="h-10 w-10 rounded-xl bg-teal-600 flex items-center justify-center text-white shrink-0">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </div>
+                    <div>
+                        <span class="text-xs font-bold text-slate-500 uppercase tracking-wider block">Endereço do Consultório:</span>
+                        <p class="text-sm font-extrabold text-slate-900">Rua Amintas de Barros, 519 (Cj. 103) - Curitiba / PR, CEP 80060-200</p>
+                    </div>
                 </div>
             </div>
-
         </section>
 
         <!-- SEÇÃO 3: CANAIS DE EXIBIÇÃO E OTIMIZAÇÃO CONTÍNUA (GDN) -->
@@ -322,11 +301,11 @@
                     <div class="space-y-1">
                         <h3 class="text-sm font-extrabold text-amber-900">Como funciona a inteligência inicial na Rede de Display (GDN)?</h3>
                         <p class="text-xs text-amber-800/90 leading-relaxed max-w-4xl">
-                            Nos primeiros dias de campanha, o algoritmo do Google testa a exibição em um inventário diversificado de sites e aplicativos móbile dentro do raio de 12 km. A equipe da <strong>Mídias 360 realiza auditorias periódicas e limpeza ativa de canais</strong>, negativando continuamente aplicativos de jogos e sites irrelevantes para direcionar 100% da verba para veículos de alta qualificação.
+                            Nos primeiros dias de campanha, o algoritmo do Google testa a exibição em um inventário diversificado de sites e aplicativos móbile dentro do raio de 12 km. A equipe da <strong>Mídias 360 realiza auditorias periódicas e limpeza ativa de canais semanalmente</strong>, negativando contínua e semanalmente aplicativos de jogos e sites irrelevantes para direcionar 100% da verba para veículos de alta qualificação.
                         </p>
                     </div>
                 </div>
-                <span class="text-xs font-bold text-amber-700 bg-amber-100/80 px-3 py-1.5 rounded-xl shrink-0">Otimização Diária Ativa</span>
+                <span class="text-xs font-bold text-amber-700 bg-amber-100/80 px-3 py-1.5 rounded-xl shrink-0">Otimização Semanal Ativa</span>
             </div>
 
             <!-- TABELA DE CANAIS REAIS E STATUS DE FILTRAGEM -->
@@ -489,13 +468,13 @@
                 <h3 class="text-2xl md:text-3xl font-black tracking-tight leading-tight">Garantindo Confiabilidade no Início da Jornada</h3>
                 
                 <p class="text-sm md:text-base text-teal-100 leading-relaxed font-light">
-                    O trabalho conjunto da <strong class="font-bold text-white">Mídias 360</strong> na Rede de Display do Google gera visibilidade imediata para o consultório do <strong class="font-semibold text-white">Dr. Antonio Hirt</strong> na Rua Amintas de Barros. A associação da marca do médico com diagnósticos de vanguarda (SIBO/IMO) constrói a autoridade necessária para atrair pacientes altamente qualificados na capital paranaense.
+                    O trabalho conjunto da <strong class="font-bold text-white">Mídias 360</strong> na Rede de Display do Google gera visibilidade imediata para o consultório do <strong class="font-semibold text-white">Dr. Antonio Hirt</strong> na Rua Amintas de Barros. A associação da marca do médico com diagnósticos de vanguarda (SIBO/IMO) constrói a autoridade necessária para atrair pacientes highly qualificados na capital paranaense.
                 </p>
 
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 border-t border-teal-800/80">
                     <div>
                         <div class="text-amber-400 text-lg font-bold">1. Atração GDN</div>
-                        <p class="text-xs text-teal-200/90 mt-1">Mais de 29 mil exibições no raio local de 12 km.</p>
+                        <p class="text-xs text-teal-200/90 mt-1">Mais de 57 mil exibições no raio local de 12 km.</p>
                     </div>
                     <div>
                         <div class="text-amber-400 text-lg font-bold">2. Otimização</div>
@@ -535,7 +514,6 @@
     <!-- SCRIPT DE INICIALIZAÇÃO DO MAPA LEAFLET.JS -->
     <script>
         window.addEventListener('DOMContentLoaded', function () {
-            // Safety check for Leaflet initialization
             if (typeof L !== 'undefined') {
                 // Coordinates for Rua Amintas de Barros, 519 - Curitiba PR
                 const lat = -25.4284;
@@ -543,7 +521,7 @@
 
                 const map = L.map('leafletMap', {
                     center: [lat, lng],
-                    zoom: 11,
+                    zoom: 12,
                     scrollWheelZoom: false,
                     zoomControl: true
                 });
@@ -553,36 +531,39 @@
                     attribution: '© OpenStreetMap'
                 }).addTo(map);
 
-                // Add 12km Radius Circle (12000 meters)
-                L.circle([lat, lng], {
-                    color: '#0d9488',
-                    fillColor: '#14b8a6',
-                    fillOpacity: 0.18,
-                    weight: 2,
+                // Circle 2: 6km Radius / 12km Diameter (Amber - Cobertura Urbana)
+                const outerCircle = L.circle([lat, lng], {
+                    radius: 6000,
+                    color: '#d97706',
+                    fillColor: '#f59e0b',
+                    fillOpacity: 0.15,
+                    weight: 2.5,
                     dashArray: '6, 6'
                 }).addTo(map);
+
+                // Circle 1: 3km Radius (Teal - Alta Densidade)
+                const innerCircle = L.circle([lat, lng], {
+                    radius: 3000,
+                    color: '#0d9488',
+                    fillColor: '#14b8a6',
+                    fillOpacity: 0.28,
+                    weight: 2.5
+                }).addTo(map);
+
+                // Automatically frame the 12km diameter circle
+                map.fitBounds(outerCircle.getBounds(), { padding: [20, 20] });
 
                 // Custom Pin Marker
                 const marker = L.marker([lat, lng]).addTo(map);
                 marker.bindPopup(`
                     <div style="font-family: 'Plus Jakarta Sans', sans-serif; padding: 4px;">
                         <strong style="color: #0f766e; font-size: 13px;">Consultório Dr. Antonio Hirt</strong><br/>
-                        <span style="font-size: 11px; color: #475569;">Rua Amintas de Barros, 519 - Cj. 103<br/>Curitiba - PR</span>
+                        <span style="font-size: 11px; color: #475569;">Rua Amintas de Barros, 519 - Cj. 103<br/>Curitiba - PR</span><br/>
+                        <span style="font-size: 10px; color: #0d9488; font-weight: 700; display: block; margin-top: 4px;">Raio 3km & 6km (12km Diâmetro)</span>
                     </div>
                 `).openPopup();
             }
         });
-
-        // Toast Helper
-        function showExportToast() {
-            const toast = document.getElementById('toast');
-            toast.classList.remove('translate-y-20', 'opacity-0');
-            toast.classList.add('translate-y-0', 'opacity-100');
-            setTimeout(() => {
-                toast.classList.remove('translate-y-0', 'opacity-100');
-                toast.classList.add('translate-y-20', 'opacity-0');
-            }, 3000);
-        }
     </script>
 </body>
 </html>
