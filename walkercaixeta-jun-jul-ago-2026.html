@@ -1,0 +1,1455 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Executivo de Performance - Dr. Walker Caixeta | Mídias 360</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        indigo: {
+                            50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+                        },
+                        emerald: {
+                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 500: '#10b981', 600: '#059669', 700: '#047857', 900: '#064e3b',
+                        },
+                        amber: {
+                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet.js CDN for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: #ffffff; }
+            .print-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+        }
+        .gradient-primary { background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%); }
+        .gradient-accent { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+        #geoMap { width: 100%; height: 380px; border-radius: 1.5rem; z-index: 10; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 pb-16">
+
+    <!-- Header Principal -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs px-4 sm:px-8 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-indigo-600/10 text-indigo-700 flex items-center justify-center font-black text-xl border border-indigo-500/20 shadow-xs">
+                    WC
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">Dr. Walker Caixeta</h1>
+                        <span class="bg-indigo-100 text-indigo-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-indigo-200 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-indigo-600 pulse-dot"></span>
+                            Psiquiatria
+                        </span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 font-medium">Relatório Executivo de Performance de Mídia • 01/06 a 31/08/2026</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 flex-wrap justify-end">
+                <!-- Google Partner Badge -->
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400 leading-none">Google</div>
+                        <div class="text-xs font-bold text-slate-700 leading-none">Partner</div>
+                    </div>
+                </div>
+
+                <!-- Doctoralia Badge with Stars -->
+                <div class="flex items-center gap-2.5 bg-emerald-50/80 border border-emerald-200/80 px-3 py-1.5 rounded-xl">
+                    <div class="text-emerald-700 font-extrabold text-sm tracking-tight">doctoralia</div>
+                    <div class="flex items-center text-emerald-600">
+                        <i class="fa-solid fa-star text-xs"></i>
+                        <i class="fa-solid fa-star text-xs"></i>
+                        <i class="fa-solid fa-star text-xs"></i>
+                        <i class="fa-solid fa-star text-xs"></i>
+                        <i class="fa-solid fa-star text-xs"></i>
+                    </div>
+                    <span class="text-xs font-bold text-emerald-800">5.0 ★</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
+
+        <!-- Sub-header de Metadados -->
+        <div class="bg-white rounded-[2rem] p-5 sm:p-6 shadow-xs border border-slate-200/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 print-card">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="inline-flex items-center gap-2 bg-slate-100 text-slate-700 px-3.5 py-1.5 rounded-full text-xs font-bold">
+                    <i class="fa-regular fa-calendar-days text-slate-500"></i>
+                    Período: <span class="text-indigo-700">01 Junho a 31 Agosto / 2026</span>
+                </div>
+                <div class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-800 px-3.5 py-1.5 rounded-full text-xs font-bold border border-indigo-200/60">
+                    <i class="fa-solid fa-hand-pointer text-indigo-600"></i>
+                    CPC Médio Consolidado: <span class="text-slate-900 font-black">R$ 4,06</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3.5 py-1.5 rounded-full text-xs font-extrabold border border-amber-200">
+                    🔥 CTR de Atração: 7,33% (Acima da Média Nacional)
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-900 px-3.5 py-1.5 rounded-full text-xs font-extrabold border border-emerald-200">
+                    🎯 Conversões Google: 24 (Ação Direta)
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-xs active:scale-95 shrink-0">
+                <i class="fa-solid fa-print"></i>
+                <span>Exportar Relatório</span>
+            </button>
+        </div>
+
+        <!-- SEÇÃO 1: Alcance do Anúncio no Google -->
+        <section class="space-y-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Alta Performance de Atração em Psiquiatria</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">1. Visão Geral Google Ads (Montes Claros)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <div class="bg-white rounded-[2rem] p-5 shadow-xs border border-slate-200/60 hover:border-indigo-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Impressões</span>
+                        <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
+                            <i class="fa-solid fa-eye text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">12.159</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Aparições dos anúncios em buscas</p>
+                </div>
+
+                <div class="bg-white rounded-[2rem] p-5 shadow-xs border border-slate-200/60 hover:border-indigo-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cliques Diretos</span>
+                        <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <i class="fa-solid fa-arrow-pointer text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-indigo-700 tracking-tight">891</div>
+                    <p class="text-[11px] text-indigo-800 font-bold mt-2">Tráfego direcionado para agendamento</p>
+                </div>
+
+                <div class="bg-amber-500 text-white rounded-[2rem] p-5 shadow-md border border-amber-600/20 relative overflow-hidden print-card">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-400/30 rounded-full blur-xl pointer-events-none"></div>
+                    <div class="flex items-center justify-between text-amber-100 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-100">CTR (Cliques)</span>
+                        <div class="w-8 h-8 rounded-xl bg-amber-600/40 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-chart-line text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black tracking-tight">7,33%</div>
+                    <p class="text-[11px] text-amber-100 mt-2 font-medium">Eficiência muito acima da média (3,17%)</p>
+                </div>
+
+                <div class="bg-white rounded-[2rem] p-5 shadow-xs border border-slate-200/60 hover:border-indigo-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Acessos Doctoralia</span>
+                        <div class="w-8 h-8 rounded-xl bg-indigo-50 flex items-center justify-center text-indigo-600">
+                            <i class="fa-solid fa-user-doctor text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">1.069</div>
+                    <div class="mt-2 flex items-center gap-1.5">
+                        <span class="bg-indigo-100 text-indigo-900 text-[10px] font-extrabold px-2 py-0.5 rounded-md">🎯 83,3% originados via Google Ads</span>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2rem] p-5 shadow-xs border border-slate-200/60 hover:border-emerald-500/40 transition-all print-card flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between text-slate-400 mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cliques Telefone</span>
+                            <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                                <i class="fa-solid fa-phone-volume text-sm"></i>
+                            </div>
+                        </div>
+                        <div class="text-2xl font-black text-emerald-600 tracking-tight">273</div>
+                        <p class="text-[11px] text-slate-500 mt-1 font-medium">Acionamentos diretos no anúncio/perfil</p>
+                    </div>
+                    
+                    <button onclick="openCallsModal()" class="mt-3 w-full inline-flex items-center justify-center gap-1.5 bg-rose-50 hover:bg-rose-100 text-rose-800 border border-rose-200 text-[11px] font-extrabold px-2.5 py-1.5 rounded-xl transition-all shadow-2xs cursor-pointer active:scale-95">
+                        <i class="fa-solid fa-phone-slash text-rose-600"></i>
+                        <span>Audit 81 Ligações Google</span>
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BANNER DE AUDITORIA DE LIGAÇÕES RASTREADAS DO GOOGLE ADS -->
+        <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 text-white rounded-[2rem] p-6 shadow-xl border border-slate-800 flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 print-card">
+            <div class="space-y-2 max-w-2xl">
+                <div class="flex items-center gap-2">
+                    <span class="bg-rose-500/20 text-rose-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-500/30 uppercase tracking-wider flex items-center gap-1">
+                        <i class="fa-solid fa-triangle-exclamation text-rose-400"></i>
+                        Relatório Exclusivo de Ligações Google Ads
+                    </span>
+                    <span class="text-xs text-slate-400 font-medium">(Fora dos 273 cliques de chamada)</span>
+                </div>
+                <h3 class="text-xl font-black text-white tracking-tight">Rastreamento de Chamadas Google Ads: 81 Ligações Registradas</h3>
+                <p class="text-xs text-slate-300 leading-relaxed">
+                    Além dos 273 cliques de intenção no botão de chamada, o rastreador de extensões do Google Ads registrou <strong>81 chamadas telefônicas diretas</strong>. Das 81 chamadas, <strong>73 constam como perdidas (90,1%)</strong>, revelando um altíssimo potencial represado para conversão em agendamentos.
+                </p>
+            </div>
+
+            <!-- Resumo Rápido das 4 Métricas Requeridas -->
+            <div class="flex flex-wrap items-center gap-2 shrink-0">
+                <div class="bg-slate-800/80 border border-slate-700/80 px-3 py-2 rounded-xl text-center min-w-[85px]">
+                    <div class="text-[9px] uppercase font-bold text-slate-400">Total Ligações</div>
+                    <div class="text-base font-black text-amber-400">81</div>
+                </div>
+                <div class="bg-rose-950/80 border border-rose-800/80 px-3 py-2 rounded-xl text-center min-w-[85px]">
+                    <div class="text-[9px] uppercase font-bold text-rose-300">Perdidas</div>
+                    <div class="text-base font-black text-rose-400">73</div>
+                </div>
+                <div class="bg-amber-950/80 border border-amber-800/80 px-3 py-2 rounded-xl text-center min-w-[85px]">
+                    <div class="text-[9px] uppercase font-bold text-amber-300">< 1 min</div>
+                    <div class="text-base font-black text-amber-400">3</div>
+                </div>
+                <div class="bg-emerald-950/80 border border-emerald-800/80 px-3 py-2 rounded-xl text-center min-w-[85px]">
+                    <div class="text-[9px] uppercase font-bold text-emerald-300">> 1 min</div>
+                    <div class="text-base font-black text-emerald-400">5</div>
+                </div>
+
+                <button onclick="openCallsModal()" class="ml-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 text-xs font-black px-4 py-3 rounded-xl transition-all shadow-md active:scale-95 cursor-pointer flex items-center gap-2">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Ver Registro das 81 Ligações</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SEÇÃO 2: Benchmark de Eficiência & Domínio de Busca -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <div class="bg-white rounded-[2rem] p-6 shadow-xs border border-slate-200/60 flex flex-col justify-between print-card">
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Eficiência de Atração</span>
+                    </div>
+                    <h3 class="text-lg font-black text-slate-900">Benchmark da Área de Saúde</h3>
+                    <p class="text-xs text-slate-500 mt-1">Taxa de cliques (CTR) comparada à média saudável do setor médico (3,17%).</p>
+                </div>
+                <div class="my-6 relative h-48 flex items-center justify-center">
+                    <canvas id="ctrBenchmarkChart"></canvas>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 bg-slate-900 text-white rounded-[2rem] p-7 shadow-xl border border-slate-800 flex flex-col justify-between relative overflow-hidden print-card">
+                <div class="absolute -right-12 -top-12 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Share of Voice & Posições (Camp. Especialidade)</span>
+                        <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-[10px] font-bold px-3 py-1 rounded-full">Destaque de Topo</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-white">Domínio nas Buscas por Psiquiatria em Montes Claros</h3>
+                </div>
+
+                <div class="my-6 space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-indigo-400"></span>
+                                Top Page (% Exibição na Área Superior)
+                            </span>
+                            <span class="text-indigo-400 font-extrabold text-base">76,33%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-primary h-full rounded-full" style="width: 76.33%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                1ª Posição Absoluta (% Topo 1)
+                            </span>
+                            <span class="text-amber-400 font-extrabold text-base">53,23%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3.5 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-accent h-full rounded-full" style="width: 53.23%"></div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1.5">Presença na 1ª posição em mais da metade de todas as buscas realizadas.</p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO 3: Tabela de Campanhas -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xs border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Estrutura de Campanhas no Google Ads</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">3. Tabela de Leilão e Conversões</h2>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-3.5 px-4 bg-slate-50 rounded-l-xl">Campanha</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Impr.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CTR</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CPC Méd.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">% Topo Pag.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">1ª Pos.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Parc. Impr.</th>
+                            <th class="py-3.5 px-4 bg-emerald-50 text-emerald-800 text-right rounded-r-xl">Conversões</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span> Especialidade</td>
+                            <td class="py-4 px-4 text-right">12.024</td>
+                            <td class="py-4 px-4 text-right font-semibold">866</td>
+                            <td class="py-4 px-4 text-right font-bold text-indigo-600">7,20%</td>
+                            <td class="py-4 px-4 text-right">R$ 4,15</td>
+                            <td class="py-4 px-4 text-right">76,33%</td>
+                            <td class="py-4 px-4 text-right">53,23%</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-900">43,65%</td>
+                            <td class="py-4 px-4 text-right font-black text-emerald-600 bg-emerald-50/30">24</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Institucional (Nome)</td>
+                            <td class="py-4 px-4 text-right">103</td>
+                            <td class="py-4 px-4 text-right font-semibold">24</td>
+                            <td class="py-4 px-4 text-right font-bold text-amber-600">23,30%</td>
+                            <td class="py-4 px-4 text-right">R$ 0,90</td>
+                            <td class="py-4 px-4 text-right">64,38%</td>
+                            <td class="py-4 px-4 text-right">53,42%</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-900">69,90%</td>
+                            <td class="py-4 px-4 text-right font-black text-emerald-600 bg-emerald-50/30">0</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-slate-400"></span> Serviços</td>
+                            <td class="py-4 px-4 text-right">32</td>
+                            <td class="py-4 px-4 text-right font-semibold">1</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-600">3,13%</td>
+                            <td class="py-4 px-4 text-right">R$ 1,80</td>
+                            <td class="py-4 px-4 text-right">68,75%</td>
+                            <td class="py-4 px-4 text-right">34,38%</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-900">13,33%</td>
+                            <td class="py-4 px-4 text-right font-black text-emerald-600 bg-emerald-50/30">0</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: Palavras-chave -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xs border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Qualificação de Intenção Diagnóstica</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">4. Performance de Palavras-Chave (Top Termos)</h2>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-3 px-4 bg-slate-50 rounded-l-xl">Termo de Pesquisa</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right">Impressões</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right rounded-r-xl">CTR (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="bg-indigo-50/80 border-l-4 border-indigo-600 font-bold text-slate-900">
+                            <td class="py-3.5 px-4">psiquiatria montes claros</td>
+                            <td class="py-3.5 px-4 text-right">8.993</td>
+                            <td class="py-3.5 px-4 text-right text-indigo-700 font-black">568</td>
+                            <td class="py-3.5 px-4 text-right text-indigo-800 font-black">6,32%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold">
+                            <td class="py-3.5 px-4">montes claros psiquiatra</td>
+                            <td class="py-3.5 px-4 text-right">1.646</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-700">186</td>
+                            <td class="py-3.5 px-4 text-right font-black text-slate-800">11,30%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold">
+                            <td class="py-3.5 px-4">psiquiatra montes claros</td>
+                            <td class="py-3.5 px-4 text-right">676</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-700">49</td>
+                            <td class="py-3.5 px-4 text-right font-black text-slate-800">7,25%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold bg-amber-50/30">
+                            <td class="py-3.5 px-4 flex items-center gap-2">psiquiatra infantil montes claros <span class="bg-amber-100 text-amber-800 text-[9px] px-2 py-0.5 rounded uppercase">Alta Intenção</span></td>
+                            <td class="py-3.5 px-4 text-right">172</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-amber-700">26</td>
+                            <td class="py-3.5 px-4 text-right font-black text-amber-700">15,12%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold bg-amber-50/30">
+                            <td class="py-3.5 px-4 flex items-center gap-2">psiquiatra especialista em autismo montes claros <span class="bg-amber-100 text-amber-800 text-[9px] px-2 py-0.5 rounded uppercase">Alta Intenção</span></td>
+                            <td class="py-3.5 px-4 text-right">55</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-amber-700">10</td>
+                            <td class="py-3.5 px-4 text-right font-black text-amber-700">18,18%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold">
+                            <td class="py-3.5 px-4">martins caixeta walker leonardo</td>
+                            <td class="py-3.5 px-4 text-right">64</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-700">16</td>
+                            <td class="py-3.5 px-4 text-right font-black text-slate-800">25,00%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">psiquiatria</td>
+                            <td class="py-3.5 px-4 text-right">170</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">9</td>
+                            <td class="py-3.5 px-4 text-right">5,29%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">walker leonardo martins caixeta</td>
+                            <td class="py-3.5 px-4 text-right">39</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">8</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-800">20,51%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">psiquiatra especialista em tdah montes claros</td>
+                            <td class="py-3.5 px-4 text-right">72</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">6</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-800">8,33%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">psiquiatras montes claros</td>
+                            <td class="py-3.5 px-4 text-right">28</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">4</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-indigo-800">14,29%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: Evolução de Agendamentos -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xs border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Evolução Mensal de Consultas</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">5. Agendamentos na Doctoralia (Jan - Ago)</h2>
+                </div>
+            </div>
+            
+            <div class="relative h-80 w-full mt-4">
+                <canvas id="appointmentsChart"></canvas>
+            </div>
+            
+            <div class="mt-4 flex items-center justify-center gap-6 text-sm font-bold text-slate-700 bg-slate-50 py-3 rounded-xl border border-slate-200">
+                <span><i class="fa-solid fa-calendar-check text-indigo-600 mr-1"></i> Total de Agendamentos: 423</span>
+                <span><i class="fa-solid fa-user-plus text-amber-500 mr-1"></i> Pacientes Novos: 104</span>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: Geografia -->
+        <section class="space-y-6">
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-indigo-100 text-indigo-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Geolocalização Estratégica</span>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">6. Mapa de Atuação e Conversão (Montes Claros)</h2>
+                <p class="text-xs text-slate-500 mt-1">Campanhas ativas no raio de 20km, com maior densidade de conversão no núcleo de 3km.</p>
+            </div>
+            <div class="bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-xs space-y-4 print-card">
+                <div id="geoMap"></div>
+                <div class="bg-slate-50 border border-slate-200/80 p-3.5 rounded-2xl flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 font-bold text-sm"><i class="fa-solid fa-location-dot"></i></div>
+                    <div class="text-xs text-slate-600">
+                        <p class="font-bold text-slate-900 mb-0.5">Endereço do Consultório:</p>
+                        <p class="text-slate-700 font-medium">Rua Geraldina Sarmento Mourão 386 - Jardim São Luiz, Montes Claros - MG, 39401-056</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 7: Doctoralia Prova Social -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-xs border border-slate-200/60 print-card space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-600">Autoridade & Validação Social</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">7. Reputação Digital na Doctoralia</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                <!-- Card 1 -->
+                <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden">
+                    <span class="text-xs font-bold uppercase tracking-wider text-indigo-400">Patrimônio de Opiniões</span>
+                    <div class="text-4xl font-black text-amber-400 my-2">207</div>
+                    <p class="text-xs text-indigo-300 font-semibold">Avaliações Positivas Consolidadas</p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-3xl font-black text-emerald-950 mt-2">+6 Novas Opiniões</div>
+                        <p class="text-xs text-emerald-900/90 mt-2 leading-relaxed">Avaliações validadas conquistadas no período analisado.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-8 mt-12 text-center text-xs text-slate-400 pb-8">
+        <div class="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 font-bold text-slate-600">
+                <span>Mídias 360</span>
+                <span>•</span>
+                <span>Doctoralia Partner</span>
+            </div>
+            <p>© 2026 Mídias 360 - Relatório exclusivo para Dr. Walker Caixeta</p>
+        </div>
+    </footer>
+
+    <script>
+        // Inline DataLabels Plugin para evitar dependências externas bloqueadas
+        const inlineDataLabels = {
+            id: 'inlineDataLabels',
+            afterDatasetsDraw(chart, args, options) {
+                const { ctx } = chart;
+                ctx.font = 'bold 11px "Plus Jakarta Sans"';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'bottom';
+                
+                chart.data.datasets.forEach((dataset, i) => {
+                    if (dataset.type === 'line') return;
+                    
+                    const meta = chart.getDatasetMeta(i);
+                    meta.data.forEach((bar, index) => {
+                        const data = dataset.data[index];
+                        if(data > 0) {
+                            ctx.fillStyle = (i === 1) ? '#3730a3' : '#b45309'; 
+                            ctx.fillText(data, bar.x, bar.y - 4);
+                        }
+                    });
+                });
+            }
+        };
+
+        window.onload = function() {
+            // Configuração do Mapa Leaflet - Montes Claros / Jardim São Luiz
+            const clinicCoords = [-16.7383, -43.8643];
+            
+            const mapElement = document.getElementById('geoMap');
+            if (mapElement) {
+                const map = L.map('geoMap', { center: clinicCoords, zoom: 12, zoomControl: true, scrollWheelZoom: false });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(map);
+
+                // 20km outer radius
+                L.circle(clinicCoords, { color: '#94a3b8', fillColor: '#cbd5e1', fillOpacity: 0.1, radius: 20000, dashArray: '6, 6', weight: 1.5 }).addTo(map);
+                // 3km core radius
+                L.circle(clinicCoords, { color: '#4f46e5', fillColor: '#6366f1', fillOpacity: 0.35, radius: 3000, weight: 3 }).addTo(map);
+
+                const customIcon = L.divIcon({
+                    className: 'custom-div-icon',
+                    html: `<div style="background-color: #4f46e5; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;"><i class="fa-solid fa-user-doctor"></i></div>`,
+                    iconSize: [36, 36], iconAnchor: [18, 18]
+                });
+                L.marker(clinicCoords, { icon: customIcon }).addTo(map).bindPopup("<b>Dr. Walker Caixeta</b><br>R. Geraldina Sarmento Mourão 386").openPopup();
+            }
+
+            // Gráfico de Benchmark CTR
+            const ctxCtr = document.getElementById('ctrBenchmarkChart');
+            if (ctxCtr) {
+                new Chart(ctxCtr, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Média Saúde (3,17%)', 'Dr. Walker (7,33%)'],
+                        datasets: [{ data: [3.17, 7.33], backgroundColor: ['#cbd5e1', '#f59e0b'], borderRadius: 12, barThickness: 38 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 10, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
+                });
+            }
+
+            // Gráfico Misto de Agendamentos (Totais vs Novos)
+            const ctxApp = document.getElementById('appointmentsChart');
+            if (ctxApp) {
+                new Chart(ctxApp, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago'],
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Tendência',
+                                data: [76, 50, 41, 59, 38, 66, 51, 42],
+                                borderColor: '#4f46e5',
+                                backgroundColor: '#4f46e5',
+                                borderWidth: 2,
+                                tension: 0.4,
+                                fill: false,
+                                pointBackgroundColor: '#ffffff',
+                                pointBorderColor: '#4f46e5',
+                                pointBorderWidth: 2,
+                                pointRadius: 4
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Agendamentos Totais',
+                                data: [76, 50, 41, 59, 38, 66, 51, 42],
+                                backgroundColor: '#6366f1', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Pacientes Novos',
+                                data: [30, 11, 5, 9, 10, 17, 10, 11],
+                                backgroundColor: '#fbbf24', borderRadius: 4, barPercentage: 0.6, categoryPercentage: 0.8
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true, 
+                        maintainAspectRatio: false,
+                        interaction: { mode: 'index', intersect: false },
+                        layout: { padding: { top: 30 } },
+                        plugins: {
+                            legend: { position: 'top', align: 'end', labels: { usePointStyle: true, font: { family: 'Plus Jakarta Sans', weight: 'bold' } } },
+                            tooltip: { backgroundColor: '#0f172a', titleFont: { family: 'Plus Jakarta Sans', size: 13 }, bodyFont: { family: 'Plus Jakarta Sans', size: 12 }, padding: 12, cornerRadius: 8 }
+                        },
+                        scales: { 
+                            y: { beginAtZero: true, max: 90, grid: { color: '#f1f5f9' }, ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' }, color: '#64748b' } }, 
+                            x: { grid: { display: false }, ticks: { font: { family: 'Plus Jakarta Sans', size: 11, weight: 'bold' }, color: '#334155' } } 
+                        }
+                    },
+                    plugins: [inlineDataLabels]
+                });
+            }
+        };
+    </script>
+
+<!-- MODAL DE AUDITORIA DE LIGAÇÕES GOOGLE ADS -->
+<div id="callsModal" class="fixed inset-0 z-50 hidden bg-slate-900/80 backdrop-blur-sm flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
+    <div class="bg-white rounded-[2rem] max-w-4xl w-full max-h-[90vh] flex flex-col shadow-2xl border border-slate-200 overflow-hidden animate-in fade-in zoom-in duration-200">
+        
+        <!-- Modal Header -->
+        <div class="p-6 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800">
+            <div>
+                <div class="flex items-center gap-2">
+                    <span class="bg-emerald-500/20 text-emerald-300 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-500/30">Google Ads Call Tracking</span>
+                    <span class="text-xs font-semibold text-slate-400">Dr. Walker Caixeta</span>
+                </div>
+                <h3 class="text-xl font-black text-white mt-1">Auditoria Detalhada de Chamadas (81 Ligações)</h3>
+            </div>
+            <button onclick="closeCallsModal()" class="w-10 h-10 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition-colors cursor-pointer">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 overflow-y-auto space-y-6">
+            
+            <!-- Resumo das 4 Métricas Requeridas -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                <div class="bg-slate-900 text-white p-4 rounded-2xl border border-slate-800">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">Total de Ligações</div>
+                    <div class="text-2xl font-black text-amber-400 mt-1">81</div>
+                    <div class="text-[10px] text-slate-400 mt-1">Registradas pelo Google Ads</div>
+                </div>
+                <div class="bg-rose-50 border border-rose-200 p-4 rounded-2xl">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-rose-700">Ligações Perdidas</div>
+                    <div class="text-2xl font-black text-rose-600 mt-1">73</div>
+                    <div class="text-[10px] text-rose-800 mt-1 font-semibold">⚠️ 90,1% Não Atendidas</div>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-amber-800">Ligações < 1 min</div>
+                    <div class="text-2xl font-black text-amber-600 mt-1">3</div>
+                    <div class="text-[10px] text-amber-800 mt-1 font-semibold">Atendimento Rápido</div>
+                </div>
+                <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl">
+                    <div class="text-[10px] font-bold uppercase tracking-wider text-emerald-800">Ligações > 1 min</div>
+                    <div class="text-2xl font-black text-emerald-600 mt-1">5</div>
+                    <div class="text-[10px] text-emerald-800 mt-1 font-semibold">Atendimento Efetivo</div>
+                </div>
+            </div>
+
+            <!-- Alerta de Oportunidade Operacional -->
+            <div class="p-4 rounded-2xl bg-amber-50/90 border border-amber-300 text-xs text-amber-950 flex items-start gap-3 shadow-xs">
+                <i class="fa-solid fa-triangle-exclamation text-amber-600 text-base shrink-0 mt-0.5"></i>
+                <div>
+                    <strong class="text-amber-900 font-extrabold uppercase tracking-wider">Alerta de Alinhamento Operacional:</strong>
+                    <span class="ml-1 text-amber-900">
+                        O rastreamento de chamadas do Google Ads identificou que <strong>73 das 81 ligações (90,1%) não foram completadas/atendidas</strong>. Este volume representa um número muito expressivo de potenciais pacientes tentando agendar consulta diretamente que não foram atendidos no momento do contato. Recomendamos alinhar a rotina da recepção/secretaria para não perder essas oportunidades ativas.
+                    </span>
+                </div>
+            </div>
+
+            <!-- Filtros da Tabela -->
+            <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+                <span class="text-xs font-bold text-slate-700 uppercase tracking-wider">Registro Cronológico das 81 Chamadas</span>
+                <div class="flex items-center gap-1.5 flex-wrap">
+                    <button onclick="filterCalls('all', this)" class="call-filter-btn bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-900">Todas (81)</button>
+                    <button onclick="filterCalls('perdida', this)" class="call-filter-btn bg-slate-100 text-slate-600 hover:bg-rose-50 hover:text-rose-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">Perdidas (73)</button>
+                    <button onclick="filterCalls('menor1m', this)" class="call-filter-btn bg-slate-100 text-slate-600 hover:bg-amber-50 hover:text-amber-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">< 1 min (3)</button>
+                    <button onclick="filterCalls('maior1m', this)" class="call-filter-btn bg-slate-100 text-slate-600 hover:bg-emerald-50 hover:text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200">> 1 min (5)</button>
+                </div>
+            </div>
+
+            <!-- Tabela de Chamadas -->
+            <div class="overflow-x-auto max-h-[350px] border border-slate-200 rounded-2xl">
+                <table class="w-full text-left border-collapse">
+                    <thead class="sticky top-0 bg-slate-100 z-10">
+                        <tr class="border-b border-slate-200 text-slate-600 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-2.5 px-3">#</th>
+                            <th class="py-2.5 px-3">Horário de Início</th>
+                            <th class="py-2.5 px-3">Duração</th>
+                            <th class="py-2.5 px-3">Telefone do Cliente</th>
+                            <th class="py-2.5 px-3 text-right">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium">
+                        
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#01</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jun. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#02</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jun. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#03</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jun. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#04</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">5 de jun. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#05</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">5 de jun. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#06</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">6 de jun. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#07</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jun. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#08</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jun. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#09</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jun. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#10</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jun. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#11</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">11 de jun. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#12</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">15 de jun. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#13</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">16 de jun. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#14</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">16 de jun. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#15</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">17 de jun. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#16</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">19 de jun. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#17</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">19 de jun. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#18</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">19 de jun. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#19</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">22 de jun. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#20</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">24 de jun. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#21</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de jun. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#22</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de jun. de 2026 17:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#23</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de jun. de 2026 17:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#24</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de jun. de 2026 17:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#25</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">26 de jun. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#26</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">29 de jun. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#27</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#28</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#29</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#30</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#31</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#32</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#33</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#34</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#35</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#36</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#37</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#38</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#39</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#40</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">1 de jul. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#41</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">2 de jul. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#42</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">2 de jul. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#43</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">2 de jul. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#44</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">8 de jul. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#45</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">8 de jul. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#46</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">9 de jul. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#47</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jul. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#48</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">10 de jul. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#49</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">14 de jul. de 2026 08:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#50</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">14 de jul. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#51</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">17 de jul. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#52</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">17 de jul. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#53</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">21 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#54</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">23 de jul. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#55</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">28 de jul. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#56</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">29 de jul. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#57</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">30 de jul. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#58</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">31 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#59</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">31 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#60</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">31 de jul. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#61</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">4 de ago. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#62</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">4 de ago. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#63</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">5 de ago. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#64</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">6 de ago. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-menor1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#65</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">17 de ago. de 2026 17:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">3s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-200"><i class="fa-solid fa-clock"></i> < 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-maior1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#66</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">18 de ago. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">4m 23s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 99955-2565</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check"></i> > 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-maior1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#67</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">18 de ago. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">2m 17s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 99955-2565</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check"></i> > 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#68</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">18 de ago. de 2026 12:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#69</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">18 de ago. de 2026 14:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#70</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">20 de ago. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#71</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">20 de ago. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-maior1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#72</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">20 de ago. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">1m 41s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 99173-1710</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check"></i> > 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#73</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">20 de ago. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-maior1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#74</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">20 de ago. de 2026 11:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">2m 21s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 99942-1507</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check"></i> > 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-menor1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#75</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">24 de ago. de 2026 15:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">43s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 98402-3030</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-200"><i class="fa-solid fa-clock"></i> < 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#76</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de ago. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-maior1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#77</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">25 de ago. de 2026 16:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">4m 30s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 11 98050-7765</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-emerald-100 text-emerald-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-emerald-200"><i class="fa-solid fa-circle-check"></i> > 1 min</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#78</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">26 de ago. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#79</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">26 de ago. de 2026 10:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-perdida hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#80</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">28 de ago. de 2026 13:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">0s (Não Atendida)</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">Não Identificado</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-rose-100 text-rose-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-rose-200"><i class="fa-solid fa-phone-slash"></i> Perdida</span></td>
+    </tr>
+    
+    <tr class="call-row cat-menor1m hover:bg-slate-50 transition-colors">
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-500">#81</td>
+        <td class="py-2.5 px-3 font-medium text-slate-800 text-xs">31 de ago. de 2026 09:00:00</td>
+        <td class="py-2.5 px-3 font-bold text-slate-900 text-xs">16s</td>
+        <td class="py-2.5 px-3 font-mono text-xs text-slate-700">+55 38 98846-8385</td>
+        <td class="py-2.5 px-3 text-right"><span class="inline-flex items-center gap-1 bg-amber-100 text-amber-800 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full border border-amber-200"><i class="fa-solid fa-clock"></i> < 1 min</span></td>
+    </tr>
+    
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="p-4 bg-slate-50 border-t border-slate-200 flex justify-between items-center text-xs text-slate-500">
+            <span>Mídias 360 • Google Ads Call Tracking Audit</span>
+            <button onclick="closeCallsModal()" class="bg-slate-900 hover:bg-slate-800 text-white font-bold px-4 py-2 rounded-xl transition-colors cursor-pointer">
+                Fechar
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+        function openCallsModal() {
+            document.getElementById('callsModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeCallsModal() {
+            document.getElementById('callsModal').classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+        function filterCalls(cat, btn) {
+            document.querySelectorAll('.call-filter-btn').forEach(b => {
+                b.className = 'call-filter-btn bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-200';
+            });
+            btn.className = 'call-filter-btn bg-slate-900 text-white text-xs font-bold px-3 py-1.5 rounded-xl border border-slate-900';
+            
+            const rows = document.querySelectorAll('.call-row');
+            rows.forEach(r => {
+                if (cat === 'all') {
+                    r.style.display = '';
+                } else {
+                    if (r.classList.contains('cat-' + cat)) {
+                        r.style.display = '';
+                    } else {
+                        r.style.display = 'none';
+                    }
+                }
+            });
+        }
+
+</script>
+</body>
+</html>
