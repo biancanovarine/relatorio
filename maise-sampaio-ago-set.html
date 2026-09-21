@@ -1,0 +1,668 @@
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Performance - Dra. Maise Sampaio | Mídias 360</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        docgreen: {
+                            50: '#e6f8f5',
+                            100: '#cceae6',
+                            200: '#99d5cc',
+                            300: '#66c0b3',
+                            400: '#33ab99',
+                            500: '#00b39b', /* Cor Principal Doctoralia */
+                            600: '#00a08b',
+                            700: '#00806f',
+                            800: '#006053',
+                            900: '#004037'
+                        },
+                        amber: {
+                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 900: '#78350f',
+                        },
+                        rose: {
+                            50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c', 800: '#9f1239', 900: '#881337',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Leaflet.js CDN for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: #ffffff; }
+            .print-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+        }
+        .gradient-docgreen { background: linear-gradient(135deg, #00b39b 0%, #00806f 100%); }
+        .gradient-amber { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .gradient-dark { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        #geoMap { width: 100%; height: 420px; border-radius: 1.5rem; z-index: 10; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 pb-16">
+
+    <!-- Header Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm px-4 sm:px-8 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-docgreen-500 text-white flex items-center justify-center font-black text-xl shadow-md">
+                    MS
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Dra. Maise Sampaio</h1>
+                        <span class="bg-docgreen-50 text-docgreen-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-docgreen-200">Dermatologista</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 font-medium">Relatório Executivo de Performance Digital • 01/08/2026 - 20/09/2026</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Google Partner Badge -->
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400 leading-none">Google</div>
+                        <div class="text-xs font-bold text-slate-700 leading-none">Partner</div>
+                    </div>
+                </div>
+
+                <!-- Doctoralia Badge -->
+                <div class="flex items-center gap-2.5 bg-docgreen-50 border border-docgreen-200/80 px-3 py-1.5 rounded-xl">
+                    <div class="text-docgreen-700 font-extrabold text-sm tracking-tight">doctoralia</div>
+                    <div class="flex items-center text-docgreen-600">
+                        <i class="fa-solid fa-star text-xs text-amber-400"></i>
+                    </div>
+                    <span class="text-xs font-bold text-docgreen-800">5.0 ★</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
+
+        <!-- Sub-header Metadata Bar -->
+        <div class="bg-white rounded-[2rem] p-5 sm:p-6 shadow-sm border border-slate-200/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 print-card">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="inline-flex items-center gap-2 bg-slate-100 text-slate-700 px-3.5 py-1.5 rounded-full text-xs font-bold">
+                    <i class="fa-regular fa-calendar-days text-slate-500"></i>
+                    Período Analisado: <span class="text-docgreen-700">01/08 - 20/09/2026</span>
+                </div>
+                <div class="inline-flex items-center gap-2 bg-docgreen-50 text-docgreen-800 px-3.5 py-1.5 rounded-full text-xs font-bold border border-docgreen-200/60">
+                    <i class="fa-solid fa-coins text-docgreen-600"></i>
+                    CPC Médio Consolidado: <span class="text-slate-900 font-black">R$ 3,41</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3.5 py-1.5 rounded-full text-xs font-extrabold border border-amber-200">
+                    ⚡ CTR Consolidado: 9,32%
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-900 px-3.5 py-1.5 rounded-full text-xs font-extrabold border border-emerald-200">
+                    🎯 Conversões Diretas Google: 7
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95">
+                <i class="fa-solid fa-print"></i>
+                Exportar Relatório
+            </button>
+        </div>
+
+        <!-- SEÇÃO 1: Visão Geral de Performance Digital -->
+        <section class="space-y-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Alta Atratividade em Dermatologia</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">1. Visão Geral de Tração (Goiânia e Caldas Novas)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
+                
+                <!-- Impressões -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Impressões</span>
+                        <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
+                            <i class="fa-solid fa-eye text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">4.141</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Exibições nos leilões do Google</p>
+                </div>
+
+                <!-- Cliques Google -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cliques Google</span>
+                        <div class="w-8 h-8 rounded-xl bg-docgreen-50 flex items-center justify-center text-docgreen-600">
+                            <i class="fa-solid fa-arrow-pointer text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-docgreen-700 tracking-tight">386</div>
+                    <p class="text-[11px] text-docgreen-800 font-bold mt-2">Tráfego qualificado de busca</p>
+                </div>
+
+                <!-- CTR -->
+                <div class="bg-amber-500 text-white rounded-[2rem] p-5 shadow-md border border-amber-600/20 relative overflow-hidden print-card">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-400/30 rounded-full blur-xl pointer-events-none"></div>
+                    <div class="flex items-center justify-between text-amber-100 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-100">CTR (Cliques)</span>
+                        <div class="w-8 h-8 rounded-xl bg-amber-600/40 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-chart-line text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black tracking-tight">9,32%</div>
+                    <p class="text-[11px] text-amber-100 mt-2 font-medium">3x Acima do Setor (3,17%)</p>
+                </div>
+
+                <!-- Acessos Doctoralia -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Acessos Perfil</span>
+                        <div class="w-8 h-8 rounded-xl bg-docgreen-50 flex items-center justify-center text-docgreen-600">
+                            <i class="fa-solid fa-user-doctor text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">423</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Visitas de perfil registradas</p>
+                </div>
+
+                <!-- Cliques Telefone -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-emerald-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Telefone / Ligações</span>
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <i class="fa-solid fa-phone-volume text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-emerald-600 tracking-tight">150</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Acionamentos de chamada</p>
+                </div>
+
+                <!-- Cliques Instagram -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-pink-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cliques Instagram</span>
+                        <div class="w-8 h-8 rounded-xl bg-pink-50 flex items-center justify-center text-pink-600">
+                            <i class="fa-brands fa-instagram text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-pink-600 tracking-tight">102</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Redirecionamentos à rede social</p>
+                </div>
+
+            </div>
+        </section>
+
+<!-- SEÇÃO CRÍTICA DOCTORALIA: OPINIÕES NOVAS ZERADAS -->
+<section class="bg-rose-50 border-2 border-rose-300 rounded-[2rem] p-6 shadow-md relative overflow-hidden print-card">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+        <div class="flex items-start gap-4">
+            <div class="w-14 h-12 rounded-2xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-md mt-0.5">
+                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            </div>
+            <div class="space-y-1.5">
+                <div class="flex items-center gap-2 flex-wrap">
+                    <span class="bg-rose-600 text-white text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full tracking-wider">
+                        Ponto Crítico Identificado
+                    </span>
+                    <span class="text-rose-900 text-xs font-bold">Ação Urgente Necessária</span>
+                </div>
+                <h3 class="text-xl font-black text-rose-950 tracking-tight">0 Novas Opiniões no Período (374 Acumuladas)</h3>
+                <p class="text-xs text-rose-900 font-medium leading-relaxed max-w-3xl">
+                    Apesar da médica possuir um excelente patrimônio de <strong>374 opiniões</strong>, <strong>nenhuma opinião nova foi registrada no período analisado (01/08 a 20/09), sendo a última avaliação datada de 19/06</strong> (há mais de 3 meses sem novos depoimentos). Isso é um fator extremamente crítico: dados de comportamento indicam que <strong>mais de 70% dos pacientes utilizam a frequência e recência das avaliações como critério decisivo</strong> antes de agendar.
+                </p>
+            </div>
+        </div>
+
+        <div class="shrink-0 bg-white/90 p-4 rounded-2xl border border-rose-200 text-center w-full md:w-auto shadow-sm">
+            <div class="text-xs font-extrabold text-rose-700 uppercase tracking-wider">Última Avaliação</div>
+            <div class="text-2xl font-black text-rose-600 my-1">19/06/2026</div>
+            <div class="text-[11px] text-slate-500 font-semibold">Meta Recomendada: +5 a 10/mês</div>
+        </div>
+    </div>
+</section>
+
+        <!-- SEÇÃO 2: Benchmark & Share of Voice -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Gráfico Benchmark CTR -->
+            <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200/60 flex flex-col justify-between print-card">
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Atratividade (CTR)</span>
+                        <span class="bg-docgreen-100 text-docgreen-800 text-[10px] font-extrabold px-2 py-0.5 rounded-full">+194% vs Mercado</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Benchmark vs Mercado</h3>
+                    <p class="text-xs text-slate-500 mt-1">Comparação da taxa de cliques com a média da saúde (3,17%).</p>
+                </div>
+                <div class="my-6 relative h-48 flex items-center justify-center">
+                    <canvas id="ctrBenchmarkChart"></canvas>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-xs text-slate-600 flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-docgreen-600 mt-0.5"></i>
+                    <span>O CTR de <strong>9,32%</strong> comprova que o anúncio possui um índice de atração excelente no mercado de Dermatologia em Goiânia.</span>
+                </div>
+            </div>
+
+            <!-- Share of Voice -->
+            <div class="lg:col-span-2 bg-slate-900 text-white rounded-[2rem] p-7 shadow-xl border border-slate-800 flex flex-col justify-between relative overflow-hidden print-card">
+                <div class="absolute -right-12 -top-12 w-64 h-64 bg-docgreen-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-docgreen-400">Share of Voice - Dermatologia</span>
+                        <span class="bg-docgreen-500/20 text-docgreen-300 border border-docgreen-500/30 text-[10px] font-bold px-3 py-1 rounded-full">Destaque Absoluto de Topo</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-white">Domínio nas Buscas por Dermatologista Particular</h3>
+                </div>
+
+                <div class="my-6 space-y-6">
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-docgreen-400"></span>
+                                Top Page (% Exibição na Área Superior) - Camp. Especialidade
+                            </span>
+                            <span class="text-docgreen-400 font-extrabold text-base">93,02%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-docgreen h-full rounded-full" style="width: 93.02%"></div>
+                        </div>
+                        <p class="text-[11px] text-slate-400 mt-1">Presença massiva no topo das buscas no leilão de Goiânia.</p>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                1ª Posição Absoluta (% Topo 1)
+                            </span>
+                            <span class="text-amber-400 font-extrabold text-base">42,25%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-amber h-full rounded-full" style="width: 42.25%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-docgreen-300"></span>
+                                Proteção Institucional (Campanha Nome - CTR)
+                            </span>
+                            <span class="text-docgreen-300 font-extrabold text-base">22,83%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="bg-docgreen-400 h-full rounded-full" style="width: 22.83%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-docgreen-400"></i>
+                        Aparecendo em 93% das buscas na área superior com custo por clique controlado
+                    </span>
+                    <span class="font-mono text-[10px] text-slate-500 uppercase">Mídias 360 Analytics</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: Tabela de Campanhas -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Estrutura no Google Ads</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">2. Tabela de Leilão e Desempenho por Campanha</h2>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-3.5 px-4 bg-slate-50 rounded-l-xl">Campanha</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Impr.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CTR</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CPC Médio</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Top Page (% Sup.)</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">1ª Posição Abs.</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Parc. Impr. Red.</th>
+                            <th class="py-3.5 px-4 bg-docgreen-50 text-docgreen-800 text-right rounded-r-xl">Conversões</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-docgreen-600"></span> Especialidade</td>
+                            <td class="py-4 px-4 text-right font-semibold">4.033</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-900">365</td>
+                            <td class="py-4 px-4 text-right font-bold text-docgreen-600">9,05%</td>
+                            <td class="py-4 px-4 text-right">R$ 3,56</td>
+                            <td class="py-4 px-4 text-right font-bold text-docgreen-700">93,02%</td>
+                            <td class="py-4 px-4 text-right">42,25%</td>
+                            <td class="py-4 px-4 text-right font-semibold text-slate-600">26,75%</td>
+                            <td class="py-4 px-4 text-right font-black text-docgreen-700 bg-docgreen-50/30">6</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-amber-50/20">
+                            <td class="py-4 px-4 font-bold text-slate-900 flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Nome (Institucional)</td>
+                            <td class="py-4 px-4 text-right font-semibold">92</td>
+                            <td class="py-4 px-4 text-right font-bold text-slate-900">21</td>
+                            <td class="py-4 px-4 text-right font-bold text-amber-600">22,83%</td>
+                            <td class="py-4 px-4 text-right">R$ 0,83</td>
+                            <td class="py-4 px-4 text-right font-bold text-docgreen-700">67,69%</td>
+                            <td class="py-4 px-4 text-right font-bold text-amber-700">52,31%</td>
+                            <td class="py-4 px-4 text-right font-semibold text-slate-600">69,89%</td>
+                            <td class="py-4 px-4 text-right font-black text-docgreen-700 bg-docgreen-50/30">1</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors text-slate-400">
+                            <td class="py-4 px-4 font-bold flex items-center gap-2"><span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span> Serviços</td>
+                            <td class="py-4 px-4 text-right">16</td>
+                            <td class="py-4 px-4 text-right">0</td>
+                            <td class="py-4 px-4 text-right">0,00%</td>
+                            <td class="py-4 px-4 text-right">—</td>
+                            <td class="py-4 px-4 text-right">75,00%</td>
+                            <td class="py-4 px-4 text-right">12,50%</td>
+                            <td class="py-4 px-4 text-right">< 10%</td>
+                            <td class="py-4 px-4 text-right">0</td>
+                        </tr>
+                        <tr class="bg-slate-900 text-white font-bold rounded-xl">
+                            <td class="py-4 px-4 rounded-l-xl">TOTAL CONSOLIDADO</td>
+                            <td class="py-4 px-4 text-right">4.141</td>
+                            <td class="py-4 px-4 text-right text-docgreen-300 font-black">386</td>
+                            <td class="py-4 px-4 text-right text-amber-300 font-black">9,32%</td>
+                            <td class="py-4 px-4 text-right text-docgreen-200 font-bold">R$ 3,41</td>
+                            <td class="py-4 px-4 text-right">92,44%</td>
+                            <td class="py-4 px-4 text-right">41,96%</td>
+                            <td class="py-4 px-4 text-right">—</td>
+                            <td class="py-4 px-4 text-right rounded-r-xl text-docgreen-300 font-black">7</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: Palavras-Chave -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Qualificação de Intenção de Busca</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">3. Principais Termos de Pesquisa</h2>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-3 px-4 bg-slate-50 rounded-l-xl">Palavra-Chave / Termo</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right">Impressões</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3 px-4 bg-slate-50 text-right rounded-r-xl">CTR (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="bg-docgreen-50/80 border-l-4 border-docgreen-600 font-bold text-slate-900">
+                            <td class="py-3.5 px-4">dermatologista particular goiania</td>
+                            <td class="py-3.5 px-4 text-right">3.416</td>
+                            <td class="py-3.5 px-4 text-right text-docgreen-700 font-black">324</td>
+                            <td class="py-3.5 px-4 text-right text-docgreen-800 font-black">9,48%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold text-slate-900 bg-amber-50/30">
+                            <td class="py-3.5 px-4 flex items-center gap-2">dermatologista caldas novas <span class="bg-amber-100 text-amber-800 text-[9px] px-2 py-0.5 rounded uppercase font-bold">Região Adicional</span></td>
+                            <td class="py-3.5 px-4 text-right">398</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-amber-700">30</td>
+                            <td class="py-3.5 px-4 text-right font-black text-amber-600">7,54%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold">
+                            <td class="py-3.5 px-4">sampaio maise</td>
+                            <td class="py-3.5 px-4 text-right">62</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-docgreen-700">11</td>
+                            <td class="py-3.5 px-4 text-right font-black text-slate-800">17,74%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 font-bold bg-docgreen-50/20">
+                            <td class="py-3.5 px-4">maise sampaio</td>
+                            <td class="py-3.5 px-4 text-right">30</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-docgreen-700">10</td>
+                            <td class="py-3.5 px-4 text-right font-black text-docgreen-800">33,33%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">dermatologista goiânia</td>
+                            <td class="py-3.5 px-4 text-right">107</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">8</td>
+                            <td class="py-3.5 px-4 text-right">7,48%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">dermatologista</td>
+                            <td class="py-3.5 px-4 text-right">41</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">2</td>
+                            <td class="py-3.5 px-4 text-right">4,88%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="py-3.5 px-4">dermatologista particular</td>
+                            <td class="py-3.5 px-4 text-right">56</td>
+                            <td class="py-3.5 px-4 text-right font-semibold">1</td>
+                            <td class="py-3.5 px-4 text-right text-slate-500">1,79%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: Geografia e Otimização Estratégica -->
+        <section class="space-y-6">
+            <div>
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="bg-docgreen-100 text-docgreen-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Geolocalização & Estratégia</span>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">4. Performance Geográfica e Ajustes de Raio</h2>
+                <p class="text-xs text-slate-500 mt-1">Análise detalhada da abrangência em Goiânia (Setor Bueno) e Caldas Novas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+                <!-- Mapa Interativo -->
+                <div class="lg:col-span-2 bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-sm space-y-4 print-card">
+                    <div id="geoMap"></div>
+                </div>
+
+                <!-- Painel Informativo -->
+                <div class="bg-slate-900 text-white rounded-[2rem] p-6 shadow-xl border border-slate-800 flex flex-col justify-between print-card space-y-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-docgreen-400">Direcionamento de Verba</span>
+                        <h3 class="text-lg font-black text-white mt-1">Otimização Geográfica</h3>
+                        
+                        <div class="mt-5 space-y-4 text-xs">
+                            <!-- Card Goiânia -->
+                            <div class="p-4 rounded-xl bg-slate-800/90 border border-docgreen-500/40">
+                                <div class="font-bold text-docgreen-300 flex items-center justify-between mb-1">
+                                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot"></i> Polo Goiânia (Setor Bueno)</span>
+                                    <span class="bg-docgreen-500/20 text-docgreen-300 text-[9px] px-2 py-0.5 rounded-full font-extrabold">Ajustado</span>
+                                </div>
+                                <div class="text-slate-300 mt-1">R. T-50 com T-29, Qd 69, Lt 5, nº 723 - Setor Bueno, Goiânia</div>
+                                <div class="mt-2.5 pt-2 border-t border-slate-700/60 text-[11px] text-docgreen-200">
+                                    <i class="fa-solid fa-circle-check text-docgreen-400 mr-1"></i>
+                                    <strong>Raio atual: 10 km.</strong> Conforme alinhado em nossa reunião anterior (onde operávamos em 15 km), reduzimos para 10 km para aumentar a densidade e blindar a busca no Setor Bueno e adjacências.
+                                </div>
+                            </div>
+
+                            <!-- Card Caldas Novas -->
+                            <div class="p-4 rounded-xl bg-slate-800/90 border border-amber-500/40">
+                                <div class="font-bold text-amber-300 flex items-center justify-between mb-1">
+                                    <span class="flex items-center gap-1.5"><i class="fa-solid fa-location-dot"></i> Polo Caldas Novas</span>
+                                    <span class="bg-amber-500/20 text-amber-300 text-[9px] px-2 py-0.5 rounded-full font-extrabold">Sem Conversão</span>
+                                </div>
+                                <div class="text-slate-300 mt-1">Centro de Caldas Novas - GO</div>
+                                <div class="mt-2.5 pt-2 border-t border-slate-700/60 text-[11px] text-amber-200">
+                                    <i class="fa-solid fa-circle-exclamation text-amber-400 mr-1"></i>
+                                    <strong>Raio mantido em 10 km.</strong> Porém, no período analisado <strong>não registramos conversões vindas de Caldas Novas</strong>. Recomendamos avaliar o remanejamento dessa verba para reforçar ainda mais o Setor Bueno.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800 text-[11px] text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-lightbulb text-amber-400"></i>
+                        <span>Foco absoluto onde o paciente tem menor fricção de deslocamento.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: Doctoralia e Diagnóstico do Perfil -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Acessos x Prova Social</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">5. Desempenho do Perfil na Doctoralia</h2>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                <!-- Card Acessos -->
+                <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-center relative overflow-hidden">
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-400">Tráfego de Visitantes</span>
+                    <div class="text-4xl sm:text-5xl font-black text-white my-2">423</div>
+                    <p class="text-xs text-docgreen-300 font-semibold">Acessos Totais ao Perfil no Período</p>
+                    <div class="mt-3 inline-flex items-center gap-2 bg-docgreen-500/20 text-docgreen-300 border border-docgreen-500/30 text-xs font-bold px-3 py-1.5 rounded-xl w-fit">
+                        <span>🎯 Grande fluxo originado pelas buscas de Goiânia</span>
+                    </div>
+                </div>
+
+                <!-- Card Opiniões e Recomendação -->
+                <div class="bg-rose-50 border border-rose-200 rounded-2xl p-6 flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-bold uppercase tracking-wider text-rose-800">Diagnóstico de Prova Social</div>
+                        <div class="text-3xl font-black text-rose-950 mt-1.5">374 Opiniões <span class="text-xs font-bold text-rose-600 bg-rose-200 px-2 py-0.5 rounded-md uppercase ml-1">0 Novas</span></div>
+                        <div class="flex items-center text-amber-500 text-sm mt-1 mb-2">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-rose-900 leading-relaxed font-medium">
+                            Seu perfil tem uma excelente nota consolidada, mas a <strong>ausência de novas opiniões nos últimos 50 dias prejudica a conversão final</strong>. Implementar um fluxo de disparo pós-consulta via WhatsApp solicitará a avaliação e destravará a decisão dos novos pacientes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-8 mt-12 text-center text-xs text-slate-400 pb-8">
+        <div class="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 font-bold text-slate-600">
+                <span>Mídias 360</span>
+                <span>•</span>
+                <span>Doctoralia Partner</span>
+            </div>
+            <div class="text-slate-400 text-[11px]">
+                Dra. Maise Sampaio • Dermatologia • Relatório Executivo
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Mapa (Setor Bueno, Goiânia vs Caldas Novas)
+            const goianiaCoords = [-16.7025, -49.2740]; // Setor Bueno, Goiânia - GO
+            const caldasCoords = [-17.7444, -48.6253];   // Centro, Caldas Novas - GO
+            const mapElement = document.getElementById('geoMap');
+            
+            if (mapElement) {
+                // Centralizar visualização para abranger ambas as regiões no estado de Goiás
+                const map = L.map('geoMap', { center: [-17.2200, -48.9500], zoom: 8, zoomControl: true, scrollWheelZoom: false });
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap'
+                }).addTo(map);
+
+                // Círculo Goiânia (Setor Bueno - 10km ativo)
+                L.circle(goianiaCoords, { color: '#00b39b', fillColor: '#00b39b', fillOpacity: 0.18, radius: 10000, weight: 2.5 }).addTo(map);
+                
+                // Círculo Caldas Novas (10km - sem conversões)
+                L.circle(caldasCoords, { color: '#f43f5e', fillColor: '#f43f5e', fillOpacity: 0.12, radius: 10000, weight: 2, dashArray: '6, 6' }).addTo(map);
+
+                const iconGoiania = L.divIcon({
+                    className: 'custom-icon-goiania',
+                    html: `<div style="background-color: #00b39b; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;"><i class="fa-solid fa-user-doctor"></i></div>`,
+                    iconSize: [36, 36], iconAnchor: [18, 18]
+                });
+                L.marker(goianiaCoords, { icon: iconGoiania }).addTo(map).bindPopup("<b>Dra. Maise Sampaio - Setor Bueno</b><br>Goiânia - GO (Raio 10km)").openPopup();
+
+                const iconCaldas = L.divIcon({
+                    className: 'custom-icon-caldas',
+                    html: `<div style="background-color: #f43f5e; width: 36px; height: 36px; border-radius: 50%; border: 3px solid white; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 14px;"><i class="fa-solid fa-location-crosshairs"></i></div>`,
+                    iconSize: [36, 36], iconAnchor: [18, 18]
+                });
+                L.marker(caldasCoords, { icon: iconCaldas }).addTo(map).bindPopup("<b>Polo Caldas Novas</b><br>10km (Sem conversões no período)");
+            }
+
+            // Benchmark CTR Chart
+            const ctxCtr = document.getElementById('ctrBenchmarkChart');
+            if (ctxCtr) {
+                new Chart(ctxCtr.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Geral (9,32%)', 'Média de Saúde (3,17%)'],
+                        datasets: [{
+                            label: 'CTR (%)',
+                            data: [9.32, 3.17],
+                            backgroundColor: [
+                                'rgba(0, 179, 155, 0.9)', 
+                                'rgba(217, 119, 6, 0.4)'
+                            ],
+                            borderRadius: 8,
+                            barThickness: 48
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, max: 12, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
