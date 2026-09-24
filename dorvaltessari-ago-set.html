@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Executivo de Desempenho - Dr. Dorval de Andrade Tessari | Mídias 360</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        docgreen: {
+                            50: '#e6f8f5',
+                            100: '#cceae6',
+                            200: '#99d5cc',
+                            300: '#66c0b3',
+                            400: '#33ab99',
+                            500: '#00b39b',
+                            600: '#00a08b',
+                            700: '#00806f',
+                            800: '#006053',
+                            900: '#004037'
+                        },
+                        amber: {
+                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 900: '#78350f',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: #ffffff; }
+            .print-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; }
+        }
+        .gradient-docgreen { background: linear-gradient(135deg, #00b39b 0%, #00806f 100%); }
+        .gradient-amber { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 pb-16">
+
+    <!-- Header Bar -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-sm px-4 sm:px-8 py-4 mb-8">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 rounded-2xl bg-docgreen-500 text-white flex items-center justify-center font-black text-xl shadow-md">
+                    DT
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">Dr. Dorval de Andrade Tessari</h1>
+                        <span class="bg-docgreen-50 text-docgreen-700 text-xs font-bold px-2.5 py-0.5 rounded-full border border-docgreen-200">Ginecologia</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-slate-500 font-medium">Relatório Executivo de Performance Digital • Caxias do Sul - RS</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-4 sm:gap-6">
+                <!-- Google Partner Badge -->
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1.5 rounded-xl">
+                    <svg class="w-6 h-6" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <div class="text-left">
+                        <div class="text-[10px] uppercase font-bold tracking-wider text-slate-400 leading-none">Google</div>
+                        <div class="text-xs font-bold text-slate-700 leading-none">Partner</div>
+                    </div>
+                </div>
+
+                <!-- Doctoralia Badge -->
+                <div class="flex items-center gap-2.5 bg-docgreen-50 border border-docgreen-200/80 px-3 py-1.5 rounded-xl">
+                    <div class="text-docgreen-700 font-extrabold text-sm tracking-tight">doctoralia</div>
+                    <div class="flex items-center text-docgreen-600">
+                        <i class="fa-solid fa-star text-xs text-amber-400"></i>
+                    </div>
+                    <span class="text-xs font-bold text-docgreen-800">5.0 ★</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 space-y-8">
+
+        <!-- Sub-header Metadata Bar -->
+        <div class="bg-white rounded-[2rem] p-5 sm:p-6 shadow-sm border border-slate-200/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 print-card">
+            <div class="flex flex-wrap items-center gap-3">
+                <div class="inline-flex items-center gap-2 bg-slate-100 text-slate-700 px-3.5 py-1.5 rounded-full text-xs font-bold">
+                    <i class="fa-regular fa-calendar-days text-slate-500"></i>
+                    Período Analisado: <span class="text-docgreen-700">23/08 a 23/09</span>
+                </div>
+                <div class="inline-flex items-center gap-2 bg-docgreen-50 text-docgreen-800 px-3.5 py-1.5 rounded-full text-xs font-bold border border-docgreen-200/60">
+                    <i class="fa-solid fa-hand-holding-dollar text-docgreen-600"></i>
+                    CPC Médio Consolidado: <span class="text-slate-900 font-black">R$ 3,63</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3.5 py-1.5 rounded-full text-xs font-extrabold border border-amber-200">
+                    ⚡ CTR Médio: 6,51% (2,05x Média de Saúde)
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-5 py-2.5 rounded-xl transition-all duration-200 shadow-sm active:scale-95 shrink-0">
+                <i class="fa-solid fa-print"></i>
+                Exportar Relatório
+            </button>
+        </div>
+
+        <!-- SEÇÃO 1: Alcance e Métricas Principais -->
+        <section class="space-y-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Performance Digital & Atração</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">1. Alcance do Anúncio no Google & Indicadores Diretos</h2>
+                <p class="text-xs text-slate-500 mt-1">Volume de exibições e respostas geradas pelas campanhas no período.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                
+                <!-- Impressões -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Impressões</span>
+                        <div class="w-8 h-8 rounded-xl bg-slate-100 flex items-center justify-center text-slate-600">
+                            <i class="fa-solid fa-eye text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 tracking-tight">3.750</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Exibições nos leilões do Google</p>
+                </div>
+
+                <!-- Cliques -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Cliques Totais</span>
+                        <div class="w-8 h-8 rounded-xl bg-docgreen-50 flex items-center justify-center text-docgreen-600">
+                            <i class="fa-solid fa-arrow-pointer text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black text-docgreen-700 tracking-tight">244</div>
+                    <p class="text-[11px] text-docgreen-800 font-bold mt-2">Visitas qualificadas direcionadas</p>
+                </div>
+
+                <!-- CTR -->
+                <div class="bg-amber-500 text-white rounded-[2rem] p-5 shadow-md border border-amber-600/20 relative overflow-hidden print-card">
+                    <div class="absolute -right-4 -bottom-4 w-20 h-20 bg-amber-400/30 rounded-full blur-xl pointer-events-none"></div>
+                    <div class="flex items-center justify-between text-amber-100 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-amber-100">CTR (Cliques)</span>
+                        <div class="w-8 h-8 rounded-xl bg-amber-600/40 flex items-center justify-center text-white">
+                            <i class="fa-solid fa-chart-line text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black tracking-tight">6,51%</div>
+                    <p class="text-[11px] text-amber-100 mt-2 font-medium">▲ +105% Acima do Benchmark (3,17%)</p>
+                </div>
+
+                <!-- CPC Médio -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-docgreen-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">CPC Médio</span>
+                        <div class="w-8 h-8 rounded-xl bg-docgreen-50 flex items-center justify-center text-docgreen-600">
+                            <i class="fa-solid fa-hand-holding-dollar text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black text-slate-900 tracking-tight">R$ 3,63</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Custo médio por clique gerado</p>
+                </div>
+
+                <!-- Ligações Recebidas -->
+                <div class="bg-white rounded-[2rem] p-5 shadow-sm border border-slate-200/60 hover:border-emerald-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-2">
+                        <span class="text-xs font-bold uppercase tracking-wider text-slate-500">Ligações Recebidas</span>
+                        <div class="w-8 h-8 rounded-xl bg-emerald-50 flex items-center justify-center text-emerald-600">
+                            <i class="fa-solid fa-phone-volume text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="text-3xl font-black text-emerald-600 tracking-tight">75</div>
+                    <p class="text-[11px] text-slate-500 mt-2 font-medium">Chamadas diretas atendidas</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: Benchmark de Atratividade & Share of Voice -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            <!-- Benchmark CTR -->
+            <div class="bg-white rounded-[2rem] p-6 shadow-sm border border-slate-200/60 flex flex-col justify-between print-card">
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Atratividade do Anúncio</span>
+                        <span class="bg-docgreen-100 text-docgreen-800 text-[10px] font-extrabold px-2 py-0.5 rounded-full">+105% vs Mercado</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900">Benchmark de CTR (%)</h3>
+                    <p class="text-xs text-slate-500 mt-1">Taxa de cliques comparada com a média do setor da saúde (3,17%).</p>
+                </div>
+                <div class="my-6 relative h-48 flex items-center justify-center">
+                    <canvas id="ctrBenchmarkChart"></canvas>
+                </div>
+                <div class="bg-slate-50 rounded-2xl p-3 border border-slate-100 text-xs text-slate-600 flex items-start gap-2">
+                    <i class="fa-solid fa-circle-info text-docgreen-600 mt-0.5"></i>
+                    <span>Destaque para a campanha <strong>SN-Net-Online</strong> com <strong>18,40% de CTR</strong> e <strong>SN-Name</strong> com <strong>16,31%</strong>.</span>
+                </div>
+            </div>
+
+            <!-- Share of Voice -->
+            <div class="lg:col-span-2 bg-slate-900 text-white rounded-[2rem] p-7 shadow-xl border border-slate-800 flex flex-col justify-between relative overflow-hidden print-card">
+                <div class="absolute -right-12 -top-12 w-64 h-64 bg-docgreen-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-docgreen-400">Share of Voice & Visibilidade</span>
+                        <span class="bg-docgreen-500/20 text-docgreen-300 border border-docgreen-500/30 text-[10px] font-bold px-3 py-1 rounded-full">Caxias do Sul</span>
+                    </div>
+                    <h3 class="text-xl font-extrabold tracking-tight text-white">Domínio de Leilão nas Pesquisas por Ginecologia</h3>
+                    <p class="text-xs text-slate-400 mt-1">
+                        Garantir posições no topo do motor de busca assegura destaque absoluto no momento da tomada de decisão das pacientes.
+                    </p>
+                </div>
+
+                <div class="my-6 space-y-5">
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-docgreen-400"></span>
+                                Top 3 Ponderado (% Exibição na Área Superior)
+                            </span>
+                            <span class="text-docgreen-400 font-extrabold text-base">64,58%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-docgreen h-full rounded-full" style="width: 64.58%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
+                                Top 1 Ponderado (1ª Posição Absoluta)
+                            </span>
+                            <span class="text-amber-400 font-extrabold text-base">40,98%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-amber h-full rounded-full" style="width: 40.98%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-sm font-semibold mb-2">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2.5 h-2.5 rounded-full bg-slate-300"></span>
+                                Parcela de Impressões (Share Ponderado)
+                            </span>
+                            <span class="text-slate-300 font-extrabold text-base">26,56%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-3 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="bg-slate-400 h-full rounded-full" style="width: 26.56%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs text-slate-400">
+                    <span class="flex items-center gap-2">
+                        <i class="fa-solid fa-circle-check text-docgreen-400"></i>
+                        Excelente presença nas primeiras colocações do leilão em Caxias do Sul
+                    </span>
+                    <span class="font-mono text-[10px] text-slate-500 uppercase">Mídias 360 Analytics</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 3: Análise Detalhada por Grupo de Campanha (Sem Conversões) -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-6">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Estrutura de Campanha</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">3. Análise Detalhada por Grupo de Campanha</h2>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto custom-scrollbar">
+                <table class="w-full text-left text-xs sm:text-sm border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[11px] font-bold">
+                            <th class="py-3.5 px-4 bg-slate-50 rounded-l-xl">Campanha</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Views</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CTR</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">CPC Médio</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right">% Top 3</th>
+                            <th class="py-3.5 px-4 bg-slate-50 text-right rounded-r-xl">% Top 1</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="hover:bg-slate-50 transition-colors font-bold text-slate-900">
+                            <td class="py-3.5 px-4">SN-Spec-caxias-do-sul [229544]</td>
+                            <td class="py-3.5 px-4 text-right">2.162</td>
+                            <td class="py-3.5 px-4 text-right text-docgreen-700 font-black">95</td>
+                            <td class="py-3.5 px-4 text-right">4,39%</td>
+                            <td class="py-3.5 px-4 text-right">R$ 1,40</td>
+                            <td class="py-3.5 px-4 text-right">52,69%</td>
+                            <td class="py-3.5 px-4 text-right">15,06%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors">
+                            <td class="py-3.5 px-4 font-bold">SN-Services-caxias-do-sul [229544]</td>
+                            <td class="py-3.5 px-4 text-right">1.192</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-docgreen-700">81</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-slate-800">6,80%</td>
+                            <td class="py-3.5 px-4 text-right">R$ 3,74</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-docgreen-700">78,16%</td>
+                            <td class="py-3.5 px-4 text-right font-bold text-docgreen-700">49,24%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors bg-docgreen-50/40 font-bold">
+                            <td class="py-3.5 px-4">SN-Name [229544]</td>
+                            <td class="py-3.5 px-4 text-right">233</td>
+                            <td class="py-3.5 px-4 text-right">38</td>
+                            <td class="py-3.5 px-4 text-right text-docgreen-800 font-black">16,31%</td>
+                            <td class="py-3.5 px-4 text-right text-emerald-600 font-bold">R$ 0,82</td>
+                            <td class="py-3.5 px-4 text-right">67,12%</td>
+                            <td class="py-3.5 px-4 text-right">63,70%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 transition-colors bg-amber-50/30">
+                            <td class="py-3.5 px-4 font-bold">SN-Net-Online [229544]</td>
+                            <td class="py-3.5 px-4 text-right font-medium">163</td>
+                            <td class="py-3.5 px-4 text-right font-bold">30</td>
+                            <td class="py-3.5 px-4 text-right font-black text-amber-700">18,40%</td>
+                            <td class="py-3.5 px-4 text-right font-bold">R$ 13,93</td>
+                            <td class="py-3.5 px-4 text-right font-black text-docgreen-700">99,01%</td>
+                            <td class="py-3.5 px-4 text-right font-black text-amber-600">83,17%</td>
+                        </tr>
+                        <tr class="bg-slate-900 text-white font-bold rounded-xl">
+                            <td class="py-4 px-4 rounded-l-xl">TOTAL CONSOLIDADO</td>
+                            <td class="py-4 px-4 text-right">3.750</td>
+                            <td class="py-4 px-4 text-right text-docgreen-300 font-black text-base">244</td>
+                            <td class="py-4 px-4 text-right text-amber-300 font-black">6,51%</td>
+                            <td class="py-4 px-4 text-right text-docgreen-200">R$ 3,63</td>
+                            <td class="py-4 px-4 text-right">64,58%</td>
+                            <td class="py-4 px-4 text-right rounded-r-xl">40,98%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 4: Perfil do Público & Origem (Apenas Nomes dos Locais na Origem) -->
+        <section class="space-y-6">
+            <div>
+                <span class="bg-docgreen-100 text-docgreen-800 text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-wider">Demografia & Origem</span>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight mt-1">4. Perfil do Público & Origem dos Acessos</h2>
+                <p class="text-xs text-slate-500 mt-1">Mapeamento geográfico dos locais de acesso e composição demográfica das pacientes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Origem Geográfica (Apenas Nomes dos Locais) -->
+                <div class="bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between print-card">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Origem Principal</span>
+                            <i class="fa-solid fa-city text-slate-400"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-4">Cidades de Origem</h3>
+                        
+                        <div class="space-y-2.5 text-xs">
+                            <div class="bg-docgreen-50 p-3.5 rounded-xl border border-docgreen-200 flex items-center font-bold">
+                                <span class="text-docgreen-900 text-sm"><i class="fa-solid fa-location-dot text-docgreen-600 mr-2.5"></i>Caxias do Sul</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center font-semibold">
+                                <span class="text-slate-800"><i class="fa-solid fa-location-dot text-slate-400 mr-2.5"></i>Farroupilha</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center font-semibold">
+                                <span class="text-slate-800"><i class="fa-solid fa-location-dot text-slate-400 mr-2.5"></i>Nova Prata</span>
+                            </div>
+                            <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 flex items-center font-semibold">
+                                <span class="text-slate-800"><i class="fa-solid fa-location-dot text-slate-400 mr-2.5"></i>Flores da Cunha</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Gênero -->
+                <div class="bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between print-card">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Gênero</span>
+                            <i class="fa-solid fa-venus-mars text-slate-400"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Distribuição por Gênero</h3>
+                        <div class="h-48 relative">
+                            <canvas id="genderChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gráfico de Faixa Etária -->
+                <div class="bg-white rounded-[2rem] p-6 border border-slate-200/80 shadow-sm flex flex-col justify-between print-card">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Faixa Etária</span>
+                            <i class="fa-solid fa-users text-slate-400"></i>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 mb-2">Faixa Etária Predominante</h3>
+                        <div class="h-48 relative">
+                            <canvas id="ageChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: Reputação Digital & Prova Social (Apenas Opiniões) -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Autoridade & Validação Social Médica</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">5. Reputação Digital & Prova Social</h2>
+                </div>
+                <div class="flex items-center gap-1 text-docgreen-600">
+                    <i class="fa-solid fa-star text-sm text-amber-400"></i>
+                    <i class="fa-solid fa-star text-sm text-amber-400"></i>
+                    <i class="fa-solid fa-star text-sm text-amber-400"></i>
+                    <i class="fa-solid fa-star text-sm text-amber-400"></i>
+                    <i class="fa-solid fa-star text-sm text-amber-400"></i>
+                    <span class="text-xs font-bold text-slate-800 ml-1">Nota 5.0 ★ Excelente</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+                <!-- Card 1: Patrimônio Total de Opiniões -->
+                <div class="bg-slate-900 text-white rounded-2xl p-6 flex flex-col justify-between relative overflow-hidden border-l-8 border-docgreen-500">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider text-docgreen-400">Patrimônio de Reputação</span>
+                        <div class="text-4xl font-black text-amber-400 my-2">814 Opiniões</div>
+                        <div class="flex items-center text-amber-400 text-sm mb-2">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            <span class="text-xs font-bold text-slate-300 ml-2">5.0 de Avaliação Média</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-slate-800 text-[11px] text-slate-300 font-medium">
+                        🌟 Sólida autoridade acumulada e reconhecimento contínuo das pacientes em Caxias do Sul.
+                    </div>
+                </div>
+
+                <!-- Card 2: Novas Opiniões no Período -->
+                <div class="bg-docgreen-50/80 border border-docgreen-200 rounded-2xl p-6 flex flex-col justify-between border-l-8 border-docgreen-600">
+                    <div>
+                        <div class="flex items-center gap-2 text-docgreen-900 font-extrabold text-xs uppercase tracking-wider">
+                            <i class="fa-solid fa-circle-check text-docgreen-600"></i>
+                            Evolução Recente
+                        </div>
+                        <div class="text-4xl font-black text-docgreen-950 my-2">+13 Novas Opiniões</div>
+                        <p class="text-xs text-docgreen-900/90 font-bold">Avaliações Positivas Recebidas no Período</p>
+                    </div>
+                    <div class="mt-4 pt-2 border-t border-docgreen-200 text-[11px] text-docgreen-950 font-bold">
+                        🎯 Opiniões recentes mantêm o perfil altamente atrativo para novos agendamentos.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO 6: Evolução da Jornada de Agendamentos M360 (Com Linhas Pontilhadas de Tendência) -->
+        <section class="bg-white rounded-[2rem] p-6 sm:p-8 shadow-sm border border-slate-200/60 print-card space-y-8">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-docgreen-600">Acompanhamento de Crescimento</span>
+                    <h2 class="text-xl font-black text-slate-900 tracking-tight">6. Evolução da Jornada de Agendamentos M360</h2>
+                    <p class="text-xs text-slate-500 mt-1">Acompanhamento da evolução dos agendamentos online e realizados pela secretaria antes e após a contratação do M360.</p>
+                </div>
+            </div>
+
+            <!-- Gráfico 1: Agendamentos Pacientes (Online) com Linha Pontilhada -->
+            <div class="space-y-3">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-docgreen-500 inline-block"></span>
+                        Volume de Agendamentos Realizados pelos Pacientes ao Longo da Jornada M360
+                    </h3>
+                    <span class="text-xs text-slate-500 font-bold flex items-center gap-1.5">
+                        <span class="w-4 h-0.5 border-t-2 border-dashed border-docgreen-700 inline-block"></span> Linha de Tendência
+                    </span>
+                </div>
+                <div class="bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200/80">
+                    <div class="h-64 relative">
+                        <canvas id="patientAppointmentsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gráfico 2: Agendamentos Secretaria com Linha Pontilhada -->
+            <div class="space-y-3 pt-4 border-t border-slate-100">
+                <div class="flex items-center justify-between flex-wrap gap-2">
+                    <h3 class="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                        Volume de Agendamentos Realizados pela Secretaria ao Longo da Jornada M360
+                    </h3>
+                    <span class="text-xs text-slate-500 font-bold flex items-center gap-1.5">
+                        <span class="w-4 h-0.5 border-t-2 border-dashed border-amber-700 inline-block"></span> Linha de Tendência
+                    </span>
+                </div>
+                <div class="bg-slate-50 p-4 sm:p-6 rounded-2xl border border-slate-200/80">
+                    <div class="h-56 relative">
+                        <canvas id="secretaryAppointmentsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-[11px] text-slate-400 italic text-center pt-2">
+                ** Pré M360: Média mensal dos 3 meses anteriores à contratação, utilizada como referência para comparação da evolução dos agendamentos.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- RODAPÉ DE PÁGINA -->
+    <footer class="max-w-7xl mx-auto px-4 sm:px-8 mt-12 text-center text-xs text-slate-400 pb-8">
+        <div class="pt-8 border-t border-slate-200/80 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 font-bold text-slate-600 flex-wrap justify-center">
+                <span>Mídias 360</span>
+                <span>•</span>
+                <span>Doctoralia Partner</span>
+                <span>•</span>
+                <span class="text-docgreen-700">Assessor M360: Bianca Novarine Lucas</span>
+            </div>
+            <div class="text-slate-400 text-[11px]">
+                Dr. Dorval de Andrade Tessari • Ginecologista • Caxias do Sul - RS
+            </div>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS DE CHART.JS -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // Inline DataLabels Plugin
+            const inlineDataLabels = {
+                id: 'inlineDataLabels',
+                afterDatasetsDraw(chart, args, options) {
+                    const { ctx } = chart;
+                    ctx.font = 'bold 11px "Plus Jakarta Sans"';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'bottom';
+                    
+                    chart.data.datasets.forEach((dataset, i) => {
+                        if (dataset.type === 'line') return; // Skip label drawing for the trendline dataset
+                        const meta = chart.getDatasetMeta(i);
+                        meta.data.forEach((bar, index) => {
+                            const data = dataset.data[index];
+                            if(data !== undefined && data !== null) {
+                                ctx.fillStyle = '#0f172a'; 
+                                ctx.fillText(data, bar.x, bar.y - 4);
+                            }
+                        });
+                    });
+                }
+            };
+
+            // 1. Chart Benchmark CTR
+            const ctxCtr = document.getElementById('ctrBenchmarkChart');
+            if (ctxCtr) {
+                new Chart(ctxCtr.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Dr. Dorval (6,51%)', 'Média de Saúde (3,17%)'],
+                        datasets: [{
+                            label: 'CTR (%)',
+                            data: [6.51, 3.17],
+                            backgroundColor: [
+                                'rgba(0, 179, 155, 0.9)', 
+                                'rgba(217, 119, 6, 0.4)'
+                            ],
+                            borderRadius: 8,
+                            barThickness: 44
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, max: 10, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        }
+                    }
+                });
+            }
+
+            // 2. Chart Gender
+            const ctxGender = document.getElementById('genderChart');
+            if (ctxGender) {
+                new Chart(ctxGender.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Feminino', 'Indeterminado', 'Masculino'],
+                        datasets: [{
+                            data: [401, 79, 49],
+                            backgroundColor: ['#00b39b', '#94a3b8', '#cbd5e1'],
+                            borderRadius: 6,
+                            barThickness: 28
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        plugins: { legend: { display: false } },
+                        scales: { x: { display: false, grid: { display: false } }, y: { grid: { display: false } } }
+                    },
+                    plugins: [{
+                        id: 'genderLabels',
+                        afterDatasetsDraw(chart) {
+                            const { ctx } = chart;
+                            ctx.font = 'bold 10px "Plus Jakarta Sans"';
+                            ctx.fillStyle = '#0f172a';
+                            chart.data.datasets[0].data.forEach((val, i) => {
+                                const meta = chart.getDatasetMeta(0);
+                                const bar = meta.data[i];
+                                ctx.fillText(val, bar.x + 12, bar.y + 3);
+                            });
+                        }
+                    }]
+                });
+            }
+
+            // 3. Chart Age
+            const ctxAge = document.getElementById('ageChart');
+            if (ctxAge) {
+                new Chart(ctxAge.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+', 'Indet.'],
+                        datasets: [{
+                            data: [47, 99, 105, 103, 64, 33, 78],
+                            backgroundColor: ['#99d5cc', '#00b39b', '#00806f', '#006053', '#66c0b3', '#cbd5e1', '#e2e8f0'],
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { display: false }, x: { grid: { display: false } } }
+                    },
+                    plugins: [inlineDataLabels]
+                });
+            }
+
+            // 4. Chart 1: Agendamentos Pacientes com Linha Pontilhada de Evolução
+            const ctxPatients = document.getElementById('patientAppointmentsChart');
+            if (ctxPatients) {
+                new Chart(ctxPatients.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Pré M360', '0 - 30', '31 - 60', '61 - 90', '91 - 120', '121 - 150', '151 - 180', 'Last 31 - 60', 'Last 30'],
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Linha de Tendência',
+                                data: [12.7, 24, 23, 17, 15, 17, 11, 12, 23],
+                                borderColor: '#006053',
+                                borderWidth: 2.5,
+                                borderDash: [6, 6],
+                                pointBackgroundColor: '#00b39b',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2,
+                                pointRadius: 5,
+                                fill: false,
+                                tension: 0.35
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Agendamentos Pacientes',
+                                data: [12.7, 24, 23, 17, 15, 17, 11, 12, 23],
+                                backgroundColor: [
+                                    '#94a3b8', '#00b39b', '#00b39b', '#00b39b', '#00b39b', '#00b39b', '#00b39b', '#00b39b', '#00806f'
+                                ],
+                                borderRadius: 6,
+                                barPercentage: 0.55
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { top: 25 } },
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, max: 30, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        }
+                    },
+                    plugins: [inlineDataLabels]
+                });
+            }
+
+            // 5. Chart 2: Agendamentos Secretaria com Linha Pontilhada de Evolução
+            const ctxSecretary = document.getElementById('secretaryAppointmentsChart');
+            if (ctxSecretary) {
+                new Chart(ctxSecretary.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: ['Pré M360', 'Last 31 - 60', 'Last 30'],
+                        datasets: [
+                            {
+                                type: 'line',
+                                label: 'Linha de Tendência',
+                                data: [116.3, 149, 171],
+                                borderColor: '#b45309',
+                                borderWidth: 2.5,
+                                borderDash: [6, 6],
+                                pointBackgroundColor: '#f59e0b',
+                                pointBorderColor: '#ffffff',
+                                pointBorderWidth: 2,
+                                pointRadius: 6,
+                                fill: false,
+                                tension: 0.2
+                            },
+                            {
+                                type: 'bar',
+                                label: 'Agendamentos Secretaria',
+                                data: [116.3, 149, 171],
+                                backgroundColor: [
+                                    '#94a3b8', '#f59e0b', '#d97706'
+                                ],
+                                borderRadius: 8,
+                                barThickness: 48
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        layout: { padding: { top: 25 } },
+                        plugins: { legend: { display: false } },
+                        scales: {
+                            y: { beginAtZero: true, max: 200, grid: { color: '#f1f5f9' } },
+                            x: { grid: { display: false } }
+                        }
+                    },
+                    plugins: [inlineDataLabels]
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>
