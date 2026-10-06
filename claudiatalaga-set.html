@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatório Executivo de Performance - Dra. Claudia Regina Ribeiro Talaga | Mídias 360</title>
+    
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        teal: {
+                            50: '#f0fdfa', 100: '#ccfbf1', 200: '#99f6e4', 500: '#14b8a6', 600: '#0d9488', 700: '#0f766e', 800: '#115e59', 900: '#134e4a',
+                        },
+                        emerald: {
+                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 500: '#10b981', 600: '#059669', 700: '#047857', 900: '#064e3b',
+                        },
+                        amber: {
+                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 900: '#78350f',
+                        },
+                        rose: {
+                            50: '#fff1f2', 100: '#ffe4e6', 200: '#fecdd3', 500: '#f43f5e', 600: '#e11d48', 700: '#be123c', 900: '#881337',
+                        },
+                        indigo: {
+                            50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background-color: #ffffff; font-size: 11px; }
+            .print-card { box-shadow: none !important; border: 1px solid #e2e8f0 !important; page-break-inside: avoid; }
+            .page-break { page-break-before: always; }
+        }
+        .gradient-teal { background: linear-gradient(135deg, #0d9488 0%, #0f766e 100%); }
+        .gradient-accent { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
+        .pulse-dot {
+            box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7);
+            animation: pulse-animation 2s infinite;
+        }
+        @keyframes pulse-animation {
+            0% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(13, 148, 136, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(13, 148, 136, 0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 pb-12">
+
+    <!-- Header Principal -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs px-4 sm:px-8 py-3 mb-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            
+            <div class="flex items-center space-x-3">
+                <div class="w-11 h-11 rounded-2xl bg-teal-600/10 text-teal-700 flex items-center justify-center font-black text-lg border border-teal-500/20 shadow-xs">
+                    CT
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <h1 class="text-lg sm:text-xl font-extrabold text-slate-900 tracking-tight">Dra. Claudia Regina Ribeiro Talaga</h1>
+                        <span class="bg-teal-100 text-teal-800 text-xs font-semibold px-2.5 py-0.5 rounded-full border border-teal-200 flex items-center gap-1.5">
+                            <span class="w-2 h-2 rounded-full bg-teal-600 pulse-dot"></span>
+                            Ginecologia & Obstetrícia
+                        </span>
+                    </div>
+                    <p class="text-xs text-slate-500 font-medium">Relatório Executivo de Mídia • Santo André & Região (01/09 a 30/09/2026)</p>
+                </div>
+            </div>
+
+            <div class="flex items-center gap-3 flex-wrap justify-end">
+                <div class="flex items-center gap-2 bg-slate-50 border border-slate-200/80 px-3 py-1 rounded-xl">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                    </svg>
+                    <div class="text-left">
+                        <div class="text-[9px] uppercase font-bold tracking-wider text-slate-400 leading-none">Google</div>
+                        <div class="text-xs font-bold text-slate-700 leading-none">Partner</div>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2 bg-teal-50/80 border border-teal-200/80 px-3 py-1 rounded-xl">
+                    <div class="text-teal-700 font-extrabold text-xs tracking-tight">doctoralia</div>
+                    <div class="flex items-center text-teal-600">
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                        <i class="fa-solid fa-star text-[10px]"></i>
+                    </div>
+                    <span class="text-xs font-bold text-teal-800">5.0 ★</span>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 space-y-6">
+
+        <!-- Sub-header de Metadados -->
+        <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200/60 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 print-card">
+            <div class="flex flex-wrap items-center gap-2.5">
+                <div class="inline-flex items-center gap-1.5 bg-slate-100 text-slate-700 px-3 py-1 rounded-full text-xs font-bold">
+                    <i class="fa-regular fa-calendar-days text-slate-500"></i>
+                    Período: <span class="text-teal-700">01 a 30 de Setembro / 2026</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-teal-50 text-teal-800 px-3 py-1 rounded-full text-xs font-bold border border-teal-200/60">
+                    <i class="fa-solid fa-clock-rotate-left text-teal-600"></i>
+                    Cliente desde: <span class="text-slate-900 font-black">Abril / 2023</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-800 px-3 py-1 rounded-full text-xs font-bold border border-emerald-200/60">
+                    <i class="fa-solid fa-wallet text-emerald-600"></i>
+                    Investimento Mensal: <span class="text-slate-900 font-black">R$ 1.500,00</span>
+                </div>
+                <div class="inline-flex items-center gap-1.5 bg-amber-50 text-amber-900 px-3 py-1 rounded-full text-xs font-extrabold border border-amber-200">
+                    🔥 CTR: 4,96% (1,56x Média de Saúde)
+                </div>
+            </div>
+
+            <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-xl transition-all duration-200 shadow-xs active:scale-95 shrink-0">
+                <i class="fa-solid fa-print"></i>
+                <span>Exportar (2 Páginas)</span>
+            </button>
+        </div>
+
+        <!-- SEÇÃO 1: Alcance do Anúncio no Google -->
+        <section class="space-y-3">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Atração Qualificada em Ginecologia & Obstetrícia</span>
+                <h2 class="text-xl font-black text-slate-900 tracking-tight">1. Visão Geral Google Ads (Santo André & ABC)</h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+                
+                <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200/60 hover:border-teal-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Impressões Totais</span>
+                        <div class="w-7 h-7 rounded-lg bg-slate-100 flex items-center justify-center text-slate-600 text-xs">
+                            <i class="fa-solid fa-eye"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">9.362</div>
+                    <p class="text-[10px] text-slate-500 mt-1 font-medium">Exibições nos leilões do Google</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200/60 hover:border-teal-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">Cliques Diretos</span>
+                        <div class="w-7 h-7 rounded-lg bg-teal-50 flex items-center justify-center text-teal-600 text-xs">
+                            <i class="fa-solid fa-arrow-pointer"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-teal-700 tracking-tight">464</div>
+                    <p class="text-[10px] text-teal-800 font-bold mt-1">Tráfego engajado e qualificado</p>
+                </div>
+
+                <div class="bg-amber-500 text-white rounded-2xl p-4 shadow-md border border-amber-600/20 relative overflow-hidden print-card">
+                    <div class="flex items-center justify-between text-amber-100 mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-amber-100">CTR (Cliques)</span>
+                        <div class="w-7 h-7 rounded-lg bg-amber-600/40 flex items-center justify-center text-white text-xs">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black tracking-tight">4,96%</div>
+                    <p class="text-[10px] text-amber-100 mt-1 font-medium">▲ Acima do Benchmark Saúde (3,17%)</p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-4 shadow-xs border border-slate-200/60 hover:border-teal-500/40 transition-all print-card">
+                    <div class="flex items-center justify-between text-slate-400 mb-1">
+                        <span class="text-[11px] font-bold uppercase tracking-wider text-slate-500">CPC Médio</span>
+                        <div class="w-7 h-7 rounded-lg bg-teal-50 flex items-center justify-center text-teal-600 text-xs">
+                            <i class="fa-solid fa-hand-holding-dollar"></i>
+                        </div>
+                    </div>
+                    <div class="text-2xl font-black text-slate-900 tracking-tight">R$ 1,72</div>
+                    <p class="text-[10px] text-slate-500 mt-1 font-medium">Custo por clique altamente otimizado</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 2: Benchmark & ALERTA DE SHARE OF VOICE -->
+        <section class="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            
+            <!-- Card Benchmark CTR -->
+            <div class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200/60 flex flex-col justify-between print-card">
+                <div>
+                    <div class="flex items-center justify-between mb-1">
+                        <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Eficiência de Atração</span>
+                        <span class="bg-amber-100 text-amber-900 text-[10px] font-extrabold px-2 py-0.5 rounded-full">+56,5% vs Mercado</span>
+                    </div>
+                    <h3 class="text-base font-black text-slate-900">Benchmark CTR Área de Saúde</h3>
+                    <p class="text-[11px] text-slate-500 mt-0.5">Média oficial do setor médico estipulada pelo Google (3,17%).</p>
+                </div>
+
+                <div class="my-4 relative h-40 flex items-center justify-center">
+                    <canvas id="ctrBenchmarkChart"></canvas>
+                </div>
+
+                <div class="bg-slate-50 rounded-xl p-2.5 border border-slate-200/80 text-[11px] text-slate-600 flex items-start gap-2">
+                    <i class="fa-solid fa-lightbulb text-amber-500 mt-0.5 shrink-0"></i>
+                    <span>A campanha da marca atingiu alta conversão de atenção com <strong>18,83% de CTR</strong>.</span>
+                </div>
+            </div>
+
+            <!-- Card Share of Voice & Alerta de Oportunidade -->
+            <div class="lg:col-span-2 bg-slate-900 text-white rounded-2xl p-5 shadow-lg border border-slate-800 flex flex-col justify-between relative overflow-hidden print-card">
+                <div class="absolute -right-12 -top-12 w-56 h-56 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-xs font-bold uppercase tracking-widest text-teal-400">Share of Voice & Competitividade de Busca</span>
+                        <span class="bg-teal-500/20 text-teal-300 border border-teal-500/30 text-[10px] font-bold px-2.5 py-0.5 rounded-full">Santo André & ABC</span>
+                    </div>
+                    <h3 class="text-lg font-extrabold tracking-tight text-white">Domínio de Leilão nas Pesquisas por Ginecologia</h3>
+                </div>
+
+                <div class="my-3 space-y-3">
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+                                Top 3 Ponderado (% Exibição na Área Superior)
+                            </span>
+                            <span class="text-teal-400 font-extrabold">60,49%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-teal h-full rounded-full" style="width: 60.49%"></div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between items-center text-xs font-semibold mb-1">
+                            <span class="flex items-center gap-2 text-slate-200">
+                                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                Top 1 Ponderado (% 1ª Posição Absoluta)
+                            </span>
+                            <span class="text-amber-400 font-extrabold">10,53%</span>
+                        </div>
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden p-0.5 border border-slate-700/50">
+                            <div class="gradient-accent h-full rounded-full" style="width: 10.53%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ALERTA DE CONCORRÊNCIA E ORÇAMENTO EXIGIDO -->
+                <div class="bg-rose-950/70 border border-rose-500/40 p-3 rounded-xl flex items-start gap-3 mt-2">
+                    <div class="w-8 h-8 rounded-lg bg-rose-600/30 text-rose-300 flex items-center justify-center shrink-0 font-bold text-sm">
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </div>
+                    <div class="text-xs">
+                        <p class="font-extrabold text-rose-200 uppercase tracking-wider text-[10px]">Alerta Diagnóstico de Leilão (Share de Impressões: 8,07%):</p>
+                        <p class="text-slate-300 text-[11px] leading-snug mt-0.5">
+                            Atualmente, a campanha captura apenas <strong>8% do volume total de buscas ativas no Google</strong> na região. Este índice é impactado pela alta concorrência ginecológica no ABC, elevação do custo por palavra-chave e pelo limite de investimento atual (R$ 1.500/mês). Há uma <strong>expressiva oportunidade de expansão</strong> para captação de mais pacientes mediante o fortalecimento progressivo do orçamento.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- SEÇÃO 3: Detalhamento por Grupo de Campanha (Santo André e Nome) -->
+        <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200/60 print-card">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 mb-4">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Estrutura de Campanhas Santo André</span>
+                    <h2 class="text-lg font-black text-slate-900 tracking-tight">3. Análise Detalhada por Grupo de Campanha</h2>
+                </div>
+                <div class="text-xs text-slate-500 bg-slate-100 px-3 py-1 rounded-xl self-start md:self-auto font-medium">
+                    Consolidado Setembro/2026
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="border-b border-slate-200 text-slate-500 uppercase tracking-wider text-[10px] font-bold">
+                            <th class="py-3 px-3 bg-slate-50 rounded-l-xl">Campanha</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right">Impressões</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right">Cliques</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right">CTR</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right">CPC Médio</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right">% Top 3</th>
+                            <th class="py-3 px-3 bg-slate-50 text-right rounded-r-xl">% Top 1</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 font-medium text-slate-700">
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-teal-50/20">
+                            <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-teal-600"></span> SN-Spec-santo-andre (Especialidade)
+                            </td>
+                            <td class="py-3 px-3 text-right font-bold">7.230</td>
+                            <td class="py-3 px-3 text-right font-bold text-slate-900">317</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">4,38%</td>
+                            <td class="py-3 px-3 text-right font-semibold text-emerald-700">R$ 1,70</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">59,31%</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">11,10%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors">
+                            <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-emerald-500"></span> SN-Services-santo-andre (Serviços Ginecologia)
+                            </td>
+                            <td class="py-3 px-3 text-right font-bold">1.946</td>
+                            <td class="py-3 px-3 text-right font-bold text-slate-900">115</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">5,91%</td>
+                            <td class="py-3 px-3 text-right font-semibold text-emerald-700">R$ 2,05</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">72,73%</td>
+                            <td class="py-3 px-3 text-right font-bold text-teal-700">12,29%</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50/80 transition-colors bg-amber-50/30">
+                            <td class="py-3 px-3 font-bold text-slate-900 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-amber-500"></span> SN-Name (Institucional / Marca)
+                            </td>
+                            <td class="py-3 px-3 text-right">154</td>
+                            <td class="py-3 px-3 text-right font-bold text-slate-900">29</td>
+                            <td class="py-3 px-3 text-right font-black text-amber-600">18,83%</td>
+                            <td class="py-3 px-3 text-right font-semibold text-emerald-700">R$ 0,71</td>
+                            <td class="py-3 px-3 text-right font-bold text-amber-700">83,67%</td>
+                            <td class="py-3 px-3 text-right font-bold text-amber-700">52,04%</td>
+                        </tr>
+
+                        <!-- Linha Total -->
+                        <tr class="bg-slate-900 text-white font-bold rounded-xl">
+                            <td class="py-3 px-3 rounded-l-xl">TOTAL CONSOLIDADO (SANTO ANDRÉ)</td>
+                            <td class="py-3 px-3 text-right font-black">9.330</td>
+                            <td class="py-3 px-3 text-right text-teal-300 font-black">461</td>
+                            <td class="py-3 px-3 text-right text-amber-300 font-black">4,94%</td>
+                            <td class="py-3 px-3 text-right text-teal-200 font-bold">R$ 1,73</td>
+                            <td class="py-3 px-3 text-right font-bold">62,5%</td>
+                            <td class="py-3 px-3 text-right rounded-r-xl font-bold">12,6%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- QUEBRA DE PÁGINA PARA IMPRESSÃO PERFEITA DE 2 PÁGINAS -->
+        <div class="page-break"></div>
+
+        <!-- SEÇÃO 4: Perfil do Público (Gráficos Cidade, Gênero e Faixa Etária) -->
+        <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200/60 print-card space-y-4">
+            <div>
+                <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Composição da Audiência & Origem dos Cliques</span>
+                <h2 class="text-lg font-black text-slate-900 tracking-tight">4. Perfil Demográfico do Público</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                
+                <!-- Gráfico 1: Cidade -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-slate-700 tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-location-dot text-teal-600"></i> Cliques por Cidade
+                        </span>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Distribuição dos acessos por município</p>
+                    </div>
+                    <div class="h-48 relative mt-2">
+                        <canvas id="cityChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 2: Gênero -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-slate-700 tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-venus-mars text-teal-600"></i> Distribuição por Gênero
+                        </span>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Predomínio do público feminino (67,5%)</p>
+                    </div>
+                    <div class="h-48 relative mt-2 flex items-center justify-center">
+                        <canvas id="genderChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Gráfico 3: Faixa Etária -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-3.5 flex flex-col justify-between">
+                    <div>
+                        <span class="text-xs font-extrabold uppercase text-slate-700 tracking-wider flex items-center gap-1.5">
+                            <i class="fa-solid fa-user-group text-teal-600"></i> Faixa Etária
+                        </span>
+                        <p class="text-[10px] text-slate-500 mt-0.5">Concentração em idade fértil (25-54 anos)</p>
+                    </div>
+                    <div class="h-48 relative mt-2">
+                        <canvas id="ageChart"></canvas>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- SEÇÃO 5: Comparativo de Concorrência & Mercado (Apenas Consulta e Opiniões) -->
+        <section class="bg-white rounded-2xl p-5 shadow-xs border border-slate-200/60 print-card space-y-4">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-teal-600">Análise Comparativa de Mercado</span>
+                    <h2 class="text-lg font-black text-slate-900 tracking-tight">5. Comparativo com a Concorrência & Médias de Mercado</h2>
+                    <p class="text-xs text-slate-500 mt-0.5">Posicionamento de precificação e patrimônio de reputação da Dra. Claudia Talaga.</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                
+                <!-- Card 1: Valor de Consulta -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-2.5">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-amber-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-tag text-amber-600"></i> Valor de Consulta (Ticket Médio)
+                    </span>
+                    <div class="space-y-1.5 pt-1 text-xs">
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-amber-100/80 font-black text-amber-950">
+                            <span>Este Especialista (Dra. Claudia):</span>
+                            <span class="text-sm">R$ 721,62</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-white border border-slate-200 text-slate-600 font-semibold">
+                            <span>Média Doctoralia:</span>
+                            <span>R$ 662,50</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-white border border-slate-200 text-slate-600 font-semibold">
+                            <span>Média M360:</span>
+                            <span>R$ 733,33</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-amber-800 font-bold pt-0.5">
+                        ⭐ Posicionamento de alto valor percebido e alinhado ao padrão M360.
+                    </p>
+                </div>
+
+                <!-- Card 2: Total de Opiniões -->
+                <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4 space-y-2.5">
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-emerald-600"></i> Total de Opiniões Validadas
+                    </span>
+                    <div class="space-y-1.5 pt-1 text-xs">
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-emerald-100/80 font-black text-emerald-950">
+                            <span>Este Especialista (Dra. Claudia):</span>
+                            <span class="text-base">329 avaliações</span>
+                        </div>
+                        <div class="flex justify-between items-center p-2 rounded-lg bg-white border border-slate-200 text-slate-600 font-semibold">
+                            <span>Média Doctoralia Geral:</span>
+                            <span>167 avaliações</span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-emerald-800 font-bold pt-0.5">
+                        🔥 +97% superior ao patrimônio médio de opiniões da plataforma.
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="max-w-7xl mx-auto px-4 sm:px-8 mt-8 text-center text-xs text-slate-400 pb-6">
+        <div class="pt-6 border-t border-slate-200/80 flex flex-col sm:flex-row justify-between items-center gap-3">
+            <div class="flex items-center gap-2 font-bold text-slate-600">
+                <span>Mídias 360</span>
+                <span>•</span>
+                <span>Doctoralia Partner</span>
+                <span>•</span>
+                <span>Assessor: Bianca Novarine Lucas</span>
+            </div>
+            <p>© 2026 Mídias 360 - Relatório exclusivo para Dra. Claudia Regina Ribeiro Talaga (Santo André - SP)</p>
+        </div>
+    </footer>
+
+    <script>
+        window.onload = function() {
+            // 1. CTR Benchmark Chart
+            const ctxCtr = document.getElementById('ctrBenchmarkChart');
+            if (ctxCtr) {
+                new Chart(ctxCtr, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Média Saúde (3,17%)', 'Dra. Claudia (4,96%)', 'Marca (18,83%)'],
+                        datasets: [{ data: [3.17, 4.96, 18.83], backgroundColor: ['#cbd5e1', '#d97706', '#0d9488'], borderRadius: 8, barThickness: 24 }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true, max: 22, grid: { color: '#f1f5f9' } }, x: { grid: { display: false } } } }
+                });
+            }
+
+            // 2. City Chart (Barra Horizontal)
+            const ctxCity = document.getElementById('cityChart');
+            if (ctxCity) {
+                new Chart(ctxCity, {
+                    type: 'bar',
+                    data: {
+                        labels: ['São Paulo', 'Santo André', 'S. Bernardo', 'S. Caetano', 'Guarulhos', 'Ribeirão Pires', 'Mauá', 'R. G. Serra'],
+                        datasets: [{
+                            label: 'Cliques',
+                            data: [261, 239, 87, 29, 7, 6, 5, 5],
+                            backgroundColor: '#0d9488',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { x: { beginAtZero: true, grid: { color: '#f1f5f9' } }, y: { grid: { display: false }, ticks: { font: { size: 10, weight: 'bold' } } } }
+                    }
+                });
+            }
+
+            // 3. Gender Chart (Doughnut)
+            const ctxGender = document.getElementById('genderChart');
+            if (ctxGender) {
+                new Chart(ctxGender, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Feminino (560)', 'Indeterminado (176)', 'Masculino (94)'],
+                        datasets: [{
+                            data: [560, 176, 94],
+                            backgroundColor: ['#0d9488', '#cbd5e1', '#0ea5e9'],
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, font: { size: 10, weight: 'bold' } } } }
+                    }
+                });
+            }
+
+            // 4. Age Chart (Barra)
+            const ctxAge = document.getElementById('ageChart');
+            if (ctxAge) {
+                new Chart(ctxAge, {
+                    type: 'bar',
+                    data: {
+                        labels: ['18-24', '25-34', '35-44', '45-54', '55-64', '65+', 'Indet.'],
+                        datasets: [{
+                            label: 'Cliques',
+                            data: [37, 139, 142, 180, 104, 55, 173],
+                            backgroundColor: '#f59e0b',
+                            borderRadius: 6
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true, grid: { color: '#f1f5f9' } }, x: { grid: { display: false }, ticks: { font: { size: 9, weight: 'bold' } } } }
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>
