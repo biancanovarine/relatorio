@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Executivo • Dr. Rafael Cofiño de Sá</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js 4.x CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Leaflet.js CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            amber: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body { background-color: #ffffff !important; }
+      .no-print { display: none !important; }
+      .shadow-xl, .shadow-sm, .shadow-lg { box-shadow: none !important; }
+      .page-break { page-break-before: always; }
+      .rounded-\[2rem\] { border-radius: 1rem !important; }
+      #map { height: 420px !important; }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-teal-500 selection:text-white">
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-xl shadow-slate-200/40 transition-all">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-teal-600 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-teal-600/30">
+              RC
+            </div>
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Dr. Rafael Cofiño de Sá</h1>
+              <div class="flex flex-wrap items-center gap-2 mt-1">
+                <span class="text-teal-700 font-semibold text-sm">Psiquiatra • Campinas &amp; Telemedicina Nacional</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-slate-500 text-xs sm:text-sm font-medium">Período: 01/10/2026 - 15/11/2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200/70">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                  Início M360: jul. de 2025
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges em linha única compacta -->
+        <div class="flex items-center flex-wrap gap-2.5">
+          <!-- Selo M360 -->
+          <div class="flex items-center gap-2 bg-slate-900 text-white px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+            M360
+          </div>
+
+          <!-- Selo Doctoralia com 5 Estrelas Amarelas -->
+          <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-900">
+            <span>Doctoralia • 704 Opiniões</span>
+            <span class="text-amber-500 tracking-wider">★★★★★</span>
+          </div>
+
+          <!-- Botão Exportar PDF -->
+          <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-3.5 py-1.5 rounded-xl font-semibold text-xs transition shadow-sm active:scale-95">
+            <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Exportar
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SEÇÃO 1: 5 KPI CARDS -->
+    <section>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Card 1: Impressões -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Impressões</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">9.105</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Exibições do anúncio no Google (Campinas &amp; Online)</p>
+        </div>
+
+        <!-- Card 2: Cliques Diretos -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cliques no Anúncio</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">880</span>
+            </div>
+          </div>
+          <p class="text-xs text-teal-700 font-medium mt-4">Tráfego direto originado em 175 cidades</p>
+        </div>
+
+        <!-- Card 3: CTR Consolidado -->
+        <div class="bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent rounded-[2rem] p-6 border-2 border-amber-400/60 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">CTR Consolidado</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">+205,0%</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-amber-700">9,67%</span>
+              <span class="text-xs text-slate-500 font-medium">vs 3,17% média</span>
+            </div>
+          </div>
+          <p class="text-xs text-amber-800 font-semibold mt-4">Mais que o triplo da média Google Saúde</p>
+        </div>
+
+        <!-- Card 4: Impressões de Chamadas -->
+        <div class="bg-white rounded-[2rem] p-6 border border-teal-500/40 shadow-lg shadow-teal-500/10 flex flex-col justify-between hover:border-teal-600 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-teal-900 uppercase tracking-wider">Impressões de Chamadas</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-black text-teal-700">1.503</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 font-medium mt-4">Quantas vezes o nº de telefone foi exibido no anúncio</p>
+        </div>
+
+        <!-- Card 5: CPC Médio -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">CPC Médio</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">R$ 6,42</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Custo médio pago por cada clique no período</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BENCHMARKING DE ATRATIVIDADE & DOMÍNIO DE LEILÃO NAS BUSCAS -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- Coluna Esquerda: Benchmarking de CTR -->
+      <div class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Benchmarking de Atratividade (CTR)</h2>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg">Saúde 2026</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Percentual de impressões que resultaram em cliques comparado à média oficial do Google.</p>
+        </div>
+
+        <div class="my-6">
+          <div class="h-48 relative">
+            <canvas id="ctrBenchmarkChart"></canvas>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
+          <div class="p-3 bg-teal-50/70 rounded-xl border border-teal-100">
+            <span class="text-[11px] font-semibold text-teal-900">Dr. Rafael Cofiño de Sá</span>
+            <p class="text-lg font-extrabold text-teal-700 mt-0.5">9,67%</p>
+            <p class="text-[10px] text-teal-600">CTR médio consolidado</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-[11px] font-semibold text-slate-700">Média Google Saúde</span>
+            <p class="text-lg font-extrabold text-slate-800 mt-0.5">3,17%</p>
+            <p class="text-[10px] text-slate-500">Benchmark de referência</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Domínio de Leilão nas Buscas -->
+      <div class="bg-slate-900 text-white rounded-[2rem] p-6 lg:p-8 shadow-xl flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-white tracking-tight">Domínio de Leilão nas Buscas</h2>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-teal-500/20 text-teal-300 rounded border border-teal-500/30">Google Search</span>
+          </div>
+          
+          <div class="mt-4 p-4 rounded-2xl bg-teal-950/60 border border-teal-500/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse"></span>
+              <span class="text-xs font-bold text-teal-200 uppercase tracking-wider">Parcela de Buscas no Google</span>
+            </div>
+            <p class="text-2xl font-black text-white mt-1">54,10% <span class="text-xs font-normal text-slate-300">de participação nas buscas elegíveis</span></p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Forte competitividade tanto na praça presencial de Campinas quanto nas buscas nacionais por psiquiatria online.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4 my-6">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Três Primeiras Posições (Top 3)</span>
+              <span class="text-teal-400 font-bold">84,08%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-teal-400 h-2 rounded-full" style="width: 84.08%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Topo de Página (1ª Posição Absoluta)</span>
+              <span class="text-amber-400 font-bold">47,24%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-amber-400 h-2 rounded-full" style="width: 47.24%"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400 border-t border-slate-800 pt-3">
+          Quase 50% de todas as exibições colocam o Dr. Rafael Cofiño de Sá no primeiríssimo lugar absoluto da página do Google.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SEÇÃO 3: DESEMPENHO POR GRUPO DE CAMPANHA -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Desempenho por Grupo de Campanha</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Comparativo de impressões, cliques e posicionamento gerados por Especialidade, Online e Institucional.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl self-start sm:self-auto">
+          3 Frentes Ativas
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[680px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Campanha</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right">CPC Médio</th>
+              <th class="py-3 px-4 text-right">Topo de Página</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">1ª Posição</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <tr class="hover:bg-teal-50/30 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">Especialidade</td>
+              <td class="py-3.5 px-4 text-right font-medium">5.884</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">380</td>
+              <td class="py-3.5 px-4 text-right font-semibold">6,46%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 8,76</td>
+              <td class="py-3.5 px-4 text-right font-medium">90,26%</td>
+              <td class="py-3.5 px-4 text-right font-medium">44,92%</td>
+            </tr>
+            <tr class="bg-teal-50/30 hover:bg-teal-50/60 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">Online</td>
+              <td class="py-3.5 px-4 text-right font-medium">2.817</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">430</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">15,26%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 5,27</td>
+              <td class="py-3.5 px-4 text-right font-medium">91,85%</td>
+              <td class="py-3.5 px-4 text-right font-medium">38,36%</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">Institucional</td>
+              <td class="py-3.5 px-4 text-right font-medium">240</td>
+              <td class="py-3.5 px-4 text-right font-bold text-amber-700">69</td>
+              <td class="py-3.5 px-4 text-right font-bold text-amber-600">28,75%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 0,86</td>
+              <td class="py-3.5 px-4 text-right font-medium">87,67%</td>
+              <td class="py-3.5 px-4 text-right font-medium">71,23%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-slate-900 text-white font-extrabold text-xs">
+              <td class="py-3.5 px-4 rounded-l-xl">Total / Médias Consolidadas</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">9.105</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">880</td>
+              <td class="py-3.5 px-4 text-right text-amber-300">9,67%</td>
+              <td class="py-3.5 px-4 text-right">R$ 6,42</td>
+              <td class="py-3.5 px-4 text-right">84,08%</td>
+              <td class="py-3.5 px-4 text-right rounded-r-xl">47,24%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: PALAVRAS-CHAVE COM MAIOR DESEMPENHO -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Palavras-Chave com Maior Desempenho</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Termos de busca presenciais em Campinas, telemedicina nacional e marca própria que mais geraram cliques.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl self-start sm:self-auto">
+          Alta Relevância &amp; Conversão
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[650px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Pesquisar Palavra-Chave</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">CPC Médio</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <!-- Termo Líder em Cliques -->
+            <tr class="bg-teal-50/70 border-l-4 border-teal-600 font-semibold text-teal-950">
+              <td class="py-3.5 px-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                psiquiatra online
+              </td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">1.404</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">214</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-teal-700">15,24%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 7,22</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">agendar psiquiatra online</td>
+              <td class="py-3 px-4 text-right font-medium">1.366</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">209</td>
+              <td class="py-3 px-4 text-right font-bold text-teal-700">15,30%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 3,19</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatra campinas</td>
+              <td class="py-3 px-4 text-right font-medium">2.622</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">207</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">7,89%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 9,62</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatra</td>
+              <td class="py-3 px-4 text-right font-medium">2.553</td>
+              <td class="py-3 px-4 text-right font-medium">100</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-800">3,92%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 8,63</td>
+            </tr>
+            <!-- Termo de Marca -->
+            <tr class="bg-amber-50/50 hover:bg-amber-50 transition font-medium">
+              <td class="py-3 px-4 text-amber-950 font-semibold">cofiño de sá rafael (marca)</td>
+              <td class="py-3 px-4 text-right font-medium">222</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-700">65</td>
+              <td class="py-3 px-4 text-right font-extrabold text-amber-600">29,28%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 0,85</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatra perto de mim</td>
+              <td class="py-3 px-4 text-right font-medium">218</td>
+              <td class="py-3 px-4 text-right font-medium">27</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">12,39%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 8,67</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatria</td>
+              <td class="py-3 px-4 text-right font-medium">142</td>
+              <td class="py-3 px-4 text-right font-medium">17</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">11,97%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 0,96</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatria campinas</td>
+              <td class="py-3 px-4 text-right font-medium">186</td>
+              <td class="py-3 px-4 text-right font-medium">16</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">8,60%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 8,25</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">psiquiatras campinas</td>
+              <td class="py-3 px-4 text-right font-medium">49</td>
+              <td class="py-3 px-4 text-right font-medium">6</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">12,24%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 7,89</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">tratamento com mounjaro</td>
+              <td class="py-3 px-4 text-right font-medium">148</td>
+              <td class="py-3 px-4 text-right font-medium">1</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-600">0,68%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 1,31</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: HISTÓRICO DE AGENDAMENTOS & PACIENTES NOVOS (LIMPO, APENAS COM O GRÁFICO) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Histórico de Agendamentos &amp; Pacientes Novos</h2>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800">
+              Janeiro a Novembro (Parcial)
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Evolução mensal do volume total de consultas e entrada consistente de pacientes de primeira consulta.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl">
+          <span>Série Histórica 2026</span>
+        </div>
+      </div>
+
+      <!-- GRÁFICO HISTÓRICO COM RÓTULOS NATIVOS NÍTIDOS NAS BARRAS -->
+      <div class="h-80 sm:h-96 relative">
+        <canvas id="appointmentsHistoryChart"></canvas>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: ALCANCE GEOGRÁFICO NACIONAL (175 CIDADES) & PERFIL DEMOGRAFICO -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Alcance Geográfico Nacional &amp; Perfil do Público</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Mapa interativo com marcadores em todas as 175 cidades do Brasil que originaram cliques na campanha, além do perfil demográfico.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl self-start sm:self-auto">
+          175 Cidades Alcançadas
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Mapa Nacional com 175 Pinos (8 Colunas) -->
+        <div class="lg:col-span-8 flex flex-col gap-3">
+          <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-inner h-96 sm:h-[28rem] relative">
+            <div id="map" class="w-full h-full"></div>
+          </div>
+          <p class="text-[11px] text-slate-500 flex items-center justify-between px-1">
+            <span>• Cada pino no mapa representa uma cidade que gerou cliques (clique sobre um pino para ver o nome do município).</span>
+            <span class="font-semibold text-teal-700">Base: Campinas (SP) + Telemedicina Brasil</span>
+          </p>
+        </div>
+
+        <!-- Perfil Demográfico (Gênero & Faixa Etária) (4 Colunas) -->
+        <div class="lg:col-span-4 flex flex-col justify-between gap-4">
+          
+          <!-- Card Gênero -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Distribuição por Gênero</h3>
+              <span class="text-[11px] font-bold text-teal-700">46,7% Feminino</span>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Feminino</span>
+                  <span class="text-teal-700 font-bold">411 (46,7%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-teal-600 h-2 rounded-full" style="width: 46.7%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Indeterminado</span>
+                  <span class="text-slate-600 font-bold">254 (28,9%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-slate-400 h-2 rounded-full" style="width: 28.9%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Masculino</span>
+                  <span class="text-amber-700 font-bold">215 (24,4%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-amber-500 h-2 rounded-full" style="width: 24.4%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Faixa Etária -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex-1 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Faixa Etária</h3>
+              <span class="text-[11px] font-bold text-teal-700">Pico: 25 a 34 anos</span>
+            </div>
+            <div class="h-52 relative">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: COMPARATIVO DE MERCADO & AUTORIDADE NA DOCTORALIA -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Comparativo de Mercado &amp; Autoridade Doctoralia</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Posicionamento frente às médias da plataforma Doctoralia e dos especialistas M360 em agendamentos e reputação.</p>
+        </div>
+        <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold self-start sm:self-auto">
+          <span>Doctoralia Perfil Verificado</span>
+          <span class="text-amber-500 tracking-wider">★★★★★</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1: Agendamento Online vs Mercado -->
+        <div class="p-6 bg-teal-50/60 rounded-2xl border border-teal-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-900 uppercase tracking-wider">Agendamento Online</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-teal-600 text-white">12x Média</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-teal-700">36</span>
+              <span class="text-sm font-semibold text-teal-900">agendamentos online</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-teal-200/70 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">3 agendamentos</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média M360:</span>
+              <strong class="text-slate-800">17 agendamentos</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Valor de Consulta vs Mercado -->
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Valor de Consulta</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">Competitivo</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-slate-900">R$ 284</span>
+              <span class="text-xs font-medium text-slate-500">ticket médio</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">R$ 451</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média M360:</span>
+              <strong class="text-slate-800">R$ 373</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Total de Opiniões vs Mercado -->
+        <div class="p-6 bg-amber-50/50 rounded-2xl border border-amber-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">Total de Opiniões</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-white">8x Média</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-amber-700">704</span>
+              <span class="text-sm font-bold text-amber-900">opiniões</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-amber-200/70 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">88 opiniões</strong>
+            </div>
+            <p class="text-[11px] text-amber-950 font-medium pt-1">
+              Patrimônio 8x superior à média da plataforma, maximizando a conversão presencial e online.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 8: ESTRUTURA DE INVESTIMENTOS E PLANOS ATIVOS (AJUSTADA SEM SUBTOTAL E SEM TFOOT) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Estrutura de Investimentos &amp; Planos Ativos</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Detalhamento das assinaturas pagas pela clínica e do investimento direto realizado pelo Dr. Rafael.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl self-start sm:self-auto">
+          Clínica + Dr. Rafael
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[680px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Pagador / Responsável</th>
+              <th class="py-3 px-4">Item / Plano Contratado</th>
+              <th class="py-3 px-4">Modalidade / Observação</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">Valor Mensal</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <!-- GRUPO 1: PAGAMENTO PELA CLÍNICA -->
+            <tr class="bg-teal-50/30">
+              <td colspan="4" class="py-2 px-4 uppercase text-[10px] tracking-wider text-teal-900 bg-teal-50/70 font-extrabold">
+                1) Pagamento pela Clínica
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">Perfil Clínicas</td>
+              <td class="py-3 px-4 text-slate-500">Assinatura mensal (valor aproximado)</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">~ R$ 1.100,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">First Class — "Psiquiatra Campinas"</td>
+              <td class="py-3 px-4 text-slate-500">Destaque prioritário na busca dentro da Doctoralia</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">R$ 599,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">First Class — "Psicólogo Campinas"</td>
+              <td class="py-3 px-4 text-slate-500">Destaque prioritário na busca dentro da Doctoralia</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">R$ 799,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">First Class — "Médico de Família Campinas"</td>
+              <td class="py-3 px-4 text-slate-500">Destaque prioritário na busca dentro da Doctoralia</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">R$ 99,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">First Class — "Alergista Teleconsulta"</td>
+              <td class="py-3 px-4 text-slate-500">Destaque prioritário na busca dentro da Doctoralia</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">R$ 499,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-semibold text-slate-600">Clínica</td>
+              <td class="py-3 px-4 font-bold text-slate-900">Doctoralia Pagamentos</td>
+              <td class="py-3 px-4 text-slate-500">Taxa operacional variável por transação</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-700">3,99% por consulta</td>
+            </tr>
+
+            <!-- GRUPO 2: PAGAMENTO PELO RAFAEL -->
+            <tr class="bg-amber-50/30">
+              <td colspan="4" class="py-2 px-4 uppercase text-[10px] tracking-wider text-amber-900 bg-amber-50/70 font-extrabold">
+                2) Pagamento pelo Dr. Rafael
+              </td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-semibold text-slate-600">Dr. Rafael</td>
+              <td class="py-3.5 px-4 font-bold text-slate-900">Campanhas Google Ads (M360)</td>
+              <td class="py-3.5 px-4 text-slate-500">Investimento mensal dedicado à captação</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-slate-900">R$ 5.000,00</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- RODAPÉ CORPORATIVO -->
+    <footer class="pt-6 pb-12 border-t border-slate-200 text-center text-xs text-slate-500">
+      <p class="font-medium">Mídias 360 • Doctoralia Partner - Consultoria de Performance e Inteligência de Marketing Médico</p>
+      <p class="text-[11px] text-slate-400 mt-1">Relatório executivo de performance • Doctor ID: 916467.</p>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPTS & CHARTS -->
+  <script>
+    // Gráfico de Benchmark CTR
+    const ctxBenchmark = document.getElementById('ctrBenchmarkChart').getContext('2d');
+    new Chart(ctxBenchmark, {
+      type: 'bar',
+      data: {
+        labels: ['Dr. Rafael Cofiño de Sá', 'Média Google Saúde'],
+        datasets: [{
+          data: [9.67, 3.17],
+          backgroundColor: ['#0d9488', '#94a3b8'],
+          borderRadius: 12,
+          barThickness: 36
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.y}% CTR`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 11.5,
+            ticks: {
+              callback: (val) => val + '%',
+              font: { family: "'Plus Jakarta Sans'", size: 10 }
+            },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 11, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Plugin Nativo para Desenhar Rótulos de Dados Nítidos sobre as Barras
+    const nativeDataLabelsPlugin = {
+      id: 'nativeDataLabels',
+      afterDatasetsDraw(chart) {
+        const { ctx } = chart;
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          if (dataset.type === 'line') return;
+
+          const meta = chart.getDatasetMeta(datasetIndex);
+          meta.data.forEach((bar, index) => {
+            const val = dataset.data[index];
+            if (val !== undefined && val !== null) {
+              ctx.save();
+              ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+              ctx.fillStyle = datasetIndex === 1 ? '#0f766e' : '#475569';
+              ctx.fillText(val, bar.x, bar.y - 4);
+              ctx.restore();
+            }
+          });
+        });
+      }
+    };
+
+    // Gráfico de Histórico de Agendamentos (Janeiro a Novembro Parcial)
+    const ctxHistory = document.getElementById('appointmentsHistoryChart').getContext('2d');
+    new Chart(ctxHistory, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
+          'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro (até 15)'
+        ],
+        datasets: [
+          {
+            label: 'Tendência Geral',
+            data: [467, 388, 434, 393, 351, 372, 302, 346, 352, 300, 117],
+            type: 'line',
+            borderColor: '#f59e0b',
+            backgroundColor: '#f59e0b',
+            borderWidth: 2.5,
+            tension: 0.35,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#f59e0b',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            order: 1
+          },
+          {
+            label: 'Agendamentos Totais',
+            data: [467, 388, 434, 393, 351, 372, 302, 346, 352, 300, 117],
+            backgroundColor: [
+              '#0d9488', '#0d9488', '#0d9488', '#0d9488', '#0d9488', '#0d9488',
+              '#0d9488', '#0d9488', '#0d9488', '#0d9488', '#14b8a6'
+            ],
+            borderRadius: 8,
+            order: 2
+          },
+          {
+            label: 'Pacientes Novos',
+            data: [150, 113, 116, 92, 89, 88, 71, 54, 59, 48, 36],
+            backgroundColor: '#64748b',
+            borderRadius: 8,
+            order: 3
+          }
+        ]
+      },
+      plugins: [nativeDataLabelsPlugin],
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              boxWidth: 12,
+              font: { family: "'Plus Jakarta Sans'", size: 11, weight: '600' },
+              color: '#334155'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 530,
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10 } },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Gráfico Horizontal de Faixa Etária
+    const ctxAge = document.getElementById('ageChart').getContext('2d');
+    new Chart(ctxAge, {
+      type: 'bar',
+      data: {
+        labels: ['18–24', '25–34', '35–44', '45–54', '55–64', '65+', 'Indet.'],
+        datasets: [{
+          data: [99, 227, 146, 90, 40, 24, 254],
+          backgroundColor: ['#5eead4', '#0f766e', '#14b8a6', '#5eead4', '#99f6e4', '#ccfbf1', '#94a3b8'],
+          borderRadius: 6,
+          barThickness: 15
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.x} cliques`
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 290,
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 9 } },
+            grid: { color: '#e2e8f0' }
+          },
+          y: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Mapa Leaflet - 175 Cidades com Cliques (Pinos individuais sem quantidade)
+    const cityPins = [
+      ["Campinas",-22.9099,-47.0626],["São Paulo",-23.5505,-46.6333],["Rio de Janeiro",-22.9068,-43.1729],["Valinhos",-22.9706,-46.9958],["Sumaré",-22.8219,-47.2669],["Salvador",-12.9714,-38.5014],["Hortolândia",-22.8583,-47.22],["Fortaleza",-3.7172,-38.5433],["Porto Alegre",-30.0346,-51.2177],["Indaiatuba",-23.0903,-47.2181],["Recife",-8.0476,-34.877],["Belém",-1.4558,-48.5044],["Vinhedo",-23.0297,-46.9753],["Pelotas",-31.7654,-52.3376],["Sobral",-3.688,-40.3497],["Brasília",-15.7975,-47.8919],["Sorocaba",-23.5015,-47.4526],["Petrolina",-9.3891,-40.5027],["Aracaju",-10.9472,-37.0731],["Balneário Camboriú",-26.9906,-48.6348],["Montes Claros",-16.7282,-43.8617],["São José dos Campos",-23.1791,-45.8872],["Cuiabá",-15.6014,-56.0979],["São José do Rio Preto",-20.8197,-49.3794],["Boa Vista",2.8235,-60.6758],["Itapetininga",-23.5917,-48.0531],["Belo Horizonte",-19.9167,-43.9345],["Feira de Santana",-12.2664,-38.9663],["Itu",-23.2642,-47.2992],["Lagoa Santa",-19.6272,-43.8897],["Londrina",-23.3045,-51.1696],["São Carlos",-22.0174,-47.8908],["Cascavel",-24.9555,-53.4552],["Manaus",-3.119,-60.0217],["João Pessoa",-7.1195,-34.845],["Goiânia",-16.6869,-49.2648],["Campina Grande",-7.2306,-35.8811],["Macaé",-22.3708,-41.7869],["Campo Grande",-20.4697,-54.6201],["Nova Venécia",-18.7106,-40.4006],["Arapiraca",-9.7525,-36.6611],["Belo Jardim",-8.3358,-36.4244],["São Miguel dos Campos",-9.7814,-36.0936],["Santa Bárbara d'Oeste",-22.7539,-47.4136],["Igarapava",-20.0383,-47.7469],["Anápolis",-16.3281,-48.953],["São Luís",-2.5307,-44.3068],["Presidente Epitácio",-21.7633,-52.1156],["Nova Lima",-19.9858,-43.8469],["Custódia",-8.0875,-37.6431],["Teresina",-5.0892,-42.8019],["Vitória da Conquista",-14.8661,-40.8394],["Osasco",-23.5329,-46.7915],["Palmas",-10.1689,-48.3317],["Jequié",-13.8578,-40.0836],["Jacareí",-23.3053,-45.9658],["São João da Boa Vista",-21.9692,-46.7981],["Marabá",-5.3686,-49.1178],["Vila Velha",-20.3297,-40.2925],["Santa Maria",-29.6842,-53.8069],["Criciúma",-28.6775,-49.3697],["Joinville",-26.3044,-48.8487],["Contagem",-19.9317,-44.0536],["Cotia",-23.6039,-46.9189],["Uberaba",-19.7483,-47.9319],["Maceió",-9.6658,-35.7353],["Registro",-24.4875,-47.8436],["Salto de Pirapora",-23.6492,-47.5769],["Natal",-5.7945,-35.211],["São Borja",-28.6606,-56.0044],["Itamaracá",-7.7478,-34.8256],["Artur Nogueira",-22.5731,-47.1728],["Atalaia",-9.5019,-36.0228],["Bacabal",-4.225,-44.78],["Taubaté",-23.0264,-45.5553],["Barbalha",-7.3111,-39.3042],["Barra do Garças",-15.89,-52.2567],["Lorena",-22.7308,-45.1247],["Cabo de Santo Agostinho",-8.2869,-35.035],["Cachoeirinha",-29.9511,-51.0939],["Caruaru",-8.2833,-35.9761],["Bariri",-22.0744,-48.7403],["Crateús",-5.1783,-40.6775],["Formiga",-20.4644,-45.4264],["Foz do Iguaçu",-25.5478,-54.5882],["Guaíra",-20.3183,-48.3106],["Icó",-6.4011,-38.8622],["Santa Cruz do Sul",-29.7175,-52.4258],["Itatiba",-23.0058,-46.8389],["Canoas",-29.9178,-51.1836],["Jaboticabal",-21.2547,-48.3222],["Porto Velho",-8.7619,-63.9039],["Jacobina",-11.1806,-40.5183],["Jaraguá do Sul",-26.4861,-49.0667],["Lagarto",-10.9172,-37.65],["Cabo Frio",-22.8789,-42.0186],["Maragogi",-9.0122,-35.2225],["Matinhos",-25.8175,-48.5428],["Paulista",-7.9408,-34.8731],["Paragominas",-2.9958,-47.3528],["Olinda",-8.0089,-34.8553],["Palhoça",-27.6453,-48.6678],["Parauapebas",-6.0678,-49.9022],["Altamira",-3.2033,-52.2064],["Pimenta Bueno",-11.6725,-61.1936],["Pinheiro",-2.5211,-45.0828],["Queimadas",-7.3583,-35.8983],["Tangará da Serra",-14.6229,-57.4933],["Santa Luzia",-19.7697,-43.8514],["Santana",-0.0583,-51.1817],["Santo Antônio de Pádua",-21.5394,-42.1803],["Sombrio",-29.1103,-49.6289],["Juiz de Fora",-21.7642,-43.3503],["São Lourenço do Sul",-31.3653,-51.9783],["Toledo",-24.7136,-53.7431],["União da Vitória",-26.23,-51.0872],["Varginha",-21.5514,-45.4303],["Viamão",-30.0811,-51.0233],["Brumadinho",-20.1433,-44.2],["Jaboatão dos Guararapes",-8.1128,-35.0147],["Itajubá",-22.4256,-45.4528],["Guaratuba",-25.8828,-48.5747],["Divinópolis",-20.1389,-44.8839],["Ubatuba",-23.4339,-45.0711],["São Francisco do Sul",-26.2433,-48.6381],["Marituba",-1.3553,-48.3419],["Rolândia",-23.3097,-51.3686],["São Manuel",-22.7311,-48.5706],["Paço do Lumiar",-2.5317,-44.1069],["Timon",-5.0942,-42.8367],["Lages",-27.8161,-50.3261],["Itajaí",-26.9078,-48.6619],["Cataguases",-21.3892,-42.6967],["Juazeiro do Norte",-7.2131,-39.3153],["Santo Antônio de Jesus",-12.9689,-39.2614],["Guanambi",-14.2233,-42.7814],["Macapá",0.0349,-51.0694],["Maringá",-23.4205,-51.9331],["Matriz de Camaragibe",-9.1517,-35.5333],["São José",-27.6136,-48.6278],["Piracicaba",-22.7253,-47.6492],["Florianópolis",-27.5954,-48.548],["Ribeirão Preto",-21.1775,-47.8103],["Bom Despacho",-19.7364,-45.2522],["Cachoeira Paulista",-22.6664,-45.0097],["Colatina",-19.5394,-40.6306],["Irati",-25.4672,-50.6511],["Araxá",-19.5933,-46.9406],["Boa Esperança",-21.09,-45.5658],["Marechal Cândido Rondon",-24.5561,-54.0569],["Pirenópolis",-15.8525,-48.9589],["Maravilha",-26.7664,-53.1742],["Nova Odessa",-22.7775,-47.2958],["Ituporanga",-27.4144,-49.6025],["Mirandópolis",-21.1336,-51.1019],["Nanuque",-17.8389,-40.3539],["Chapecó",-27.1006,-52.6152],["Jaguaquara",-13.5328,-39.9711],["São Gonçalo",-22.8269,-43.0539],["Rio Negro",-26.1058,-49.7975],["Cerquilho",-23.165,-47.7436],["Votuporanga",-20.4228,-49.9728],["São Bento do Sul",-26.2503,-49.3786],["Santos Dumont",-21.4567,-43.5525],["Morro de São Paulo",-13.3853,-38.9136],["Guaraciaba do Norte",-4.1669,-40.7475],["Penedo",-10.2903,-36.5861],["Botucatu",-22.8858,-48.445],["Ananindeua",-1.3658,-48.3722],["São Bernardo do Campo",-23.6914,-46.5646],["Curitiba",-25.4284,-49.2733],["Paulínia",-22.7611,-47.1542],["Jaguariúna",-22.7056,-46.9858],["Monte Mor",-22.9467,-47.3158],["Arcoverde",-8.4189,-37.0539]
+    ];
+
+    const map = L.map('map', {
+      center: [-16.5, -48.5],
+      zoom: 4,
+      scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    cityPins.forEach(([name, lat, lng]) => {
+      const isMain = name === 'Campinas';
+      const icon = L.divIcon({
+        className: 'custom-city-pin',
+        html: `<div style="background-color: ${isMain ? '#f59e0b' : '#0d9488'}; width: ${isMain ? 16 : 10}px; height: ${isMain ? 16 : 10}px; border-radius: 50%; border: 2px solid white; box-shadow: 0 0 6px rgba(0,0,0,0.4);"></div>`,
+        iconSize: [isMain ? 16 : 10, isMain ? 16 : 10],
+        iconAnchor: [isMain ? 8 : 5, isMain ? 8 : 5]
+      });
+
+      const marker = L.marker([lat, lng], { icon })
+        .addTo(map)
+        .bindPopup(`<b>${name}</b>`);
+
+      if (isMain) marker.openPopup();
+    });
+  </script>
+</body>
+</html>
