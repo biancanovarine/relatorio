@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Executivo • Dr. Lucas Reis Brom</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js 4.x CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Leaflet.js CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            amber: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body { background-color: #ffffff !important; }
+      .no-print { display: none !important; }
+      .shadow-xl, .shadow-sm, .shadow-lg { box-shadow: none !important; }
+      .page-break { page-break-before: always; }
+      .rounded-\[2rem\] { border-radius: 1rem !important; }
+      #map { height: 350px !important; }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-teal-500 selection:text-white">
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-xl shadow-slate-200/40 transition-all">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-teal-600 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-teal-600/30">
+              LB
+            </div>
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Dr. Lucas Reis Brom</h1>
+              <div class="flex flex-wrap items-center gap-2 mt-1">
+                <span class="text-teal-700 font-semibold text-sm">Alergista • Goiânia</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-slate-500 text-xs sm:text-sm font-medium">Período: 01/10/2026 - 15/11/2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200/70">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                  Início M360: set. de 2022
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges em linha única compacta -->
+        <div class="flex items-center flex-wrap gap-2.5">
+          <!-- Selo M360 -->
+          <div class="flex items-center gap-2 bg-slate-900 text-white px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+            M360
+          </div>
+
+          <!-- Selo Doctoralia com 5 Estrelas Amarelas -->
+          <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-900">
+            <span>Doctoralia • 557 Opiniões</span>
+            <span class="text-amber-500 tracking-wider">★★★★★</span>
+          </div>
+
+          <!-- Botão Exportar PDF -->
+          <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-3.5 py-1.5 rounded-xl font-semibold text-xs transition shadow-sm active:scale-95">
+            <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Exportar
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SEÇÃO 1: 5 KPI CARDS (ALCANCE DO ANÚNCIO NO GOOGLE) -->
+    <section>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Card 1: Impressões -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Impressões</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">8.649</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Exibições do anúncio no Google em Goiânia</p>
+        </div>
+
+        <!-- Card 2: Cliques Diretos -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cliques no Anúncio</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">556</span>
+            </div>
+          </div>
+          <p class="text-xs text-teal-700 font-medium mt-4">Tráfego qualificado direcionado ao perfil</p>
+        </div>
+
+        <!-- Card 3: CTR Consolidado -->
+        <div class="bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent rounded-[2rem] p-6 border-2 border-amber-400/60 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">CTR Consolidado</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">+102,8%</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-amber-700">6,43%</span>
+              <span class="text-xs text-slate-500 font-medium">vs 3,17% média</span>
+            </div>
+          </div>
+          <p class="text-xs text-amber-800 font-semibold mt-4">Mais que o dobro da média do setor saúde</p>
+        </div>
+
+        <!-- Card 4: Impressões de Chamadas -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Imp. Chamadas</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">3.262</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Exibições da opção direta de ligação</p>
+        </div>
+
+        <!-- Card 5: CPC Médio & Conversões -->
+        <div class="bg-white rounded-[2rem] p-6 border border-teal-500/40 shadow-lg shadow-teal-500/10 flex flex-col justify-between hover:border-teal-600 transition duration-300">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-900 uppercase tracking-wider">CPC Médio</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-teal-100 text-teal-800">25 Conv.</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-black text-teal-700">R$ 4,14</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 font-medium mt-4">Custo médio por clique • 31 horários disp. (14d)</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BENCHMARKING DE ATRATIVIDADE & DOMÍNIO DE LEILÃO NAS BUSCAS -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- Coluna Esquerda: Benchmarking de CTR -->
+      <div class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Benchmarking de Atratividade (CTR)</h2>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg">Saúde 2026</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Percentual de impressões que resultaram em cliques comparado à média oficial do Google.</p>
+        </div>
+
+        <div class="my-6">
+          <div class="h-48 relative">
+            <canvas id="ctrBenchmarkChart"></canvas>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
+          <div class="p-3 bg-teal-50/70 rounded-xl border border-teal-100">
+            <span class="text-[11px] font-semibold text-teal-900">Dr. Lucas Reis Brom</span>
+            <p class="text-lg font-extrabold text-teal-700 mt-0.5">6,43%</p>
+            <p class="text-[10px] text-teal-600">CTR médio no período</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-[11px] font-semibold text-slate-700">Média Google Saúde</span>
+            <p class="text-lg font-extrabold text-slate-800 mt-0.5">3,17%</p>
+            <p class="text-[10px] text-slate-500">Benchmark de referência</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Domínio de Leilão nas Buscas -->
+      <div class="bg-slate-900 text-white rounded-[2rem] p-6 lg:p-8 shadow-xl flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-white tracking-tight">Domínio de Leilão nas Buscas</h2>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-teal-500/20 text-teal-300 rounded border border-teal-500/30">Google Search</span>
+          </div>
+          
+          <div class="mt-4 p-4 rounded-2xl bg-teal-950/60 border border-teal-500/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse"></span>
+              <span class="text-xs font-bold text-teal-200 uppercase tracking-wider">Parcela de Buscas no Google</span>
+            </div>
+            <p class="text-2xl font-black text-white mt-1">58,67% <span class="text-xs font-normal text-slate-300">de participação nas buscas elegíveis</span></p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Presença competitiva de destaque em Goiânia, garantindo visibilidade constante para pacientes que pesquisam por alergia e imunologia.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4 my-6">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Três Primeiras Posições (Top 3)</span>
+              <span class="text-teal-400 font-bold">71,42%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-teal-400 h-2 rounded-full" style="width: 71.42%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Topo de Página (1ª Posição Absoluta)</span>
+              <span class="text-amber-400 font-bold">25,47%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-amber-400 h-2 rounded-full" style="width: 25.47%"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400 border-t border-slate-800 pt-3">
+          Mais de 7 em cada 10 exibições posicionam o Dr. Lucas Reis Brom entre os três primeiros anúncios no topo da página do Google.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SEÇÃO 3: DESEMPENHO POR GRUPO DE CAMPANHA -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Desempenho por Grupo de Campanha</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Comparativo de cliques, posicionamento e conversões gerados por cada estratégia ativa.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl self-start sm:self-auto">
+          3 Grupos Ativos
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[740px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Campanha</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right">CPC Médio</th>
+              <th class="py-3 px-4 text-right">Topo de Página</th>
+              <th class="py-3 px-4 text-right">1ª Posição</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">Conversões</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <tr class="bg-teal-50/30 hover:bg-teal-50/60 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Spec-goiania [288136]</td>
+              <td class="py-3.5 px-4 text-right font-medium">6.137</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">389</td>
+              <td class="py-3.5 px-4 text-right font-semibold">6,34%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 5,16</td>
+              <td class="py-3.5 px-4 text-right font-medium">84,68%</td>
+              <td class="py-3.5 px-4 text-right font-medium">38,30%</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-teal-800">23</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Services-goiania [288136]</td>
+              <td class="py-3.5 px-4 text-right font-medium">2.500</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">159</td>
+              <td class="py-3.5 px-4 text-right font-semibold">6,36%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 1,80</td>
+              <td class="py-3.5 px-4 text-right font-medium">73,94%</td>
+              <td class="py-3.5 px-4 text-right font-medium">20,39%</td>
+              <td class="py-3.5 px-4 text-right font-bold text-slate-900">2</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Name [288136]</td>
+              <td class="py-3.5 px-4 text-right font-medium">12</td>
+              <td class="py-3.5 px-4 text-right font-medium">8</td>
+              <td class="py-3.5 px-4 text-right font-bold text-amber-600">66,67%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 0,79</td>
+              <td class="py-3.5 px-4 text-right font-medium">100,00%</td>
+              <td class="py-3.5 px-4 text-right font-medium">62,50%</td>
+              <td class="py-3.5 px-4 text-right font-medium text-slate-400">0</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-slate-900 text-white font-extrabold text-xs">
+              <td class="py-3.5 px-4 rounded-l-xl">Total / Médias Consolidadas</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">8.649</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">556</td>
+              <td class="py-3.5 px-4 text-right text-amber-300">6,43%</td>
+              <td class="py-3.5 px-4 text-right">R$ 4,14</td>
+              <td class="py-3.5 px-4 text-right">71,42%</td>
+              <td class="py-3.5 px-4 text-right">25,47%</td>
+              <td class="py-3.5 px-4 text-right text-emerald-300 rounded-r-xl">25</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: PALAVRAS-CHAVE COM MAIOR DESEMPENHO -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Palavras-Chave com Maior Desempenho</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Termos definidos na campanha que geraram maior volume de cliques e oportunidades de consulta.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl self-start sm:self-auto">
+          Termos de Alta Conversão
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[650px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Pesquisar Palavra-Chave</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">CPC Médio</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <!-- Termo Líder em destaque -->
+            <tr class="bg-teal-50/70 border-l-4 border-teal-600 font-semibold text-teal-950">
+              <td class="py-3.5 px-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                especialista em alergia goiânia
+              </td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">5.527</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">345</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-teal-700">6,24%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 5,22</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">clinica de alergia</td>
+              <td class="py-3 px-4 text-right font-medium">1.086</td>
+              <td class="py-3 px-4 text-right font-medium">62</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">5,71%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 1,61</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">medico imunologista goiania</td>
+              <td class="py-3 px-4 text-right font-medium">481</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">45</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-600">9,36%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,05</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">medico imunologista</td>
+              <td class="py-3 px-4 text-right font-medium">562</td>
+              <td class="py-3 px-4 text-right font-medium">29</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">5,16%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 1,65</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">consulta alergista goiânia</td>
+              <td class="py-3 px-4 text-right font-medium">169</td>
+              <td class="py-3 px-4 text-right font-medium">18</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-600">10,65%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 5,22</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">imunologista goiania</td>
+              <td class="py-3 px-4 text-right font-medium">203</td>
+              <td class="py-3 px-4 text-right font-medium">12</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">5,91%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,07</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">medico alergista goiânia</td>
+              <td class="py-3 px-4 text-right font-medium">82</td>
+              <td class="py-3 px-4 text-right font-medium">9</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-600">10,98%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 5,01</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">clínica de alergia goiânia</td>
+              <td class="py-3 px-4 text-right font-medium">133</td>
+              <td class="py-3 px-4 text-right font-medium">9</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">6,77%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 4,25</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">imunologista</td>
+              <td class="py-3 px-4 text-right font-medium">152</td>
+              <td class="py-3 px-4 text-right font-medium">9</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">5,92%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 1,99</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">alergia e imunologia goiânia</td>
+              <td class="py-3 px-4 text-right font-medium">187</td>
+              <td class="py-3 px-4 text-right font-medium">8</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-800">4,28%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 3,88</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition text-slate-400">
+              <td class="py-3 px-4">alergista</td>
+              <td class="py-3 px-4 text-right">14</td>
+              <td class="py-3 px-4 text-right">0</td>
+              <td class="py-3 px-4 text-right">0,00%</td>
+              <td class="py-3 px-4 text-right">--</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: PERFIL DO PÚBLICO (LOCALIZAÇÃO, GÊNERO E FAIXA ETÁRIA) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Perfil do Público &amp; Geolocalização (Goiânia)</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Distribuição geográfica, demográfica e etária dos 556 pacientes que demonstraram interesse nos anúncios.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl self-start sm:self-auto">
+          97,3% Concentrados em Goiânia
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Coluna 1: Tabela de Cidades + Mapa (7 cols) -->
+        <div class="lg:col-span-7 flex flex-col gap-4">
+          <div class="rounded-2xl overflow-hidden border border-slate-200 shadow-inner h-64 sm:h-72 relative">
+            <div id="map" class="w-full h-full"></div>
+          </div>
+
+          <div class="bg-slate-50 rounded-2xl p-4 border border-slate-200">
+            <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-600 mb-2.5">Cliques por Cidade</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-center">
+              <div class="p-2.5 bg-teal-600 text-white rounded-xl shadow-sm">
+                <p class="text-[11px] font-semibold opacity-90">Goiânia</p>
+                <p class="text-lg font-black mt-0.5">541</p>
+                <p class="text-[10px] opacity-80">97,3%</p>
+              </div>
+              <div class="p-2.5 bg-white border border-slate-200 rounded-xl">
+                <p class="text-[11px] font-semibold text-slate-600">Ap. de Goiânia</p>
+                <p class="text-lg font-extrabold text-slate-900 mt-0.5">7</p>
+                <p class="text-[10px] text-slate-400">1,3%</p>
+              </div>
+              <div class="p-2.5 bg-white border border-slate-200 rounded-xl">
+                <p class="text-[11px] font-semibold text-slate-600">Caldas Novas</p>
+                <p class="text-lg font-extrabold text-slate-900 mt-0.5">4</p>
+                <p class="text-[10px] text-slate-400">0,7%</p>
+              </div>
+              <div class="p-2.5 bg-white border border-slate-200 rounded-xl">
+                <p class="text-[11px] font-semibold text-slate-600">Catalão</p>
+                <p class="text-lg font-extrabold text-slate-900 mt-0.5">2</p>
+                <p class="text-[10px] text-slate-400">0,4%</p>
+              </div>
+              <div class="p-2.5 bg-white border border-slate-200 rounded-xl col-span-2 sm:col-span-1">
+                <p class="text-[11px] font-semibold text-slate-600">Trindade</p>
+                <p class="text-lg font-extrabold text-slate-900 mt-0.5">2</p>
+                <p class="text-[10px] text-slate-400">0,4%</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna 2: Gênero & Faixa Etária (5 cols) -->
+        <div class="lg:col-span-5 flex flex-col justify-between gap-4">
+          
+          <!-- Card Gênero -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Distribuição por Gênero</h3>
+              <span class="text-[11px] font-bold text-teal-700">57,0% Feminino</span>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Feminino</span>
+                  <span class="text-teal-700 font-bold">317 (57,0%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-teal-600 h-2 rounded-full" style="width: 57.0%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Indeterminado</span>
+                  <span class="text-slate-600 font-bold">121 (21,8%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-slate-400 h-2 rounded-full" style="width: 21.8%"></div>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-between text-xs font-semibold mb-1">
+                  <span class="text-slate-700">Masculino</span>
+                  <span class="text-amber-700 font-bold">118 (21,2%)</span>
+                </div>
+                <div class="w-full bg-slate-200 rounded-full h-2">
+                  <div class="bg-amber-500 h-2 rounded-full" style="width: 21.2%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Faixa Etária -->
+          <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200 flex-1 flex flex-col justify-between">
+            <div class="flex items-center justify-between mb-2">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Faixa Etária</h3>
+              <span class="text-[11px] font-bold text-teal-700">Pico: 35 a 44 anos</span>
+            </div>
+            <div class="h-44 relative">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: AUTORIDADE & PROVA SOCIAL NA DOCTORALIA -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Autoridade &amp; Prova Social na Doctoralia</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Consolidação de reputação médica construída desde setembro de 2022 em parceria com a M360.</p>
+        </div>
+        <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold self-start sm:self-auto">
+          <span>Doctoralia Perfil Verificado</span>
+          <span class="text-amber-500 tracking-wider">★★★★★</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Card Opiniões Totais -->
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200/80 flex flex-col justify-between">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Patrimônio de Opiniões</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-slate-900">557</span>
+              <span class="text-sm font-bold text-emerald-600">Avaliações Validadas</span>
+            </div>
+            <div class="flex items-center gap-1 text-amber-500 text-lg mt-1">
+              ★★★★★
+            </div>
+          </div>
+          <p class="text-xs text-slate-600 mt-4 leading-relaxed">
+            Com 557 avaliações de excelência, o Dr. Lucas Reis Brom destaca-se como referência absoluta em Alergia e Imunologia em Goiânia, maximizando a conversão dos pacientes que acessam o perfil via Google Ads.
+          </p>
+        </div>
+
+        <!-- Card Disponibilidade & Reputação -->
+        <div class="p-6 bg-teal-50/60 rounded-2xl border border-teal-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-800 uppercase tracking-wider">Agenda &amp; Conversão Digital</span>
+              <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-600 text-white">25 Conversões</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-teal-700">31</span>
+              <span class="text-sm font-semibold text-teal-900">horários disponíveis (próximos 14 dias)</span>
+            </div>
+          </div>
+          <div class="mt-4 p-3 bg-white/80 rounded-xl border border-teal-200/70 text-xs text-teal-950 leading-relaxed font-medium">
+            Sabemos que mais de 70% dos pacientes que entram no perfil do médico olham as opiniões e a disponibilidade imediata de agenda antes de marcar a consulta. A combinação de 557 avaliações 5 estrelas com agenda aberta converte o tráfego de alta intenção em agendamentos reais.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RODAPÉ CORPORATIVO -->
+    <footer class="pt-6 pb-12 border-t border-slate-200 text-center text-xs text-slate-500">
+      <p class="font-medium">Mídias 360 • Doctoralia Partner - Consultoria de Performance e Inteligência de Marketing Médico</p>
+      <p class="text-[11px] text-slate-400 mt-1">Relatório executivo de performance • Doctor ID: 288136.</p>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPTS & CHARTS -->
+  <script>
+    // Gráfico de Benchmark CTR
+    const ctxBenchmark = document.getElementById('ctrBenchmarkChart').getContext('2d');
+    new Chart(ctxBenchmark, {
+      type: 'bar',
+      data: {
+        labels: ['Dr. Lucas Reis Brom', 'Média Google Saúde'],
+        datasets: [{
+          data: [6.43, 3.17],
+          backgroundColor: ['#0d9488', '#94a3b8'],
+          borderRadius: 12,
+          barThickness: 36
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.y}% CTR`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 8,
+            ticks: {
+              callback: (val) => val + '%',
+              font: { family: "'Plus Jakarta Sans'", size: 10 }
+            },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 11, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Gráfico Horizontal de Faixa Etária
+    const ctxAge = document.getElementById('ageChart').getContext('2d');
+    new Chart(ctxAge, {
+      type: 'bar',
+      data: {
+        labels: ['18–24', '25–34', '35–44', '45–54', '55–64', '65+', 'Indet.'],
+        datasets: [{
+          data: [48, 96, 132, 66, 50, 43, 121],
+          backgroundColor: ['#5eead4', '#14b8a6', '#0f766e', '#14b8a6', '#5eead4', '#99f6e4', '#94a3b8'],
+          borderRadius: 6,
+          barThickness: 14
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.x} cliques`
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 150,
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 9 } },
+            grid: { color: '#e2e8f0' }
+          },
+          y: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Mapa Leaflet - Goiânia e Região Metropolitana (OpenStreetMap)
+    const goianiaCoords = [-16.6869, -49.2648];
+    const cities = [
+      { name: 'Goiânia', clicks: 541, coords: [-16.6869, -49.2648], main: true },
+      { name: 'Aparecida de Goiânia', clicks: 7, coords: [-16.8198, -49.2473], main: false },
+      { name: 'Trindade', clicks: 2, coords: [-16.6517, -49.4925], main: false },
+      { name: 'Caldas Novas', clicks: 4, coords: [-17.7441, -48.6246], main: false },
+      { name: 'Catalão', clicks: 2, coords: [-18.1658, -47.9464], main: false }
+    ];
+
+    const map = L.map('map', {
+      center: [-16.72, -49.26],
+      zoom: 10,
+      scrollWheelZoom: false
+    });
+
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19
+    }).addTo(map);
+
+    cities.forEach((c) => {
+      const icon = L.divIcon({
+        className: 'custom-city-icon',
+        html: `<div style="background-color: ${c.main ? '#0d9488' : '#f59e0b'}; width: ${c.main ? 18 : 13}px; height: ${c.main ? 18 : 13}px; border-radius: 50%; border: 3px solid white; box-shadow: 0 0 10px rgba(0,0,0,0.35);"></div>`,
+        iconSize: [c.main ? 18 : 13, c.main ? 18 : 13],
+        iconAnchor: [c.main ? 9 : 6.5, c.main ? 9 : 6.5]
+      });
+
+      const m = L.marker(c.coords, { icon })
+        .addTo(map)
+        .bindPopup(`<b>${c.name}</b><br>${c.clicks} cliques registrados`);
+
+      if (c.main) m.openPopup();
+    });
+
+    L.circle(goianiaCoords, {
+      color: '#0d9488',
+      fillColor: '#0d9488',
+      fillOpacity: 0.16,
+      weight: 2,
+      radius: 12000
+    }).addTo(map);
+  </script>
+</body>
+</html>
