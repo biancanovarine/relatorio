@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório Executivo • Dr. Rogério Saint-Clair Pimentel Mafra</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Font: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Chart.js 4.x CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            teal: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+              800: '#115e59',
+              900: '#134e4a',
+            },
+            amber: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @media print {
+      body { background-color: #ffffff !important; }
+      .no-print { display: none !important; }
+      .shadow-xl, .shadow-sm, .shadow-lg { box-shadow: none !important; }
+      .page-break { page-break-before: always; }
+      .rounded-\[2rem\] { border-radius: 1rem !important; }
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      height: 6px;
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: #f1f5f9;
+      border-radius: 9999px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-teal-500 selection:text-white">
+
+  <!-- Main Container -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+    <!-- HEADER PRINCIPAL -->
+    <header class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-xl shadow-slate-200/40 transition-all">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div>
+          <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-2xl bg-teal-600 flex items-center justify-center text-white font-extrabold text-xl shadow-lg shadow-teal-600/30">
+              RM
+            </div>
+            <div>
+              <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Dr. Rogério Saint-Clair Pimentel Mafra</h1>
+              <div class="flex flex-wrap items-center gap-2 mt-1">
+                <span class="text-teal-700 font-semibold text-sm">Urologista • Belo Horizonte</span>
+                <span class="text-slate-300">•</span>
+                <span class="text-slate-500 text-xs sm:text-sm font-medium">Período: 01/10/2026 - 22/11/2026</span>
+                <span class="text-slate-300">•</span>
+                <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-teal-50 text-teal-800 border border-teal-200/70">
+                  <span class="w-1.5 h-1.5 rounded-full bg-teal-600"></span>
+                  Início M360: nov. de 2022 • Investimento Mensal: R$ 2.000
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Badges em linha única compacta -->
+        <div class="flex items-center flex-wrap gap-2.5">
+          <!-- Selo M360 -->
+          <div class="flex items-center gap-2 bg-slate-900 text-white px-3 py-1.5 rounded-xl text-xs font-semibold tracking-wide shadow-sm">
+            <span class="w-2 h-2 rounded-full bg-teal-400"></span>
+            M360
+          </div>
+
+          <!-- Selo Doctoralia com 5 Estrelas Amarelas -->
+          <div class="flex items-center gap-2 bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-900">
+            <span>Doctoralia • 310 Opiniões</span>
+            <span class="text-amber-500 tracking-wider">★★★★★</span>
+          </div>
+
+          <!-- Botão Exportar PDF -->
+          <button onclick="window.print()" class="no-print inline-flex items-center gap-2 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-3.5 py-1.5 rounded-xl font-semibold text-xs transition shadow-sm active:scale-95">
+            <svg class="w-3.5 h-3.5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            Exportar
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- SEÇÃO 1: 5 KPI CARDS (ALCANCE DO ANÚNCIO NO GOOGLE - SEM LIGAÇÕES RISCADO) -->
+    <section>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        
+        <!-- Card 1: Impressões -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Impressões</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">14.484</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Exibições do anúncio no Google em BH</p>
+        </div>
+
+        <!-- Card 2: Cliques Diretos -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">Cliques</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">814</span>
+            </div>
+          </div>
+          <p class="text-xs text-teal-700 font-medium mt-4">Cliques qualificados direcionados ao perfil</p>
+        </div>
+
+        <!-- Card 3: CTR Consolidado -->
+        <div class="bg-gradient-to-br from-amber-500/10 via-amber-500/5 to-transparent rounded-[2rem] p-6 border-2 border-amber-400/60 shadow-lg shadow-amber-500/10 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-1">
+              <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">CTR</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">+77,3%</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-amber-700">5,62%</span>
+              <span class="text-xs text-slate-500 font-medium">vs 3,17% média</span>
+            </div>
+          </div>
+          <p class="text-xs text-amber-800 font-semibold mt-4">Bem acima da média Google Saúde</p>
+        </div>
+
+        <!-- Card 4: Impressões de Chamadas -->
+        <div class="bg-white rounded-[2rem] p-6 border border-teal-500/40 shadow-lg shadow-teal-500/10 flex flex-col justify-between hover:border-teal-600 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-teal-900 uppercase tracking-wider">Imp. Chamadas</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-black text-teal-700">4.078</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-500 font-medium mt-4">Exibições da opção de ligação no anúncio</p>
+        </div>
+
+        <!-- Card 5: CPC Médio -->
+        <div class="bg-white rounded-[2rem] p-6 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between hover:border-teal-500/50 transition duration-300">
+          <div>
+            <span class="text-xs font-bold text-slate-500 uppercase tracking-wider">CPC Médio</span>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-3xl font-extrabold text-slate-900">R$ 2,72</span>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 font-medium mt-4">Custo médio pago por cada clique</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 2: BENCHMARKING DE ATRATIVIDADE & DOMÍNIO DE LEILÃO NAS BUSCAS -->
+    <section class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+      
+      <!-- Coluna Esquerda: Benchmarking de CTR -->
+      <div class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-slate-900 tracking-tight">Benchmarking de Atratividade (CTR)</h2>
+            <span class="text-xs font-semibold px-2.5 py-1 bg-slate-100 text-slate-700 rounded-lg">Saúde 2026</span>
+          </div>
+          <p class="text-xs text-slate-500 mt-1">Percentual de impressões que resultaram em cliques comparado à média oficial do Google.</p>
+        </div>
+
+        <div class="my-6">
+          <div class="h-48 relative">
+            <canvas id="ctrBenchmarkChart"></canvas>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100">
+          <div class="p-3 bg-teal-50/70 rounded-xl border border-teal-100">
+            <span class="text-[11px] font-semibold text-teal-900">Dr. Rogério Mafra</span>
+            <p class="text-lg font-extrabold text-teal-700 mt-0.5">5,62%</p>
+            <p class="text-[10px] text-teal-600">CTR médio no período</p>
+          </div>
+          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+            <span class="text-[11px] font-semibold text-slate-700">Média Google Saúde</span>
+            <p class="text-lg font-extrabold text-slate-800 mt-0.5">3,17%</p>
+            <p class="text-[10px] text-slate-500">Benchmark de referência</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna Direita: Domínio de Leilão nas Buscas -->
+      <div class="bg-slate-900 text-white rounded-[2rem] p-6 lg:p-8 shadow-xl flex flex-col justify-between relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-teal-500/10 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div>
+          <div class="flex items-center justify-between">
+            <h2 class="text-lg font-bold text-white tracking-tight">Domínio de Leilão nas Buscas</h2>
+            <span class="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 bg-teal-500/20 text-teal-300 rounded border border-teal-500/30">Google Search</span>
+          </div>
+          
+          <div class="mt-4 p-4 rounded-2xl bg-teal-950/60 border border-teal-500/30">
+            <div class="flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-teal-400 animate-pulse"></span>
+              <span class="text-xs font-bold text-teal-200 uppercase tracking-wider">Parcela de Buscas no Google</span>
+            </div>
+            <p class="text-2xl font-black text-white mt-1">48,12% <span class="text-xs font-normal text-slate-300">de participação nas buscas elegíveis</span></p>
+            <p class="text-xs text-slate-300 mt-2 leading-relaxed">
+              Presença sólida em Belo Horizonte e Região Metropolitana para consultas urológicas e procedimentos específicos com CPC competitivo de R$ 2,72.
+            </p>
+          </div>
+        </div>
+
+        <div class="space-y-4 my-6">
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Três Primeiras Posições (Top 3)</span>
+              <span class="text-teal-400 font-bold">74,31%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-teal-400 h-2 rounded-full" style="width: 74.31%"></div>
+            </div>
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-semibold mb-1.5">
+              <span class="text-slate-300">Topo de Página (1ª Posição Absoluta)</span>
+              <span class="text-amber-400 font-bold">28,33%</span>
+            </div>
+            <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+              <div class="bg-amber-400 h-2 rounded-full" style="width: 28.33%"></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="text-xs text-slate-400 border-t border-slate-800 pt-3">
+          Quase 3 em cada 4 exibições posicionam o Dr. Rogério Mafra entre os três primeiros anúncios no topo da busca do Google.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- SEÇÃO 3: DESEMPENHO POR GRUPO DE CAMPANHA (SEM COLUNA DE CONVERSÕES RISCADA) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Desempenho por Grupo de Campanha</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Comparativo de impressões, cliques e posicionamento gerados por Serviços, Especialidade e Institucional.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-slate-100 text-slate-700 rounded-xl self-start sm:self-auto">
+          3 Grupos Ativos
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[680px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Campanha</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right">CPC Médio</th>
+              <th class="py-3 px-4 text-right">Topo de Página</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">1ª Posição</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <tr class="bg-teal-50/30 hover:bg-teal-50/60 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Services-belo-horizonte</td>
+              <td class="py-3.5 px-4 text-right font-medium">9.332</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">607</td>
+              <td class="py-3.5 px-4 text-right font-semibold">6,50%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 2,78</td>
+              <td class="py-3.5 px-4 text-right font-medium">77,26%</td>
+              <td class="py-3.5 px-4 text-right font-medium">33,63%</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Spec-belo-horizonte</td>
+              <td class="py-3.5 px-4 text-right font-medium">5.024</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-700">185</td>
+              <td class="py-3.5 px-4 text-right font-semibold">3,68%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 2,76</td>
+              <td class="py-3.5 px-4 text-right font-medium">72,79%</td>
+              <td class="py-3.5 px-4 text-right font-medium">21,62%</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3.5 px-4 font-bold text-slate-900">SN-Name</td>
+              <td class="py-3.5 px-4 text-right font-medium">128</td>
+              <td class="py-3.5 px-4 text-right font-bold text-amber-700">22</td>
+              <td class="py-3.5 px-4 text-right font-bold text-amber-600">17,19%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 0,82</td>
+              <td class="py-3.5 px-4 text-right font-medium">63,00%</td>
+              <td class="py-3.5 px-4 text-right font-medium">32,00%</td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-slate-900 text-white font-extrabold text-xs">
+              <td class="py-3.5 px-4 rounded-l-xl">Total / Médias Consolidadas</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">14.484</td>
+              <td class="py-3.5 px-4 text-right text-teal-300">814</td>
+              <td class="py-3.5 px-4 text-right text-amber-300">5,62%</td>
+              <td class="py-3.5 px-4 text-right">R$ 2,72</td>
+              <td class="py-3.5 px-4 text-right">74,31%</td>
+              <td class="py-3.5 px-4 text-right rounded-r-xl">28,33%</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 4: PALAVRAS-CHAVE COM MAIOR DESEMPENHO (SEM COLUNA DE CONVERSÕES RISCADA) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Palavras-Chave com Maior Desempenho</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Termos de busca na especialidade de Urologia e procedimentos cirúrgicos que geraram maior volume de cliques.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl self-start sm:self-auto">
+          Alta Intenção &amp; Conversão
+        </span>
+      </div>
+
+      <div class="overflow-x-auto custom-scrollbar">
+        <table class="w-full text-left border-collapse min-w-[650px]">
+          <thead>
+            <tr class="border-b border-slate-200 text-[11px] font-bold text-slate-500 uppercase tracking-wider bg-slate-50/80">
+              <th class="py-3 px-4 rounded-l-xl">Pesquisar Palavra-Chave</th>
+              <th class="py-3 px-4 text-right">Impressões</th>
+              <th class="py-3 px-4 text-right">Cliques</th>
+              <th class="py-3 px-4 text-right">CTR</th>
+              <th class="py-3 px-4 text-right rounded-r-xl">CPC Médio</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100 text-xs text-slate-700">
+            <!-- Termo Líder em Cliques -->
+            <tr class="bg-teal-50/70 border-l-4 border-teal-600 font-semibold text-teal-950">
+              <td class="py-3.5 px-4 flex items-center gap-2">
+                <span class="w-2 h-2 rounded-full bg-teal-600"></span>
+                aumento peniano cirúrgico
+              </td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">2.835</td>
+              <td class="py-3.5 px-4 text-right font-bold text-teal-900">195</td>
+              <td class="py-3.5 px-4 text-right font-extrabold text-teal-700">6,88%</td>
+              <td class="py-3.5 px-4 text-right font-medium">R$ 2,53</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">urologistas belo horizonte</td>
+              <td class="py-3 px-4 text-right font-medium">4.535</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">155</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">3,42%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,88</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">prótese peniana preço</td>
+              <td class="py-3 px-4 text-right font-medium">407</td>
+              <td class="py-3 px-4 text-right font-bold text-slate-900">74</td>
+              <td class="py-3 px-4 text-right font-extrabold text-amber-600">18,18%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,57</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">prótese peniana</td>
+              <td class="py-3 px-4 text-right font-medium">1.204</td>
+              <td class="py-3 px-4 text-right font-medium">46</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-800">3,82%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,52</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">especialista disfunção erétil</td>
+              <td class="py-3 px-4 text-right font-medium">389</td>
+              <td class="py-3 px-4 text-right font-medium">36</td>
+              <td class="py-3 px-4 text-right font-bold text-teal-700">9,25%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,81</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">especialista em fimose</td>
+              <td class="py-3 px-4 text-right font-medium">794</td>
+              <td class="py-3 px-4 text-right font-medium">34</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-800">4,28%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,94</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">vasectomia em bh</td>
+              <td class="py-3 px-4 text-right font-medium">329</td>
+              <td class="py-3 px-4 text-right font-medium">33</td>
+              <td class="py-3 px-4 text-right font-bold text-amber-600">10,03%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 4,00</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">cirurgia de prótese peniana</td>
+              <td class="py-3 px-4 text-right font-medium">609</td>
+              <td class="py-3 px-4 text-right font-medium">30</td>
+              <td class="py-3 px-4 text-right font-semibold text-teal-700">4,93%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,82</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">como funciona prótese peniana</td>
+              <td class="py-3 px-4 text-right font-medium">303</td>
+              <td class="py-3 px-4 text-right font-medium">28</td>
+              <td class="py-3 px-4 text-right font-bold text-teal-700">9,24%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,70</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">próteses peniana</td>
+              <td class="py-3 px-4 text-right font-medium">897</td>
+              <td class="py-3 px-4 text-right font-medium">24</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-800">2,68%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 2,60</td>
+            </tr>
+            <tr class="hover:bg-slate-50 transition">
+              <td class="py-3 px-4 font-medium">implante peniano</td>
+              <td class="py-3 px-4 text-right font-medium">460</td>
+              <td class="py-3 px-4 text-right font-medium">11</td>
+              <td class="py-3 px-4 text-right font-semibold text-slate-600">2,39%</td>
+              <td class="py-3 px-4 text-right font-medium">R$ 3,06</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 5: EVOLUÇÃO DE AGENDAMENTOS & PACIENTES NOVOS (COM QUADRO COMPARATIVO NO TOPO) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <div class="flex items-center gap-2">
+            <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Evolução de Agendamentos &amp; Pacientes Novos</h2>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-bold bg-teal-100 text-teal-800">
+              Janeiro a Novembro (até dia 22)
+            </span>
+          </div>
+          <p class="text-xs text-slate-500 mt-0.5">Comparativo de transformação da agenda desde o início da jornada M360 e histórico mensal completo de 2026.</p>
+        </div>
+        <div class="flex items-center gap-2 text-xs font-medium text-slate-600 bg-slate-100 px-3 py-1.5 rounded-xl">
+          <span>Série Histórica 2026</span>
+        </div>
+      </div>
+
+      <!-- QUADRO COMPARATIVO NO TOPO: COMO ERA NO INÍCIO VS COMO É HOJE -->
+      <div class="bg-slate-900 text-white rounded-2xl p-5 sm:p-6 mb-8 shadow-md">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-slate-800">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">
+              Jornada M360 • Agendamentos via Secretária
+            </span>
+            <h3 class="text-base font-extrabold text-white mt-1.5">Comparativo de Evolução: Como Era no Início vs. Como é Hoje</h3>
+          </div>
+          <span class="text-xs font-extrabold text-emerald-300 bg-emerald-950/80 border border-emerald-500/40 px-3 py-1.5 rounded-xl self-start sm:self-auto">
+            +118,6% de Crescimento
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-5">
+          <!-- Etapa 1: Pré M360 (Início) -->
+          <div class="p-4 bg-slate-800/80 rounded-xl border border-slate-700 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-slate-400">Como Era no Início (Pré-M360)</span>
+              <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-black text-slate-200">18,3</span>
+                <span class="text-xs text-slate-400 font-medium">agendamentos/mês</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-slate-400 mt-3 pt-2.5 border-t border-slate-700/80">
+              Média mensal de agendamentos realizados pela secretária antes da estruturação M360.
+            </p>
+          </div>
+
+          <!-- Etapa 2: Período Intermediário (31 a 60 dias atrás) -->
+          <div class="p-4 bg-teal-950/60 rounded-xl border border-teal-500/30 flex flex-col justify-between">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-teal-300">Consolidação (Últimos 31–60 Dias)</span>
+              <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-black text-teal-300">39</span>
+                <span class="text-xs text-teal-100 font-medium">agendamentos</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-teal-200/80 mt-3 pt-2.5 border-t border-teal-500/20">
+              Mais que o dobro do volume inicial (+113,1% acima da base pré-M360).
+            </p>
+          </div>
+
+          <!-- Etapa 3: Como é Hoje (Últimos 30 dias) -->
+          <div class="p-4 bg-gradient-to-br from-teal-600 to-teal-700 rounded-xl border border-teal-400/50 flex flex-col justify-between shadow-lg">
+            <div>
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-extrabold uppercase tracking-wider text-teal-100">Como é Hoje (Últimos 30 Dias)</span>
+                <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-400 text-amber-950">Patamar Atual</span>
+              </div>
+              <div class="mt-2 flex items-baseline gap-2">
+                <span class="text-3xl font-black text-white">40</span>
+                <span class="text-xs text-teal-100 font-semibold">agendamentos/mês</span>
+              </div>
+            </div>
+            <p class="text-[11px] text-white/95 font-medium mt-3 pt-2.5 border-t border-white/20">
+              Crescimento sustentado de <strong>+21,7 agendamentos/mês</strong> via secretária em relação ao início.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRÁFICO HISTÓRICO COMPLETO (JANEIRO A NOVEMBRO ATÉ DIA 22) -->
+      <div class="h-80 sm:h-96 relative">
+        <canvas id="appointmentsHistoryChart"></canvas>
+      </div>
+    </section>
+
+    <!-- SEÇÃO 6: PERFIL DO PÚBLICO (CIDADES, GÊNERO E FAIXA ETÁRIA - SEM O MAPA RISCADO) -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Perfil do Público &amp; Distribuição Regional</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Localização por cidade, distribuição por gênero e faixa etária dos 814 pacientes que clicaram nos anúncios.</p>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1.5 bg-teal-50 text-teal-800 border border-teal-200 rounded-xl self-start sm:self-auto">
+          82,1% Concentrados em Belo Horizonte
+        </span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+        
+        <!-- Coluna 1: Principais Cidades (4 Colunas) -->
+        <div class="lg:col-span-4 bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Principais Cidades</h3>
+              <span class="text-[11px] font-bold text-teal-700">11 Municípios</span>
+            </div>
+            <div class="space-y-2 text-xs">
+              <div class="flex items-center justify-between p-2.5 bg-teal-600 text-white rounded-xl font-bold shadow-sm">
+                <span>1. Belo Horizonte</span>
+                <span>668 cliques (82,1%)</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">2. Contagem</span>
+                <span class="font-bold text-teal-700">77 (9,5%)</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">3. Sabará</span>
+                <span class="font-bold text-teal-700">26 (3,2%)</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">4. Santa Luzia</span>
+                <span class="font-bold text-slate-900">23 (2,8%)</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">5. Nova Lima</span>
+                <span class="font-bold text-slate-900">7 (0,9%)</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">6. Conselheiro Lafaiete</span>
+                <span class="font-bold text-slate-900">2</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">7. Ibirité</span>
+                <span class="font-bold text-slate-900">2</span>
+              </div>
+              <div class="flex items-center justify-between p-2 bg-white border border-slate-200 rounded-xl">
+                <span class="font-semibold text-slate-800">8. Juiz de Fora</span>
+                <span class="font-bold text-slate-900">1</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-[10px] text-slate-400 mt-3 pt-2 border-t border-slate-200">
+            Demais 3 municípios da região somam 8 cliques complementares.
+          </p>
+        </div>
+
+        <!-- Coluna 2: Distribuição por Gênero (4 Colunas) -->
+        <div class="lg:col-span-4 bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Distribuição por Gênero</h3>
+              <span class="text-[11px] font-bold text-teal-700">56,0% Masculino</span>
+            </div>
+
+            <div class="space-y-4">
+              <div class="p-3.5 bg-white rounded-xl border border-teal-200">
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-teal-950">Masculino</span>
+                  <span class="text-teal-700">456 (56,0%)</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2.5">
+                  <div class="bg-teal-600 h-2.5 rounded-full" style="width: 56.0%"></div>
+                </div>
+              </div>
+
+              <div class="p-3.5 bg-white rounded-xl border border-slate-200">
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-slate-700">Indeterminado</span>
+                  <span class="text-slate-600">216 (26,5%)</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2.5">
+                  <div class="bg-slate-400 h-2.5 rounded-full" style="width: 26.5%"></div>
+                </div>
+              </div>
+
+              <div class="p-3.5 bg-white rounded-xl border border-amber-200">
+                <div class="flex justify-between text-xs font-bold mb-1.5">
+                  <span class="text-amber-950">Feminino</span>
+                  <span class="text-amber-700">142 (17,4%)</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2.5">
+                  <div class="bg-amber-500 h-2.5 rounded-full" style="width: 17.4%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 p-3 bg-teal-50/70 rounded-xl border border-teal-100 text-[11px] text-teal-950 leading-relaxed">
+            Público altamente alinhado à especialidade urológica, com predominância masculina (56,0%) em Belo Horizonte.
+          </div>
+        </div>
+
+        <!-- Coluna 3: Faixa Etária (4 Colunas) -->
+        <div class="lg:col-span-4 bg-slate-50 rounded-2xl p-5 border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="text-xs font-extrabold uppercase tracking-wider text-slate-700">Faixa Etária</h3>
+              <span class="text-[11px] font-bold text-teal-700">25 a 54 anos: 43,5%</span>
+            </div>
+            <div class="h-64 relative">
+              <canvas id="ageChart"></canvas>
+            </div>
+          </div>
+
+          <div class="mt-3 pt-2 border-t border-slate-200 text-[11px] text-slate-500">
+            Distribuição equilibrada entre <strong>65+ anos (127)</strong>, <strong>35–44 anos (119)</strong>, <strong>45–54 anos (118)</strong> e <strong>25–34 anos (117)</strong>.
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SEÇÃO 7: COMPARATIVO DE MERCADO & AUTORIDADE NA DOCTORALIA -->
+    <section class="bg-white rounded-[2rem] p-6 lg:p-8 border border-slate-200/60 shadow-lg shadow-slate-200/30">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+        <div>
+          <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">Comparativo de Mercado &amp; Autoridade Doctoralia</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Posicionamento frente às médias da plataforma Doctoralia e dos especialistas M360 em agendamentos, valor de consulta e opiniões.</p>
+        </div>
+        <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl text-xs font-bold self-start sm:self-auto">
+          <span>Doctoralia Perfil Verificado</span>
+          <span class="text-amber-500 tracking-wider">★★★★★</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <!-- Card 1: Agendamento Online vs Mercado -->
+        <div class="p-6 bg-teal-50/60 rounded-2xl border border-teal-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-teal-900 uppercase tracking-wider">Agendamento Online</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-teal-600 text-white">2,5x Média</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-teal-700">10</span>
+              <span class="text-sm font-semibold text-teal-900">agendamentos online</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-teal-200/70 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">4 agendamentos</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média M360:</span>
+              <strong class="text-slate-800">11 agendamentos</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Valor de Consulta vs Mercado -->
+        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-600 uppercase tracking-wider">Valor de Consulta</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">Posicionamento Premium</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-slate-900">R$ 687</span>
+              <span class="text-xs font-medium text-slate-500">ticket médio</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-slate-200 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">R$ 314</strong>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média M360:</span>
+              <strong class="text-slate-800">R$ 531</strong>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Total de Opiniões vs Mercado -->
+        <div class="p-6 bg-amber-50/50 rounded-2xl border border-amber-200 flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-900 uppercase tracking-wider">Total de Opiniões</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-extrabold bg-amber-500 text-white">+92,5% Média</span>
+            </div>
+            <div class="mt-2 flex items-baseline gap-2">
+              <span class="text-4xl font-black text-amber-700">310</span>
+              <span class="text-sm font-bold text-amber-900">opiniões</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-3 border-t border-amber-200/70 space-y-1.5 text-xs">
+            <div class="flex justify-between">
+              <span class="text-slate-600">Média Doctoralia:</span>
+              <strong class="text-slate-800">161 opiniões</strong>
+            </div>
+            <p class="text-[11px] text-amber-950 font-medium pt-1">
+              Autoridade quase 2x superior à média da especialidade, sustentando o posicionamento de ticket alto.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RODAPÉ CORPORATIVO -->
+    <footer class="pt-6 pb-12 border-t border-slate-200 text-center text-xs text-slate-500">
+      <p class="font-medium">Mídias 360 • Doctoralia Partner - Consultoria de Performance e Inteligência de Marketing Médico</p>
+      <p class="text-[11px] text-slate-400 mt-1">Relatório executivo de performance • Dr. Rogério Saint-Clair Pimentel Mafra.</p>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPTS & CHARTS -->
+  <script>
+    // Gráfico de Benchmark CTR
+    const ctxBenchmark = document.getElementById('ctrBenchmarkChart').getContext('2d');
+    new Chart(ctxBenchmark, {
+      type: 'bar',
+      data: {
+        labels: ['Dr. Rogério Mafra', 'Média Google Saúde'],
+        datasets: [{
+          data: [5.62, 3.17],
+          backgroundColor: ['#0d9488', '#94a3b8'],
+          borderRadius: 12,
+          barThickness: 36
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.y}% CTR`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 7,
+            ticks: {
+              callback: (val) => val + '%',
+              font: { family: "'Plus Jakarta Sans'", size: 10 }
+            },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 11, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Plugin Nativo para Desenhar Rótulos de Dados Nítidos sobre as Barras
+    const nativeDataLabelsPlugin = {
+      id: 'nativeDataLabels',
+      afterDatasetsDraw(chart) {
+        const { ctx } = chart;
+        chart.data.datasets.forEach((dataset, datasetIndex) => {
+          if (dataset.type === 'line') return;
+
+          const meta = chart.getDatasetMeta(datasetIndex);
+          meta.data.forEach((bar, index) => {
+            const val = dataset.data[index];
+            if (val !== undefined && val !== null) {
+              ctx.save();
+              ctx.font = '700 10.5px "Plus Jakarta Sans", sans-serif';
+              ctx.textAlign = 'center';
+              ctx.textBaseline = 'bottom';
+              ctx.fillStyle = datasetIndex === 1 ? '#0f766e' : '#475569';
+              ctx.fillText(val, bar.x, bar.y - 4);
+              ctx.restore();
+            }
+          });
+        });
+      }
+    };
+
+    // Gráfico de Histórico de Agendamentos (Janeiro a Novembro até dia 22)
+    const ctxHistory = document.getElementById('appointmentsHistoryChart').getContext('2d');
+    new Chart(ctxHistory, {
+      type: 'bar',
+      data: {
+        labels: [
+          'Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun',
+          'Jul', 'Ago', 'Set', 'Out', 'Nov (até dia 22)'
+        ],
+        datasets: [
+          {
+            label: 'Tendência Geral',
+            data: [92, 55, 79, 84, 63, 58, 81, 76, 75, 85, 56],
+            type: 'line',
+            borderColor: '#f59e0b',
+            backgroundColor: '#f59e0b',
+            borderWidth: 2.5,
+            tension: 0.35,
+            pointBackgroundColor: '#ffffff',
+            pointBorderColor: '#f59e0b',
+            pointBorderWidth: 2,
+            pointRadius: 4,
+            order: 1
+          },
+          {
+            label: 'Agendamentos Totais',
+            data: [92, 55, 79, 84, 63, 58, 81, 76, 75, 85, 56],
+            backgroundColor: [
+              '#0d9488', '#0d9488', '#0d9488', '#0d9488', '#0d9488', '#0d9488',
+              '#0d9488', '#0d9488', '#0d9488', '#0f766e', '#14b8a6'
+            ],
+            borderRadius: 8,
+            order: 2
+          },
+          {
+            label: 'Pacientes Novos',
+            data: [21, 15, 23, 21, 10, 7, 29, 25, 21, 25, 9],
+            backgroundColor: '#64748b',
+            borderRadius: 8,
+            order: 3
+          }
+        ]
+      },
+      plugins: [nativeDataLabelsPlugin],
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              boxWidth: 12,
+              font: { family: "'Plus Jakarta Sans'", size: 11, weight: '600' },
+              color: '#334155'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.dataset.label}: ${ctx.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            max: 110,
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10 } },
+            grid: { color: '#f1f5f9' }
+          },
+          x: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+
+    // Gráfico Horizontal de Faixa Etária
+    const ctxAge = document.getElementById('ageChart').getContext('2d');
+    new Chart(ctxAge, {
+      type: 'bar',
+      data: {
+        labels: ['18–24', '25–34', '35–44', '45–54', '55–64', '65+', 'Indet.'],
+        datasets: [{
+          data: [28, 117, 119, 118, 91, 127, 214],
+          backgroundColor: ['#ccfbf1', '#5eead4', '#14b8a6', '#14b8a6', '#5eead4', '#0f766e', '#94a3b8'],
+          borderRadius: 6,
+          barThickness: 16
+        }]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: (ctx) => `${ctx.parsed.x} cliques`
+            }
+          }
+        },
+        scales: {
+          x: {
+            beginAtZero: true,
+            max: 250,
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 9 } },
+            grid: { color: '#e2e8f0' }
+          },
+          y: {
+            ticks: { font: { family: "'Plus Jakarta Sans'", size: 10, weight: '600' } },
+            grid: { display: false }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
